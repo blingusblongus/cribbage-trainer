@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../Card/Card.jsx';
+import { useDispatch } from 'react-redux';
 
 function CribbageGolf(props) {
+    const dispatch = useDispatch();
     const [deal, setDeal] = useState([]);
-    
+
+
+    useEffect(() => {
+        dispatch({type:'DEAL_6'});
+    });
     return (
         <>
             <div className="test-container">

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "FETCH_USER" actions
+// Deal 6 cards to the user (by default, into the crib)
 function* deal6() {
   try {
     const response = yield axios.get('/api/deal');
