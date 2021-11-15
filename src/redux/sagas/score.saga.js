@@ -10,10 +10,21 @@ function* checkOptimal() {
       crib: '[' + store.crib.join(', ') + ']'
     }
     const response = yield axios.post('/api/score/optimal', data);
-    console.log('score result', response.data);
-    // yield put({ type: 'SET_DEAL', payload: response.data });
+    
+    // send score to the golfScore reducer
+    let score;
+    if(response.data.length > 1){
+      score = response.data[1].stats.avg - response.data[0].stats.avg
+    }else{
+      score = 0;
+    };
+
+    yield put({
+      type: 'RECORD_GOLF_SCORE',
+      payload: score
+    });
   } catch (error) {
-    console.log('Check optimum request failed', error);
+    console.log('Check optimal request failed', error);
   }
 }
 
