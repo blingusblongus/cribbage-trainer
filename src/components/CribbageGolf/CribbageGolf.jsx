@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
 import Card from '../Card/Card.jsx';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import './CribbageGolf.css';
 
 function CribbageGolf(props) {
     const dispatch = useDispatch();
-    const [deal, setDeal] = useState([]);
+    const deal = useSelector(store => store.deal);
+    console.log(deal);
 
 
+    // Deal cards on page load
     useEffect(() => {
         dispatch({type:'DEAL_6'});
-    });
+    },[]);
+
+
     return (
         <>
             <div className="test-container">
@@ -21,8 +27,7 @@ function CribbageGolf(props) {
                     return <Card
                         key={card.id}
                         card={card}
-                        send={send}
-                        setSend={setSend} />
+                    />
                 })}
             </div>
         </>
