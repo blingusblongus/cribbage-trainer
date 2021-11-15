@@ -34,14 +34,15 @@ function CribbageGolf(props) {
         dispatch({ type: 'DEAL_6' })
     }
 
-    console.log(results);
+    const avgMsg = results && (<>
+        YOUR HAND AVG: {results[0].stats.avg} <br />
+        BEST POSSIBLE AVG: {results[1].stats.avg} <br />
+        DIFFERENCE: {results[1].stats.avg - results[0].stats.avg}
+    </>
+    )
 
-    const avgMsg = results && ( <>
-        YOUR HAND AVG: {results[0].stats.avg} <br/>
-        BEST POSSIBLE AVG: {results[1].stats.avg} <br/>
-        DIFFERENCE: {results[1].stats.avg - results[0].stats.avg}  
-        </>
-     ) 
+    const bestHand = results ? (results.length === 1) : false;
+    console.log(bestHand);
 
     return (
         <>
@@ -49,12 +50,17 @@ function CribbageGolf(props) {
             <p>Round #: {round}</p>
             <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
             <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
-            
+
             <div className="optimal-container">
                 {(displayResults && results) && (
-                    results.length > 1 ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
-                )}                
+                    !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
+                )}
 
+                <div className="best-container">
+                    {results && results[1]?.cards.draw.map(card => {
+                        return (<Card key={card.id + 100} card={card} />)
+                    })}
+                </div>
             </div>
 
             <div className="test-container">
