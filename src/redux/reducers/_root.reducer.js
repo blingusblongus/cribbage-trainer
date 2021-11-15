@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
   user,
   hand,
   crib,
-  deal, // will have an id and username if someone is logged in
+  deal,
+  golfScore // will have an id and username if someone is logged in
 });
 
 export default rootReducer;
