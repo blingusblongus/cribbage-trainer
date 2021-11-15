@@ -7,8 +7,12 @@ const app = express();
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
+// My module references
+const deck = require('./modules/deck.js');
+
 // Route includes
 const userRouter = require('./routes/user.router');
+const includeRouter = require('./routes/include.router.js');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -23,6 +27,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/include', includeRouter);
 
 // Serve static files
 app.use(express.static('build'));
@@ -34,3 +39,12 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+
+// Uncategorized routes
+app.get('/deal', (req, res) => {
+  deck.gather();
+  deck.shuffle();
+  res.send(deck.deal(6));
+  console.log(deck.cards.length);
+})
