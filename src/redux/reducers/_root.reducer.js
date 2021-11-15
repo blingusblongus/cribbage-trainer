@@ -4,6 +4,8 @@ import user from './user.reducer';
 import hand from './hand.reducer';
 import crib from './crib.reducer';
 import deal from './deal.reducer';
+import golfScore from './golfScore.reducer';
+import round from './round.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
   user,
   hand,
   crib,
-  deal, // will have an id and username if someone is logged in
+  deal,
+  golfScore,
+  round, // will have an id and username if someone is logged in
 });
 
 export default rootReducer;

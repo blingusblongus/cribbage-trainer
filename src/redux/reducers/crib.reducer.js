@@ -7,6 +7,8 @@ const crib = (state = [], action) => {
             return state.filter(id => id !== action.payload);
         case 'REMOVE_FROM_HAND':
             return [...state, action.payload];
+        case 'NEW_HAND':
+            return [];
         default:
             return state;
     }
