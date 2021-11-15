@@ -1,3 +1,7 @@
+:root {
+    --transition-time: 5s;
+}
+
 .card-container {
     width: 125px;
     height: 175px;
@@ -7,10 +11,12 @@
     border: 3px solid black;
     margin-left: -50px;
     margin-top: 30px;
+    transition: margin .3s ease;
 }
 
 .selected {
     margin-top: -20px;
+    transition: margin .3s ease;
 }
 
 .card-container:first-child {

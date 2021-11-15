@@ -6,6 +6,7 @@ function* deal6() {
   try {
     const response = yield axios.get('/api/deal');
     yield put({ type: 'SET_DEAL', payload: response.data });
+    yield put({type: 'SET_CRIB', payload: response.data});
   } catch (error) {
     console.log('Deal get request failed', error);
   }

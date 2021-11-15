@@ -16,10 +16,17 @@ function CribbageGolf(props) {
     },[]);
 
 
+    // Send request for optimum hand checking
+    const scoreOptimal = () => {
+        dispatch({
+            type: "SCORE_OPTIMAL"
+        });
+    }
+
     return (
         <>
             <div className="test-container">
-                <button onClick="">GET</button>
+                <button onClick={scoreOptimal}>GET</button>
                 {/* <Scatter data={data} options={options} /> */}
             </div>
             <div className="hand-container">
