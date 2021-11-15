@@ -42,7 +42,7 @@ app.listen(PORT, () => {
 
 
 // Uncategorized routes
-app.get('/deal', (req, res) => {
+app.get('/api/deal', (req, res) => {
   deck.gather();
   deck.shuffle();
   res.send(deck.deal(6));

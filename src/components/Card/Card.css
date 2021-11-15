@@ -1,0 +1,18 @@
+.card-container {
+    width: 125px;
+    height: 175px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: left;
+    border: 3px solid black;
+    margin-left: -50px;
+    margin-top: 30px;
+}
+
+.selected {
+    margin-top: -20px;
+}
+
+.card-container:first-child {
+    margin-left: 0px;
+}
