@@ -8,6 +8,7 @@ function CribbageGolf(props) {
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
+    const golfScore = useSelector(store => store.golfScore);
     const [displayResults, setDisplayResults] = useState(false);
 
     // Deal cards on page load
@@ -26,27 +27,35 @@ function CribbageGolf(props) {
 
     // Deal a new hand
     const newHand = () => {
-        dispatch({type: 'NEW_HAND'});
+        dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
-        dispatch({type: 'DEAL_6'})
+        dispatch({ type: 'DEAL_6' })
     }
 
     return (
         <>
+            <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
+            <p>Round #: {golfScore.length + 1}</p>
+            <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
+            <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
+            
             <div className="test-container">
                 {/* Render submit button only if hand chosen 
                     and results not displayed  */}
-                {(hand.length === 4 && !displayResults)
-                    && <button onClick={scoreOptimal}>GET</button>}
-
-                {/* Render Next Hand button if results are being displayed */}
-                {displayResults
-                    && <button onClick={newHand}>Next Hand</button>}
-                <br />
-                <br />
+                <div>
+                    {(hand.length === 4 && !displayResults)
+                        && <button onClick={scoreOptimal}>GET</button>}
+                </div>
+                <div>
+                    {/* Render Next Hand button if results are being displayed */}
+                    {displayResults
+                        && <button onClick={newHand}>Next Hand</button>}
+                </div>
                 {/* <Scatter data={data} options={options} /> */}
             </div>
             <div className="hand-container">
+
+                {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
                     return <Card
                         key={card.id}
