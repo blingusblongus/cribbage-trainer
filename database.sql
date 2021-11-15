@@ -15,5 +15,6 @@ CREATE TABLE "hands" (
 	"optimal" BOOLEAN,
 	"hand_score" DECIMAL,
 	"hand_id_str" VARCHAR(16),
-	"crib_id_str" VARCHAR(16)
-)
+	"crib_id_str" VARCHAR(16),
+	"timestamp" TIMESTAMPTZ DEFAULT NOW()
+);
