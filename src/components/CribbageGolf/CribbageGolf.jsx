@@ -9,6 +9,7 @@ function CribbageGolf(props) {
     const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
+    const round = useSelector(store => store.round);
     const [displayResults, setDisplayResults] = useState(false);
 
     // Deal cards on page load
@@ -35,7 +36,7 @@ function CribbageGolf(props) {
     return (
         <>
             <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
-            <p>Round #: {golfScore.length + 1}</p>
+            <p>Round #: {round}</p>
             <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
             <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
             
