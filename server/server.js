@@ -12,7 +12,7 @@ const deck = require('./modules/deck.js');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const includeRouter = require('./routes/include.router.js');
+const scoreRouter = require('./routes/score.router.js');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -27,7 +27,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/include', includeRouter);
+app.use('/api/score', scoreRouter);
 
 // Serve static files
 app.use(express.static('build'));
