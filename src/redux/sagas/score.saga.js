@@ -28,8 +28,15 @@ function* checkOptimal() {
   }
 }
 
+// // Make sure that the hand is emptied before dealing again
+// function* newGolfHand () {
+//   yield put({type: 'NEW_HAND'});
+//   yield put({type: 'DEAL_6'});
+// }
+
 function* scoreSaga() {
   yield takeLatest('SCORE_OPTIMAL', checkOptimal);
+  // yield takeLatest('NEW_GOLF_HAND', newGolfHand);
 }
 
 export default scoreSaga;

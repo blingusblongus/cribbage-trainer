@@ -4,6 +4,8 @@ const hand = (state = [], action) => {
             return [...state, action.payload];
         case 'REMOVE_FROM_HAND':
             return state.filter(el => el !== action.payload);
+        case 'NEW_HAND':
+            return [];
         default:
             return state;
     }

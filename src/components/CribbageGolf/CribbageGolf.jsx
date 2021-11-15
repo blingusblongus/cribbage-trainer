@@ -7,13 +7,13 @@ import './CribbageGolf.css';
 function CribbageGolf(props) {
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
-    console.log(deal);
-
+    const hand = useSelector(store => store.hand);
+    const [displayResults, setDisplayResults] = useState(false);
 
     // Deal cards on page load
     useEffect(() => {
-        dispatch({type:'DEAL_6'});
-    },[]);
+        dispatch({ type: 'DEAL_6' });
+    }, []);
 
 
     // Send request for optimum hand checking
@@ -21,12 +21,29 @@ function CribbageGolf(props) {
         dispatch({
             type: "SCORE_OPTIMAL"
         });
+        setDisplayResults(true);
+    }
+
+    // Deal a new hand
+    const newHand = () => {
+        dispatch({type: 'NEW_HAND'});
+        setDisplayResults(false);
+        dispatch({type: 'DEAL_6'})
     }
 
     return (
         <>
             <div className="test-container">
-                <button onClick={scoreOptimal}>GET</button>
+                {/* Render submit button only if hand chosen 
+                    and results not displayed  */}
+                {(hand.length === 4 && !displayResults)
+                    && <button onClick={scoreOptimal}>GET</button>}
+
+                {/* Render Next Hand button if results are being displayed */}
+                {displayResults
+                    && <button onClick={newHand}>Next Hand</button>}
+                <br />
+                <br />
                 {/* <Scatter data={data} options={options} /> */}
             </div>
             <div className="hand-container">
