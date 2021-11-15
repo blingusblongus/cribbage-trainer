@@ -18,7 +18,6 @@ function CribbageGolf(props) {
         dispatch({ type: 'DEAL_6' });
     }, []);
 
-
     // Send request for optimum hand checking
     const scoreOptimal = () => {
         dispatch({
@@ -34,15 +33,14 @@ function CribbageGolf(props) {
         dispatch({ type: 'DEAL_6' })
     }
 
-    const avgMsg = results && (<>
+    const bestHand = results ? (results.length === 1) : false;
+
+    const avgMsg = (results && !bestHand) && (<>
         YOUR HAND AVG: {results[0].stats.avg} <br />
         BEST POSSIBLE AVG: {results[1].stats.avg} <br />
         DIFFERENCE: {results[1].stats.avg - results[0].stats.avg}
     </>
     )
-
-    const bestHand = results ? (results.length === 1) : false;
-    console.log(bestHand);
 
     return (
         <>
