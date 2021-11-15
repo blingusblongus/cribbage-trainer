@@ -1,8 +1,13 @@
+import { useState } from 'react';
+import Card from '../Card/Card.jsx';
+
 function CribbageGolf(props) {
+    const [deal, setDeal] = useState([]);
+    
     return (
         <>
             <div className="test-container">
-                <button onClick={getResults}>GET</button>
+                <button onClick="">GET</button>
                 {/* <Scatter data={data} options={options} /> */}
             </div>
             <div className="hand-container">
