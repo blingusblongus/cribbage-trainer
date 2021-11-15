@@ -5,6 +5,16 @@
     justify-content: space-between;
     margin-bottom: 30px;
   }
+
+  .best-container {
+    display: flex;
+    width: 50vw;
+  }
+
+  .best-container > * {
+      transform: scale(.6);
+      
+  }
   
   .hand-container {
     display: flex;

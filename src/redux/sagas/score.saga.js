@@ -10,6 +10,9 @@ function* checkOptimal() {
       crib: '[' + store.crib.join(', ') + ']'
     }
     const response = yield axios.post('/api/score/optimal', data);
+
+    //set Results reducer
+    yield put({type: 'SET_RESULTS', payload: response.data});
     
     // send score to the golfScore reducer
     let score;
