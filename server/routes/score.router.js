@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const scoreUtils = require('../modules/scoring.js');
 const probUtils = require('../modules/probability.js');
+const pool = require('../modules/pool.js');
 
 // return all possible hands from 4 given cards
 router.post('/', (req, res) => {
@@ -200,6 +201,27 @@ router.post('/optimal', (req, res) => {
 
     }
 
+        /// SAVE TO HANDS TABLE FOR TESTING
+        const hand_score = results.length === 2 ? results[1].stats.avg - results[0].stats.avg : 0;
+        const queryObj = {
+            optimal: results.length === 1,
+            hand_score: hand_score,
+        }
+    
+        const queryText = `
+            INSERT INTO hands (user_id, optimal, hand_score, hand_id_str, crib_id_str)
+            VALUES ($1, $2, $3, $4, $5);
+        `
+    
+        const values = [req.user.id, queryObj.optimal, queryObj.hand_score, req.body.hand, req.body.crib];
+    
+        pool.query(queryText, values)
+            .then(result => {
+                console.log('LOGGED HAND TO DB');
+            }).catch(err => {
+                console.log(err)
+            });
+
     res.send(results);
 })
 
@@ -242,7 +264,9 @@ router.post('/single', (req, res) => {
     hand[4].flip = true;
     let flip = hand.splice(4,1);
 
-    res.send(scoreUtils.scoreHand(hand, flip));
+    const result = scoreUtils.scoreHand(hand, flip)
+
+    res.send(result);
 })
 
 
