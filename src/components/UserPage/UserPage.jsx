@@ -1,7 +1,10 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Button, TextField } from '@mui/material';
+import UserTable from '../UserTable/UserTable.jsx';
+import './UserPage.css';
 
 function UserPage() {
   const history = useHistory();
@@ -11,9 +14,16 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <button onClick={()=>history.push('/golf')}>PLAY GOLF</button>
-      <br/>
-      <br/>
+      <p>Your displayName is: </p>
+      <TextField
+        size="small"
+        value={"hello"}></TextField>
+      <Button variant="contained"
+        onClick={() => history.push('/golf')}>PLAY GOLF</Button>
+      <br />
+      <br />
+      {/* Commented out until rows is resolved */}
+      {/* <UserTable/> */}
       <LogOutButton className="btn" />
     </div>
   );

@@ -9,6 +9,7 @@ body,
 :root {
   --bg-color: #444;
   --dm-text: white;
+  --primary: thistle;
 }
 
 body {
