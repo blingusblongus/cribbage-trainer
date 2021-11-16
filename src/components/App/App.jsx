@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import CribbageGolf from '../CribbageGolf/CribbageGolf';
 
 function App() {
   const dispatch = useDispatch();
@@ -100,14 +101,19 @@ function App() {
             exact
             path="/home"
           >
-            {user.id ?
+
+            {/* {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
               <Redirect to="/user" />
               :
               // Otherwise, show the Landing page
               <LandingPage />
-            }
+            } */}
+          </Route>
+
+          <Route path="/golf">
+            <CribbageGolf/>
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
