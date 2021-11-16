@@ -2,6 +2,13 @@ html,
 body,
 #react-root {
   height: 100%;
+  background-color: var(--bg-color);
+  color: var(--dm-text)
+}
+
+:root {
+  --bg-color: #444;
+  --dm-text: white;
 }
 
 body {
