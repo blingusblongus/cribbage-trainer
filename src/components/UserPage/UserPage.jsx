@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Button, TextField } from '@mui/material';
 import UserTable from '../UserTable/UserTable.jsx';
 import './UserPage.css';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 function UserPage() {
   const history = useHistory();
