@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 import CribbageGolf from '../CribbageGolf/CribbageGolf';
+import GolfResults from '../GolfResults/GolfResults.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -96,6 +97,14 @@ function App() {
               <RegisterPage />
             }
           </Route>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/golfResults"
+          >
+            <GolfResults/>
+          </ProtectedRoute>
 
           <Route
             exact

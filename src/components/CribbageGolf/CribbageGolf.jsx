@@ -4,8 +4,10 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import './CribbageGolf.css';
 import Button from '@mui/material/Button';
+import { useHistory } from 'react-router';
 
 function CribbageGolf(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
@@ -13,11 +15,11 @@ function CribbageGolf(props) {
     const round = useSelector(store => store.round);
     const results = useSelector(store => store.results);
     const [displayResults, setDisplayResults] = useState(false);
-    const displayFinal = false;
     
-    if(round > 10){
-        displayFinal = true;
-        
+    // Remember, round is kind of bugged, it's one higher than displayed
+    if(round > 5){
+        //push to results page
+        history.push('/golfResults');     
     }
 
     // Deal cards on page load

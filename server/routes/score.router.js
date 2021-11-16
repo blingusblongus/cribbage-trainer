@@ -269,5 +269,24 @@ router.post('/single', (req, res) => {
     res.send(result);
 })
 
+// record golf scores
+router.post('/golf', (req, res) => {
+    const userId = req.user.id;
+    const score = req.body.score;
+
+    const queryText = `
+        INSERT INTO golf_scores (user_id, golf_score)
+        VALUES ($1, $2);
+    `
+    const values = [userId, score];
+
+    pool.query(queryText, values)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+})
 
 module.exports = router;

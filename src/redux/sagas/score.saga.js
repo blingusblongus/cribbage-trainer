@@ -31,6 +31,14 @@ function* checkOptimal() {
   }
 }
 
+function* recordGolf(action) {
+  try{ 
+    const response = yield axios.post('/api/score/golf', action.payload);
+  }catch(err){
+    console.log(err);
+  }
+}
+
 // // Make sure that the hand is emptied before dealing again
 // function* newGolfHand () {
 //   yield put({type: 'NEW_HAND'});
@@ -39,6 +47,7 @@ function* checkOptimal() {
 
 function* scoreSaga() {
   yield takeLatest('SCORE_OPTIMAL', checkOptimal);
+  yield takeLatest('SUBMIT_GOLF_SCORE', recordGolf);
   // yield takeLatest('NEW_GOLF_HAND', newGolfHand);
 }
 
