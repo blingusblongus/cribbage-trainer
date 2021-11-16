@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Card from '../Card/Card.jsx';
+import Card from '../Card/PlayingCard.jsx';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import './CribbageGolf.css';
