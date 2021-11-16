@@ -7,7 +7,7 @@
   }
 
   .best-container {
-    margin-top: -30px;
+    margin-top: -60px;
     display: flex;
     width: 50vw;
     transform: scale(.6);
@@ -17,11 +17,6 @@
       width: 80%;
       margin: auto;
   }
-
-  /* .best-container > * {
-      
-      
-  } */
   
   .hand-container {
     display: flex;

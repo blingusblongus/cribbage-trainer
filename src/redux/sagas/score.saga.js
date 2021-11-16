@@ -26,8 +26,18 @@ function* checkOptimal() {
       type: 'RECORD_GOLF_SCORE',
       payload: score
     });
+
   } catch (error) {
     console.log('Check optimal request failed', error);
+  }
+}
+
+function* submitGolf(action) {
+  try{ 
+    const response = yield axios.post('/api/score/golf', action.payload);
+    yield put({type: 'CLEAR_GOLF_SCORE'});
+  }catch(err){
+    console.log(err);
   }
 }
 
@@ -37,8 +47,19 @@ function* checkOptimal() {
 //   yield put({type: 'DEAL_6'});
 // }
 
+function* getUserScores(){
+  try {
+    const response = yield axios.get('/api/score/user');
+    yield put({type:'SET_USER_SCORES', payload: response.data});
+  }catch(err){
+    console.log(err);
+  }
+}
+
 function* scoreSaga() {
   yield takeLatest('SCORE_OPTIMAL', checkOptimal);
+  yield takeLatest('SUBMIT_GOLF_SCORE', submitGolf);
+  yield takeLatest('FETCH_USER_SCORES', getUserScores);
   // yield takeLatest('NEW_GOLF_HAND', newGolfHand);
 }
 
