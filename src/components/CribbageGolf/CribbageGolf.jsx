@@ -15,6 +15,7 @@ function CribbageGolf(props) {
 
     // Deal cards on page load
     useEffect(() => {
+        dispatch({type: 'NEW_HAND'});
         dispatch({ type: 'DEAL_6' });
     }, []);
 
@@ -41,40 +42,49 @@ function CribbageGolf(props) {
         DIFFERENCE: {results[1].stats.avg - results[0].stats.avg}
     </>
     )
+    console.log(bestHand);
 
     return (
         <>
-            <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
-            <p>Round #: {round}</p>
-            <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
-            <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
+            <div className="div-center">
+                <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
+                <p>Round #: {round}</p>
+                <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
+                <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
 
-            <div className="optimal-container">
-                {(displayResults && results) && (
-                    !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
+                <div className="optimal-container">
+                    {(displayResults && results) && (
+                        !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
+                    )}
+                </div>
+
+                {(displayResults && !bestHand) && (<>
+                    <h3>Best Possible Hand</h3>
+                    <div className="best-container">
+                        {results && results[1]?.cards.draw.map(card => {
+                            return (<Card key={card.id + 100} card={card} />)
+                        })}
+                    </div>
+                </>
                 )}
 
-                <div className="best-container">
-                    {results && results[1]?.cards.draw.map(card => {
-                        return (<Card key={card.id + 100} card={card} />)
-                    })}
+                <div className="test-container">
+                    {/* Render submit button only if hand chosen 
+                    and results not displayed  */}
+                    <div>
+                        {(hand.length === 4 && !displayResults)
+                            && <button onClick={scoreOptimal}>GET</button>}
+                    </div>
+                    <div>
+                        {/* Render Next Hand button if results are being displayed */}
+                        {displayResults
+                            && <button onClick={newHand}>Next Hand</button>}
+                    </div>
+                    {/* <Scatter data={data} options={options} /> */}
                 </div>
             </div>
 
-            <div className="test-container">
-                {/* Render submit button only if hand chosen 
-                    and results not displayed  */}
-                <div>
-                    {(hand.length === 4 && !displayResults)
-                        && <button onClick={scoreOptimal}>GET</button>}
-                </div>
-                <div>
-                    {/* Render Next Hand button if results are being displayed */}
-                    {displayResults
-                        && <button onClick={newHand}>Next Hand</button>}
-                </div>
-                {/* <Scatter data={data} options={options} /> */}
-            </div>
+
             <div className="hand-container">
 
                 {/* Render cards only if the hand has been dealt */}
