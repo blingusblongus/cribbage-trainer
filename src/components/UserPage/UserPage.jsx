@@ -5,11 +5,26 @@ import { useHistory } from 'react-router';
 import { Button, TextField } from '@mui/material';
 import UserTable from '../UserTable/UserTable.jsx';
 import './UserPage.css';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function UserPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const [displayName, setDisplayName] = useState(user.display_name);
+
+  const updateDisplay = () => {
+    //should add error message for this
+    if(!displayName) return;
+
+    dispatch({
+      type: 'SET_DISPLAY_NAME',
+      payload: displayName
+    })
+  }
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
@@ -17,7 +32,10 @@ function UserPage() {
       <p>Your displayName is: </p>
       <TextField
         size="small"
-        value={"hello"}></TextField>
+        value={displayName}
+        onChange={(e) => setDisplayName(e.target.value)}></TextField>
+      <Button variant="contained"
+        onClick={updateDisplay}>Update Display Name</Button>
       <Button variant="contained"
         onClick={() => history.push('/golf')}>PLAY GOLF</Button>
       <br />

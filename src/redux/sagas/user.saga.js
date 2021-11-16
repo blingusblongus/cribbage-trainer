@@ -24,8 +24,18 @@ function* fetchUser() {
   }
 }
 
+function* changeDisplayName(action) {
+  try{
+    const response = axios.put(`/api/user/${action.payload}`);
+  }catch(err){
+    // pass along error?
+    console.log(err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('SET_DISPLAY_NAME', changeDisplayName);
 }
 
 export default userSaga;

@@ -33,6 +33,25 @@ router.post('/register', (req, res, next) => {
     });
 });
 
+router.put('/:displayName', (req, res, next) => {
+  const userId = req.user.id;
+  const display_name = req.params.displayName
+
+  const queryText = `
+      UPDATE "user"
+      SET display_name = $1
+      WHERE id = $2;
+  `;
+
+  pool
+    .query(queryText, [display_name, userId])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('User registration failed: ', err);
+      res.sendStatus(500);
+    });
+});
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful
