@@ -1,22 +1,41 @@
 import { useEffect, useState } from 'react';
-import Card from '../Card/Card.jsx';
+import Card from '../Card/PlayingCard.jsx';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import './CribbageGolf.css';
+import Button from '@mui/material/Button';
+import { useHistory } from 'react-router';
 
 function CribbageGolf(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
-    const round = useSelector(store => store.round);
+    // const round = useSelector(store => store.round);
     const results = useSelector(store => store.results);
+    const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
+
+    // Remember, round is kind of bugged, it's one higher than displayed
+    if (golfScore.length === golfRounds) {
+        dispatch({
+            type: 'SUBMIT_GOLF_SCORE',
+            payload: {
+                score: golfScore.reduce((sum, round) => sum += round)
+            }
+        })
+
+        //push to results page
+        history.push('/golfResults');
+    }
 
     // Deal cards on page load
     useEffect(() => {
-        dispatch({type: 'NEW_HAND'});
-        dispatch({ type: 'DEAL_6' });
+        if (golfScore.length <= golfRounds) {
+            dispatch({ type: 'NEW_HAND' });
+            dispatch({ type: 'DEAL_6' });
+        }
     }, []);
 
     // Send request for optimum hand checking
@@ -48,9 +67,28 @@ function CribbageGolf(props) {
         <>
             <div className="div-center">
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
-                <p>Round #: {round}</p>
+
+                {/* Currently on load, it runs double, so round is off by one */}
+                <p>Round #: {golfScore.length}</p>
                 <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
                 <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
+
+                <div className="test-container">
+                    {/* Render submit button only if hand chosen 
+                    and results not displayed  */}
+                    <div>
+                        {(hand.length === 4 && !displayResults)
+                            && <Button variant="contained"
+                                onClick={scoreOptimal}>GET</Button>}
+                    </div>
+                    <div>
+                        {/* Render Next Hand button if results are being displayed */}
+                        {displayResults
+                            && <Button variant="contained"
+                                onClick={newHand}>Next Hand</Button>}
+                    </div>
+                    {/* <Scatter data={data} options={options} /> */}
+                </div>
 
                 <div className="optimal-container">
                     {(displayResults && results) && (
@@ -62,26 +100,11 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<Card key={card.id + 100} card={card} />)
+                            return (<Card key={card.id} card={card} />)
                         })}
                     </div>
                 </>
                 )}
-
-                <div className="test-container">
-                    {/* Render submit button only if hand chosen 
-                    and results not displayed  */}
-                    <div>
-                        {(hand.length === 4 && !displayResults)
-                            && <button onClick={scoreOptimal}>GET</button>}
-                    </div>
-                    <div>
-                        {/* Render Next Hand button if results are being displayed */}
-                        {displayResults
-                            && <button onClick={newHand}>Next Hand</button>}
-                    </div>
-                    {/* <Scatter data={data} options={options} /> */}
-                </div>
             </div>
 
 

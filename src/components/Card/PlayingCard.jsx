@@ -1,9 +1,10 @@
-import './Card.css';
+import './PlayingCard.css';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Card } from '@mui/material';
 
-function Card({card}){
+function playingCard({card}){
     const dispatch = useDispatch();
     const [selected, setSelected] = useState(false);
     const hand = useSelector(store => store.hand);
@@ -30,7 +31,7 @@ function Card({card}){
     }
 
     return (
-        // check both selected and hand.length to prevent sticky selection
+        //{/* // check both selected and hand.length to prevent sticky selection */}
         <div className={!selected || hand.length === 0 ? 
             "card-container" : "card-container selected"}
             onClick={
@@ -42,4 +43,4 @@ function Card({card}){
     );
 }
 
-export default Card;
+export default playingCard;
