@@ -12,7 +12,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "hands" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user",
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE,
 	"optimal" BOOLEAN,
 	"hand_score" DECIMAL,
 	"hand_id_str" VARCHAR(16),
@@ -22,8 +22,7 @@ CREATE TABLE "hands" (
 
 CREATE TABLE "golf_scores" (
 	"id" SERIAL PRIMARY KEY,
-	"user_id" INT REFERENCES "user" NOT NULL,
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"golf_score" DECIMAL NOT NULL,
 	"timestamp" TIMESTAMPTZ DEFAULT NOW()
 );
-
