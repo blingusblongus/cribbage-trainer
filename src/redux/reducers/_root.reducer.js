@@ -7,6 +7,7 @@ import deal from './deal.reducer';
 import golfScore from './golfScore.reducer';
 import round from './round.reducer';
 import results from './results.reducer';
+import global from './global.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   deal,
   golfScore,
   round,
-  results, // will have an id and username if someone is logged in
+  results,
+  global, // will have an id and username if someone is logged in
 });
 
 export default rootReducer;

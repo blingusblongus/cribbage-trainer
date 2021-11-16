@@ -12,20 +12,30 @@ function CribbageGolf(props) {
     const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
-    const round = useSelector(store => store.round);
+    // const round = useSelector(store => store.round);
     const results = useSelector(store => store.results);
+    const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
-    
+
     // Remember, round is kind of bugged, it's one higher than displayed
-    if(round > 5){
+    if (golfScore.length === golfRounds) {
+        dispatch({
+            type: 'SUBMIT_GOLF_SCORE',
+            payload: {
+                score: golfScore.reduce((sum, round) => sum += round)
+            }
+        })
+
         //push to results page
-        history.push('/golfResults');     
+        history.push('/golfResults');
     }
 
     // Deal cards on page load
     useEffect(() => {
-        dispatch({type: 'NEW_HAND'});
-        dispatch({ type: 'DEAL_6' });
+        if (golfScore.length <= golfRounds) {
+            dispatch({ type: 'NEW_HAND' });
+            dispatch({ type: 'DEAL_6' });
+        }
     }, []);
 
     // Send request for optimum hand checking
@@ -59,7 +69,7 @@ function CribbageGolf(props) {
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
 
                 {/* Currently on load, it runs double, so round is off by one */}
-                <p>Round #: {round - 1}</p>
+                <p>Round #: {golfScore.length}</p>
                 <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
                 <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
 
@@ -69,13 +79,13 @@ function CribbageGolf(props) {
                     <div>
                         {(hand.length === 4 && !displayResults)
                             && <Button variant="contained"
-                                 onClick={scoreOptimal}>GET</Button>}
+                                onClick={scoreOptimal}>GET</Button>}
                     </div>
                     <div>
                         {/* Render Next Hand button if results are being displayed */}
                         {displayResults
                             && <Button variant="contained"
-                                 onClick={newHand}>Next Hand</Button>}
+                                onClick={newHand}>Next Hand</Button>}
                     </div>
                     {/* <Scatter data={data} options={options} /> */}
                 </div>
@@ -90,7 +100,7 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<Card key={card.id + 100} card={card} />)
+                            return (<Card key={card.id} card={card} />)
                         })}
                     </div>
                 </>

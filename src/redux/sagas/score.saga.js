@@ -26,14 +26,16 @@ function* checkOptimal() {
       type: 'RECORD_GOLF_SCORE',
       payload: score
     });
+
   } catch (error) {
     console.log('Check optimal request failed', error);
   }
 }
 
-function* recordGolf(action) {
+function* submitGolf(action) {
   try{ 
     const response = yield axios.post('/api/score/golf', action.payload);
+    yield put({type: 'CLEAR_GOLF_SCORE'});
   }catch(err){
     console.log(err);
   }
@@ -47,7 +49,7 @@ function* recordGolf(action) {
 
 function* scoreSaga() {
   yield takeLatest('SCORE_OPTIMAL', checkOptimal);
-  yield takeLatest('SUBMIT_GOLF_SCORE', recordGolf);
+  yield takeLatest('SUBMIT_GOLF_SCORE', submitGolf);
   // yield takeLatest('NEW_GOLF_HAND', newGolfHand);
 }
 
