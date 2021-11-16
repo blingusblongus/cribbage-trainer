@@ -48,7 +48,9 @@ function CribbageGolf(props) {
         <>
             <div className="div-center">
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
-                <p>Round #: {round}</p>
+                
+                {/* Currently on load, it runs double, so round is off by one */}
+                <p>Round #: {round - 1}</p>
                 <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
                 <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
 
