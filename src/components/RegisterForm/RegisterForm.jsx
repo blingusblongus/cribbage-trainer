@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { TextField } from '@mui/material';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -15,6 +17,7 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
+        display_name: displayName
       },
     });
   }; // end registerUser
@@ -30,7 +33,7 @@ function RegisterForm() {
       <div>
         <label htmlFor="username">
           Username:
-          <input
+          <TextField
             type="text"
             name="username"
             value={username}
@@ -42,7 +45,7 @@ function RegisterForm() {
       <div>
         <label htmlFor="password">
           Password:
-          <input
+          <TextField
             type="password"
             name="password"
             value={password}
@@ -52,6 +55,18 @@ function RegisterForm() {
         </label>
       </div>
       <div>
+      <div>
+        <label htmlFor="display-name">
+          Display Name:
+          <TextField
+            type="text"
+            name="display-name"
+            value={displayName}
+            required
+            onChange={(event) => setDisplayName(event.target.value)}
+          />
+        </label>
+      </div>
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>

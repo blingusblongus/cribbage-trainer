@@ -6,7 +6,8 @@
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+    "password" VARCHAR (1000) NOT NULL,
+	"display_name" VARCHAR (80) NOT NULL
 );
 
 CREATE TABLE "hands" (
@@ -18,3 +19,11 @@ CREATE TABLE "hands" (
 	"crib_id_str" VARCHAR(16),
 	"timestamp" TIMESTAMPTZ DEFAULT NOW()
 );
+
+CREATE TABLE "golf_scores" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user" NOT NULL,
+	"golf_score" DECIMAL NOT NULL,
+	"timestamp" TIMESTAMPTZ DEFAULT NOW()
+);
+

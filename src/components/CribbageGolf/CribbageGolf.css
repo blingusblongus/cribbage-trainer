@@ -7,16 +7,20 @@
   }
 
   .best-container {
+    margin-top: -60px;
     display: flex;
     width: 50vw;
+    transform: scale(.6);
   }
 
-  .best-container > * {
-      transform: scale(.6);
-      
+  .div-center {
+      width: 80%;
+      margin: auto;
   }
   
   .hand-container {
     display: flex;
     justify-content: center;
+    width: 95%;
+    margin: auto;
   }

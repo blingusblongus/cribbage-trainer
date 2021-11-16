@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 import CribbageGolf from '../CribbageGolf/CribbageGolf';
+import GolfResults from '../GolfResults/GolfResults.jsx';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/golf" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -97,31 +98,39 @@ function App() {
             }
           </Route>
 
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/golfResults"
+          >
+            <GolfResults/>
+          </ProtectedRoute>
+
           <Route
             exact
             path="/home"
           >
 
-            {/* {user.id ?
+            {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
               <Redirect to="/user" />
               :
               // Otherwise, show the Landing page
               <LandingPage />
-            } */}
+            }
           </Route>
 
-          <Route path="/golf">
+          <ProtectedRoute path="/golf">
             <CribbageGolf/>
-          </Route>
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );
