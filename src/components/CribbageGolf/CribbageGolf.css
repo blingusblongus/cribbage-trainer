@@ -13,6 +13,11 @@
     transform: scale(.6);
   }
 
+  .div-center {
+      width: 80%;
+      margin: auto;
+  }
+
   /* .best-container > * {
       
       
