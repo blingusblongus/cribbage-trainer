@@ -34,9 +34,19 @@ function* changeDisplayName(action) {
   }
 }
 
+function* getUserScores() {
+  try{
+    const response = yield axios.get('/api/user/scores');
+    console.log(response);
+  }catch(err){
+    console.log(err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('SET_DISPLAY_NAME', changeDisplayName);
+  yield takeLatest('GET_USER_SCORES', getUserScores);
 }
 
 export default userSaga;

@@ -20,3 +20,10 @@ CREATE TABLE "hands" (
 	"timestamp" TIMESTAMPTZ DEFAULT NOW()
 );
 
+CREATE TABLE "golf_scores" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user" NOT NULL,
+	"golf_score" DECIMAL NOT NULL,
+	"timestamp" TIMESTAMPTZ DEFAULT NOW()
+);
+

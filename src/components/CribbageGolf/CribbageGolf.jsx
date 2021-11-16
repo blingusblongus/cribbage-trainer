@@ -13,6 +13,12 @@ function CribbageGolf(props) {
     const round = useSelector(store => store.round);
     const results = useSelector(store => store.results);
     const [displayResults, setDisplayResults] = useState(false);
+    const displayFinal = false;
+    
+    if(round > 10){
+        displayFinal = true;
+        
+    }
 
     // Deal cards on page load
     useEffect(() => {

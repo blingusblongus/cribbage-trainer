@@ -52,6 +52,13 @@ router.put('/:displayName', (req, res, next) => {
     });
 });
 
+// router.get('/scores', (req, res) => {
+//   const userId = req.user.id;
+//   const queryText = `
+//     SELECT * FROM 
+//   `
+// })
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful
