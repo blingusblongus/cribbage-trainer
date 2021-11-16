@@ -47,9 +47,18 @@ function* submitGolf(action) {
 //   yield put({type: 'DEAL_6'});
 // }
 
+function* getUserScores(){
+  try {
+    const response = yield axios.get('/api/score/user');
+  }catch(err){
+    console.log(err);
+  }
+}
+
 function* scoreSaga() {
   yield takeLatest('SCORE_OPTIMAL', checkOptimal);
   yield takeLatest('SUBMIT_GOLF_SCORE', submitGolf);
+  yield takeLatest('FETCH_USER_SCORES', getUserScores);
   // yield takeLatest('NEW_GOLF_HAND', newGolfHand);
 }
 

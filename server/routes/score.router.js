@@ -173,8 +173,6 @@ router.post('/optimal', (req, res) => {
             }
         }
 
-        console.log(distribution);
-
         //create smaller result obj and push
         let pruned = {
             cards: response.cards,
@@ -284,6 +282,26 @@ router.post('/golf', (req, res) => {
         .then(result => {
             res.sendStatus(201);
         }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+})
+
+router.get('/user', (req, res)=>{
+    const queryText = `
+        SELECT * FROM golf_scores
+        WHERE id = $1
+        ORDER BY golf_score ASC
+        LIMIT 10;
+    `;
+
+    const values = [req.user.id];
+
+    pool.query(queryText, values)
+        .then(result => {
+            console.log('GET USER SCORES');
+            res.send(result.rows);
+        }).catch(err=>{
             console.log(err);
             res.sendStatus(500);
         });
