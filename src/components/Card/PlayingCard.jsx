@@ -1,14 +1,10 @@
 import './PlayingCard.css';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Card } from '@mui/material';
 
 function playingCard({card}){
     const dispatch = useDispatch();
-    // const [selected, setSelected] = useState(false);
     const hand = useSelector(store => store.hand);
-
     const selected = hand.filter(el => el.id === card.id) > 0;
 
     const addToHand = () => {
@@ -19,8 +15,6 @@ function playingCard({card}){
             type: 'ADD_TO_HAND',
             payload: card.id
         });
-
-        // setSelected(true);
     }
 
     const removeFromHand = () => {
