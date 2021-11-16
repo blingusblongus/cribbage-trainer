@@ -6,8 +6,10 @@ import { Card } from '@mui/material';
 
 function playingCard({card}){
     const dispatch = useDispatch();
-    const [selected, setSelected] = useState(false);
+    // const [selected, setSelected] = useState(false);
     const hand = useSelector(store => store.hand);
+
+    const selected = hand.filter(el => el.id === card.id) > 0;
 
     const addToHand = () => {
         //max 4 cards selected
@@ -18,7 +20,7 @@ function playingCard({card}){
             payload: card.id
         });
 
-        setSelected(true);
+        // setSelected(true);
     }
 
     const removeFromHand = () => {
@@ -27,7 +29,7 @@ function playingCard({card}){
             payload: card.id
         })
 
-        setSelected(false);
+        // setSelected(false);
     }
 
     return (
