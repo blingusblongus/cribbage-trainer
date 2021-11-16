@@ -50,6 +50,7 @@ function* submitGolf(action) {
 function* getUserScores(){
   try {
     const response = yield axios.get('/api/score/user');
+    yield put({type:'SET_USER_SCORES', payload: response.data});
   }catch(err){
     console.log(err);
   }

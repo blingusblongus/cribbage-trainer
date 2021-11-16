@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -13,6 +13,7 @@ function UserPage() {
   const dispatch = useDispatch();
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const userScores = useSelector(store => store.userScores);
   const [displayName, setDisplayName] = useState(user.display_name);
 
   const updateDisplay = () => {
@@ -24,6 +25,10 @@ function UserPage() {
       payload: displayName
     })
   }
+
+  useEffect(()=>{
+    dispatch({type: 'FETCH_USER_SCORES'});
+  },[]);
 
   return (
     <div className="container">
@@ -41,7 +46,7 @@ function UserPage() {
       <br />
       <br />
       {/* Commented out until rows is resolved */}
-      {/* <UserTable/> */}
+      {userScores.length > 1 && <UserTable rows={userScores}/>};
       <LogOutButton className="btn" />
     </div>
   );

@@ -290,7 +290,7 @@ router.post('/golf', (req, res) => {
 router.get('/user', (req, res)=>{
     const queryText = `
         SELECT * FROM golf_scores
-        WHERE id = $1
+        WHERE user_id = $1
         ORDER BY golf_score ASC
         LIMIT 10;
     `;
