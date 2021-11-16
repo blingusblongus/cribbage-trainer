@@ -31,8 +31,8 @@ function Card({card}){
 
     return (
         // check both selected and hand.length to prevent sticky selection
-        <div className={selected || hand.length === 0 ? 
-            "card-container selected" : "card-container"}
+        <div className={!selected || hand.length === 0 ? 
+            "card-container" : "card-container selected"}
             onClick={
                 selected ? removeFromHand : addToHand
                 }>

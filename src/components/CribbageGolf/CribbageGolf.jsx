@@ -41,6 +41,7 @@ function CribbageGolf(props) {
         DIFFERENCE: {results[1].stats.avg - results[0].stats.avg}
     </>
     )
+    console.log(bestHand);
 
     return (
         <>
@@ -53,13 +54,17 @@ function CribbageGolf(props) {
                 {(displayResults && results) && (
                     !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
                 )}
-
-                <div className="best-container">
-                    {results && results[1]?.cards.draw.map(card => {
-                        return (<Card key={card.id + 100} card={card} />)
-                    })}
-                </div>
             </div>
+
+            {(displayResults && !bestHand) && (<>
+                    <h3>Best Possible Hand</h3>
+                    <div className="best-container">
+                        {results && results[1]?.cards.draw.map(card => {
+                            return (<Card key={card.id + 100} card={card} />)
+                        })}
+                    </div>
+                    </>
+                )}
 
             <div className="test-container">
                 {/* Render submit button only if hand chosen 
