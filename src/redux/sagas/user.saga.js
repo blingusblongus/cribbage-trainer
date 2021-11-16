@@ -26,7 +26,8 @@ function* fetchUser() {
 
 function* changeDisplayName(action) {
   try{
-    const response = axios.put(`/api/user/${action.payload}`);
+    const response = yield axios.put(`/api/user/${action.payload}`);
+    yield put({type: 'FETCH_USER'});
   }catch(err){
     // pass along error?
     console.log(err);
