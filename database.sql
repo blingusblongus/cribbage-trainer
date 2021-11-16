@@ -7,7 +7,7 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-	"display_name" VARCHAR (80) NOT NULL,
+	"display_name" VARCHAR (80) NOT NULL
 );
 
 CREATE TABLE "hands" (
@@ -19,3 +19,4 @@ CREATE TABLE "hands" (
 	"crib_id_str" VARCHAR(16),
 	"timestamp" TIMESTAMPTZ DEFAULT NOW()
 );
+
