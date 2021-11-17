@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 import CribbageGolf from '../CribbageGolf/CribbageGolf';
 import GolfResults from '../GolfResults/GolfResults.jsx';
+import Home from '../Home/Home';
 
 function App() {
   const dispatch = useDispatch();
@@ -106,20 +107,12 @@ function App() {
             <GolfResults/>
           </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/home"
           >
-
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
-          </Route>
+            <Home />
+          </ProtectedRoute>
 
           <ProtectedRoute path="/golf">
             <CribbageGolf/>
