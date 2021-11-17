@@ -100,7 +100,7 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<Card key={card.id} card={card} />)
+                            return (<Card key={card.id} card={card} noSelect={true} />)
                         })}
                     </div>
                 </>
@@ -115,6 +115,7 @@ function CribbageGolf(props) {
                     return <Card
                         key={card.id}
                         card={card}
+                        noSelect={false}
                     />
                 })}
             </div>
