@@ -2,12 +2,24 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Button } from '@mui/material';
 import { useHistory } from "react-router";
+import { useEffect } from "react";
 
 function GolfResults(props) {
     const dispatch = useDispatch();
     const history = useHistory();
     const golfScore = useSelector(store => store.golfScore);
     const golfRounds = useSelector(store => store.global.golfRounds);
+
+    useEffect(() => {
+        if(golfScore.length > 0){
+            dispatch({
+                type: 'SUBMIT_GOLF_SCORE',
+                payload: {
+                    score: golfScore.reduce((sum, round) => sum += round)
+                }
+            });
+        }
+    },[])
 
     return (
         <>

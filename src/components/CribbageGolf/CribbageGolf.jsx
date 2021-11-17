@@ -20,12 +20,6 @@ function CribbageGolf(props) {
 
     // Remember, round is kind of bugged, it's one higher than displayed
     if (golfScore.length === golfRounds) {
-        dispatch({
-            type: 'SUBMIT_GOLF_SCORE',
-            payload: {
-                score: golfScore.reduce((sum, round) => sum += round)
-            }
-        })
 
         //push to results page
         history.push('/golfResults');
