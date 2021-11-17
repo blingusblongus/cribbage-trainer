@@ -1,3 +1,4 @@
+/* Currently unused */
 :root {
     --transition-time: 5s;
 }
@@ -12,6 +13,7 @@
     margin-left: -50px;
     margin-top: 30px;
     transition: margin .3s ease;
+    color: black;
 }
 
 .selected {

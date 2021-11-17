@@ -1,20 +1,30 @@
 import { useEffect, useState } from 'react';
-import Card from '../Card/Card.jsx';
+import Card from '../Card/PlayingCard.jsx';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import './CribbageGolf.css';
+import Button from '@mui/material/Button';
+import { useHistory } from 'react-router';
 
 function CribbageGolf(props) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
-    const round = useSelector(store => store.round);
+    // const round = useSelector(store => store.round);
     const results = useSelector(store => store.results);
+    const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
+    const [first, setFirst] = useState(true);
 
     // Deal cards on page load
     useEffect(() => {
+        if (first) {
+            dispatch({ type: 'CLEAR_GOLF_SCORE' });
+            setFirst(false);
+        }
+        dispatch({ type: 'NEW_HAND' });
         dispatch({ type: 'DEAL_6' });
     }, []);
 
@@ -28,6 +38,12 @@ function CribbageGolf(props) {
 
     // Deal a new hand
     const newHand = () => {
+
+        //push to score page if total rounds met
+        if (golfScore.length >= golfRounds) {
+            history.push('/golfResults');
+            return;
+        }
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
         dispatch({ type: 'DEAL_6' })
@@ -44,37 +60,52 @@ function CribbageGolf(props) {
 
     return (
         <>
-            <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
-            <p>Round #: {round}</p>
-            <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
-            <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
+            <div className="div-center">
+                <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
 
-            <div className="optimal-container">
-                {(displayResults && results) && (
-                    !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
-                )}
+                {/* Currently on load, it runs double, so round is off by one */}
+                <p>Round #: {golfScore.length}</p>
+                <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
+                <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
 
-                <div className="best-container">
-                    {results && results[1]?.cards.draw.map(card => {
-                        return (<Card key={card.id + 100} card={card} />)
-                    })}
-                </div>
-            </div>
-
-            <div className="test-container">
-                {/* Render submit button only if hand chosen 
+                <div className="test-container">
+                    {/* Render submit button only if hand chosen 
                     and results not displayed  */}
-                <div>
-                    {(hand.length === 4 && !displayResults)
-                        && <button onClick={scoreOptimal}>GET</button>}
+                    <div>
+                        {(hand.length === 4 && !displayResults)
+                            && <Button variant="contained"
+                                onClick={scoreOptimal}>Get Hand Avg</Button>}
+                    </div>
+                    <div>
+                        {/* Render Next Hand button if results are being displayed */}
+                        {displayResults
+                            && <Button variant="contained"
+                                onClick={newHand}>
+                                {golfScore.length === golfRounds ? 
+                                    'See results' : 'Next Hand'}
+                            </Button>}
+                    </div>
+                    {/* <Scatter data={data} options={options} /> */}
                 </div>
-                <div>
-                    {/* Render Next Hand button if results are being displayed */}
-                    {displayResults
-                        && <button onClick={newHand}>Next Hand</button>}
+
+                <div className="optimal-container">
+                    {(displayResults && results) && (
+                        !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
+                    )}
                 </div>
-                {/* <Scatter data={data} options={options} /> */}
+
+                {(displayResults && !bestHand) && (<>
+                    <h3>Best Possible Hand</h3>
+                    <div className="best-container">
+                        {results && results[1]?.cards.draw.map(card => {
+                            return (<Card key={card.id} card={card} noSelect={true} />)
+                        })}
+                    </div>
+                </>
+                )}
             </div>
+
+
             <div className="hand-container">
 
                 {/* Render cards only if the hand has been dealt */}
@@ -82,6 +113,7 @@ function CribbageGolf(props) {
                     return <Card
                         key={card.id}
                         card={card}
+                        noSelect={false}
                     />
                 })}
             </div>

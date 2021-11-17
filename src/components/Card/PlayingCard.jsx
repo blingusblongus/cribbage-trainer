@@ -1,12 +1,14 @@
-import './Card.css';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import './PlayingCard.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { Card } from '@mui/material';
 
-function Card({card}){
+function playingCard({card, noSelect}){
     const dispatch = useDispatch();
-    const [selected, setSelected] = useState(false);
     const hand = useSelector(store => store.hand);
+    const selected = hand.filter(id => id === card.id).length > 0;
+    console.log('rerender')
+    console.log(hand);
+    console.log(selected);
 
     const addToHand = () => {
         //max 4 cards selected
@@ -16,8 +18,6 @@ function Card({card}){
             type: 'ADD_TO_HAND',
             payload: card.id
         });
-
-        setSelected(true);
     }
 
     const removeFromHand = () => {
@@ -26,13 +26,13 @@ function Card({card}){
             payload: card.id
         })
 
-        setSelected(false);
+        // setSelected(false);
     }
 
     return (
-        // check both selected and hand.length to prevent sticky selection
-        <div className={selected || hand.length === 0 ? 
-            "card-container selected" : "card-container"}
+        //{/* // check both selected and hand.length to prevent sticky selection */}
+        <div className={(!selected || hand.length === 0 || noSelect) ? 
+            "card-container" : "card-container selected"}
             onClick={
                 selected ? removeFromHand : addToHand
                 }>
@@ -42,4 +42,4 @@ function Card({card}){
     );
 }
 
-export default Card;
+export default playingCard;

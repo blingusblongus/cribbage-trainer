@@ -173,8 +173,6 @@ router.post('/optimal', (req, res) => {
             }
         }
 
-        console.log(distribution);
-
         //create smaller result obj and push
         let pruned = {
             cards: response.cards,
@@ -269,5 +267,44 @@ router.post('/single', (req, res) => {
     res.send(result);
 })
 
+// record golf scores
+router.post('/golf', (req, res) => {
+    const userId = req.user.id;
+    const score = req.body.score;
+
+    const queryText = `
+        INSERT INTO golf_scores (user_id, golf_score)
+        VALUES ($1, $2);
+    `
+    const values = [userId, score];
+
+    pool.query(queryText, values)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+})
+
+router.get('/user', (req, res)=>{
+    const queryText = `
+        SELECT * FROM golf_scores
+        WHERE user_id = $1
+        ORDER BY golf_score ASC
+        LIMIT 10;
+    `;
+
+    const values = [req.user.id];
+
+    pool.query(queryText, values)
+        .then(result => {
+            console.log('GET USER SCORES');
+            res.send(result.rows);
+        }).catch(err=>{
+            console.log(err);
+            res.sendStatus(500);
+        });
+})
 
 module.exports = router;
