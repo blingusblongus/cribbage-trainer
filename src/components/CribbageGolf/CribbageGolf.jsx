@@ -16,15 +16,10 @@ function CribbageGolf(props) {
     const results = useSelector(store => store.results);
     const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
+    const [first, setFirst] = useState(true);
 
     // Remember, round is kind of bugged, it's one higher than displayed
     if (golfScore.length === golfRounds) {
-        dispatch({
-            type: 'SUBMIT_GOLF_SCORE',
-            payload: {
-                score: golfScore.reduce((sum, round) => sum += round)
-            }
-        })
 
         //push to results page
         history.push('/golfResults');
@@ -32,10 +27,12 @@ function CribbageGolf(props) {
 
     // Deal cards on page load
     useEffect(() => {
-        if (golfScore.length <= golfRounds) {
-            dispatch({ type: 'NEW_HAND' });
-            dispatch({ type: 'DEAL_6' });
+        if(first){
+            dispatch({ type: 'CLEAR_GOLF_SCORE' });
+            setFirst(false);
         }
+        dispatch({ type: 'NEW_HAND' });
+        dispatch({ type: 'DEAL_6' });
     }, []);
 
     // Send request for optimum hand checking
