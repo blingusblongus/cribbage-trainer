@@ -35,7 +35,6 @@ function* checkOptimal() {
 function* submitGolf(action) {
   try{ 
     const response = yield axios.post('/api/score/golf', action.payload);
-    yield put({type: 'CLEAR_GOLF_SCORE'});
   }catch(err){
     console.log(err);
   }

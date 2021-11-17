@@ -1,16 +1,25 @@
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Button } from '@mui/material';
+import { useHistory } from "react-router";
 
 function GolfResults(props) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const golfScore = useSelector(store => store.golfScore);
     const golfRounds = useSelector(store => store.global.golfRounds);
-    let displayConfirm = false;
 
     return (
         <>
             <div>Golf Results</div>
-            <p>Results Recorded</p>
+            <div>
+                <p>Total Score (lower is better): {golfScore.reduce((total, score) => total += score, 0)}</p>
+                <p>Optimal Hands: {golfScore.filter(score => score === 0).length}</p>
+                <p>Results Recorded</p>
+                <br/>
+                <Button variant="contained" onClick={()=>history.push('/golf')}>Play Again</Button>
+            </div>
+
         </>
     )
 }
