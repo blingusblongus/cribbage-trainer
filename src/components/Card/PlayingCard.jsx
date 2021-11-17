@@ -5,7 +5,10 @@ import { Card } from '@mui/material';
 function playingCard({card}){
     const dispatch = useDispatch();
     const hand = useSelector(store => store.hand);
-    const selected = hand.filter(el => el.id === card.id) > 0;
+    const selected = hand.filter(id => id === card.id).length > 0;
+    console.log('rerender')
+    console.log(hand);
+    console.log(selected);
 
     const addToHand = () => {
         //max 4 cards selected
@@ -28,7 +31,7 @@ function playingCard({card}){
 
     return (
         //{/* // check both selected and hand.length to prevent sticky selection */}
-        <div className={!selected || hand.length === 0 ? 
+        <div className={(!selected || hand.length === 0) ? 
             "card-container" : "card-container selected"}
             onClick={
                 selected ? removeFromHand : addToHand
