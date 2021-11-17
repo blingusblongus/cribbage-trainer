@@ -18,16 +18,9 @@ function CribbageGolf(props) {
     const [displayResults, setDisplayResults] = useState(false);
     const [first, setFirst] = useState(true);
 
-    // Remember, round is kind of bugged, it's one higher than displayed
-    if (golfScore.length === golfRounds) {
-
-        //push to results page
-        history.push('/golfResults');
-    }
-
     // Deal cards on page load
     useEffect(() => {
-        if(first){
+        if (first) {
             dispatch({ type: 'CLEAR_GOLF_SCORE' });
             setFirst(false);
         }
@@ -45,6 +38,12 @@ function CribbageGolf(props) {
 
     // Deal a new hand
     const newHand = () => {
+
+        //push to score page if total rounds met
+        if (golfScore.length >= golfRounds) {
+            history.push('/golfResults');
+            return;
+        }
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
         dispatch({ type: 'DEAL_6' })
@@ -58,7 +57,6 @@ function CribbageGolf(props) {
         DIFFERENCE: {results[1].stats.avg - results[0].stats.avg}
     </>
     )
-    console.log(bestHand);
 
     return (
         <>
@@ -76,13 +74,16 @@ function CribbageGolf(props) {
                     <div>
                         {(hand.length === 4 && !displayResults)
                             && <Button variant="contained"
-                                onClick={scoreOptimal}>GET</Button>}
+                                onClick={scoreOptimal}>Get Hand Avg</Button>}
                     </div>
                     <div>
                         {/* Render Next Hand button if results are being displayed */}
                         {displayResults
                             && <Button variant="contained"
-                                onClick={newHand}>Next Hand</Button>}
+                                onClick={newHand}>
+                                {golfScore.length === golfRounds ? 
+                                    'See results' : 'Next Hand'}
+                            </Button>}
                     </div>
                     {/* <Scatter data={data} options={options} /> */}
                 </div>
