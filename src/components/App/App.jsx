@@ -23,6 +23,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 import CribbageGolf from '../CribbageGolf/CribbageGolf';
 import GolfResults from '../GolfResults/GolfResults.jsx';
+import Home from '../Home/Home';
+import Leaderboards from '../Leaderboards/Leaderboards';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/golf" />
+          <Redirect exact from="/" to="/home" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -98,6 +100,14 @@ function App() {
             }
           </Route>
 
+          <Route
+            exact
+            path="/leaderboards"
+          >
+            <Leaderboards />
+            
+          </Route>
+
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
@@ -106,20 +116,12 @@ function App() {
             <GolfResults/>
           </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/home"
           >
-
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
-          </Route>
+            <Home />
+          </ProtectedRoute>
 
           <ProtectedRoute path="/golf">
             <CribbageGolf/>

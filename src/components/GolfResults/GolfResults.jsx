@@ -8,7 +8,6 @@ function GolfResults(props) {
     const dispatch = useDispatch();
     const history = useHistory();
     const golfScore = useSelector(store => store.golfScore);
-    const golfRounds = useSelector(store => store.global.golfRounds);
 
     useEffect(() => {
         if(golfScore.length > 0){

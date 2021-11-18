@@ -307,4 +307,23 @@ router.get('/user', (req, res)=>{
         });
 })
 
+router.get('/leaderboards', (req, res)=>{
+    const queryText = `
+        SELECT golf_scores.id, user_id, display_name, golf_score, timestamp 
+        FROM golf_scores JOIN "user" 
+        ON "user".id = golf_scores.user_id
+        ORDER BY golf_score ASC
+        LIMIT 15;
+    `;
+
+    pool.query(queryText)
+        .then(result => {
+            console.log('GET LEADERBOARD SCORES');
+            res.send(result.rows);
+        }).catch(err=>{
+            console.log(err);
+            res.sendStatus(500);
+        });
+})
+
 module.exports = router;
