@@ -14,6 +14,7 @@
     margin-top: 30px;
     transition: margin .3s ease;
     color: black;
+    box-shadow: 3px 3px 8px black;
 }
 
 .selected {

@@ -3,7 +3,6 @@ const crib = (state = [], action) => {
         case 'SET_CRIB':
             return action.payload.map(card=>card.id);
         case 'ADD_TO_HAND':
-            console.log('crib reducer working');
             return state.filter(id => id !== action.payload);
         case 'REMOVE_FROM_HAND':
             return [...state, action.payload];
