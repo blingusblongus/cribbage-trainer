@@ -20,7 +20,7 @@ function Leaderboards(props) {
 
     return (
         <div className="leaderboard">
-            <div>Leaderboards</div>
+            <h2 className="leaderboard-title">Leaderboards</h2>
 
             <TableContainer>
                 <Table aria-label="simple table"

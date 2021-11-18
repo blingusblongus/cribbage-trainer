@@ -1,5 +1,10 @@
 .leaderboard {
     width: 95%;
     margin: auto;
+    border-radius: 20px;
     background-color: var(--primary);
+}
+
+.leaderboard-title {
+    text-align: center;
 }
