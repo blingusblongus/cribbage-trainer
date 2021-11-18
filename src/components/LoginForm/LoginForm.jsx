@@ -58,6 +58,8 @@ function LoginForm() {
       </div>
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
+        <span>or</span>
+        <input className="btn" type="register" name="register" value="Register" readOnly/>
       </div>
     </form>
   );
