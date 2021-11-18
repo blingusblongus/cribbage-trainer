@@ -1,8 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import './Home.css';
 
 function Home(props) {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const redirect = (path) => {
         history.push(path);
@@ -18,7 +20,7 @@ function Home(props) {
             <div className="primary-btn"
                 onClick={()=>redirect('/leaderboards')}>Leaderboards</div>
             <div className="primary-btn"
-                onClick={()=>redirect('/logout')}>Logout</div>
+                onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</div>
         </>
     )
 }
