@@ -43,10 +43,19 @@ function* getUserScores() {
   }
 }
 
+function* deleteUser() {
+  try{
+    const response = yield axios.delete('/api/user');
+  }catch(err){
+    console.log(err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('SET_DISPLAY_NAME', changeDisplayName);
   yield takeLatest('GET_USER_SCORES', getUserScores);
+  yield takeLatest('DELETE_USER', deleteUser);
 }
 
 export default userSaga;

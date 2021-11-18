@@ -31,6 +31,17 @@ function UserPage() {
     // setNameIsUpdated(true);
   }
 
+  const promptMsg = `Are you sure?
+  Type 'delete ${user.username}' to remove your account and all associated data`;
+
+  const deleteAccount = () => {
+    if(prompt(promptMsg) === `delete ${user.username}`){
+      dispatch({type: 'DELETE_USER'});
+    }else{
+      return;
+    }
+  }
+
   useEffect(()=>{
     dispatch({type: 'FETCH_USER_SCORES'});
   },[]);
@@ -56,6 +67,9 @@ function UserPage() {
       <h2>Personal High Scores</h2>
       {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>};
       <LogOutButton className="btn" />
+      <Button variant="contained" 
+        color="warning"
+        onClick={deleteAccount}>Delete Account</Button>
     </div>
   );
 }
