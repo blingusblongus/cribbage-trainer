@@ -14,6 +14,10 @@ function UserPage() {
   const userScores = useSelector(store => store.userScores);
   const [displayName, setDisplayName] = useState(user.display_name);
 
+  // After fetch user is called, these reinit. How to get around it?
+  // const [nameIsUpdated, setNameIsUpdated] = useState(false);
+  // const [oldName, setOldName] = useState(user.display_name);
+
   const updateDisplay = () => {
     //should add error message for this
     if(!displayName) return;
@@ -21,7 +25,10 @@ function UserPage() {
     dispatch({
       type: 'SET_DISPLAY_NAME',
       payload: displayName
-    })
+    });
+
+    // Not working - WHY?
+    // setNameIsUpdated(true);
   }
 
   useEffect(()=>{
@@ -39,11 +46,14 @@ function UserPage() {
         onChange={(e) => setDisplayName(e.target.value)}></TextField>
       <Button variant="contained"
         onClick={updateDisplay}>Update Display Name</Button>
+        {/* Broken below */}
+        {/* {nameIsUpdated && <p>Display Name Updated to '{displayName}'</p>} */}
       <Button variant="contained"
         onClick={() => history.push('/golf')}>PLAY GOLF</Button>
       <br />
       <br />
       {/* Commented out until rows is resolved */}
+      <h2>Personal High Scores</h2>
       {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>};
       <LogOutButton className="btn" />
     </div>
