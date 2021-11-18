@@ -68,7 +68,7 @@ function UserPage() {
       <br />
       {/* Commented out until rows is resolved */}
       <h2>Personal High Scores</h2>
-      {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>};
+      {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>}
       <LogOutButton className="btn" />
       <Button variant="contained" 
         color="warning"
