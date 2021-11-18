@@ -27,6 +27,8 @@ function UserPage() {
       payload: displayName
     });
 
+    alert('Display Name Updated')
+
     // Not working - WHY?
     // setNameIsUpdated(true);
   }
@@ -56,6 +58,7 @@ function UserPage() {
         value={displayName}
         onChange={(e) => setDisplayName(e.target.value)}></TextField>
       <Button variant="contained"
+        disabled={displayName === user.display_name}
         onClick={updateDisplay}>Update Display Name</Button>
         {/* Broken below */}
         {/* {nameIsUpdated && <p>Display Name Updated to '{displayName}'</p>} */}
@@ -65,7 +68,7 @@ function UserPage() {
       <br />
       {/* Commented out until rows is resolved */}
       <h2>Personal High Scores</h2>
-      {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>};
+      {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>}
       <LogOutButton className="btn" />
       <Button variant="contained" 
         color="warning"
