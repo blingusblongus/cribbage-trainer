@@ -37,7 +37,9 @@ function Leaderboards(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {allScores.map((row, i) => (
+                        {allScores.map((row, i) => {
+                            let abbrScore = Math.round(row.golf_score * 100) / 100;
+                            return (
                             <TableRow
                                 key={row.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -46,10 +48,10 @@ function Leaderboards(props) {
                                     {i + 1}
                                 </TableCell>
                                 <TableCell align="right">{row.display_name}</TableCell>
-                                <TableCell align="right">{row.golf_score}</TableCell>
+                                <TableCell align="right">{abbrScore}</TableCell>
                                 <TableCell align="right">{row.timestamp.split('T')[0]}</TableCell>
                             </TableRow>
-                        ))}
+                        )})}
                     </TableBody>
                 </Table>
             </TableContainer>
