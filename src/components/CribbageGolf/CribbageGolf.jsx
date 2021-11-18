@@ -65,8 +65,8 @@ function CribbageGolf(props) {
 
                 {/* Currently on load, it runs double, so round is off by one */}
                 <p>Round #: {golfScore.length + 1} of {golfRounds}</p>
-                <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</p>
-                <p>Previous Score: {golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</p>
+                <p>Total Points Over Par: {golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</p>
+                <p>Last Hand: {golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</p>
 
                 <div className="test-container abs-center-x">
                     {/* Render submit button only if hand chosen 
