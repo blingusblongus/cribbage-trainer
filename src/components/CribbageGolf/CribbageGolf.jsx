@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import Card from '../Card/PlayingCard.jsx';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import './CribbageGolf.css';
-import Button from '@mui/material/Button';
 import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import './CribbageGolf.css';
+import Card from '../Card/PlayingCard.jsx';
+import Button from '@mui/material/Button';
+
 
 function CribbageGolf(props) {
     const history = useHistory();
@@ -68,7 +68,7 @@ function CribbageGolf(props) {
                 <p>Total Score: {golfScore.reduce((sum, el) => sum += el, 0)}</p>
                 <p>Previous Score: {golfScore[golfScore.length - 1]}</p>
 
-                <div className="test-container">
+                <div className="test-container abs-center-x">
                     {/* Render submit button only if hand chosen 
                     and results not displayed  */}
                     <div>
@@ -106,7 +106,7 @@ function CribbageGolf(props) {
             </div>
 
 
-            <div className="hand-container">
+            <div className="hand-container abs-center-x">
 
                 {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
