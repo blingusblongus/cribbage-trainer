@@ -52,9 +52,9 @@ function CribbageGolf(props) {
     const bestHand = results ? (results.length === 1) : false;
 
     const avgMsg = (results && !bestHand) && (<>
-        YOUR HAND AVG: {results[0].stats.avg} <br />
-        BEST POSSIBLE AVG: {results[1].stats.avg} <br />
-        DIFFERENCE: {results[1].stats.avg - results[0].stats.avg}
+        YOUR HAND AVG: {results[0].stats.avg.toFixed(2)} <br />
+        BEST POSSIBLE AVG: {results[1].stats.avg.toFixed(2)} <br />
+        DIFFERENCE: {(results[1].stats.avg - results[0].stats.avg).toFixed(2)}
     </>
     )
 
