@@ -46,6 +46,7 @@ function* getUserScores() {
 function* deleteUser() {
   try{
     const response = yield axios.delete('/api/user');
+    yield put({type: 'FETCH_USER'});
   }catch(err){
     console.log(err);
   }
