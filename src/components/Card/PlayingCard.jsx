@@ -1,5 +1,6 @@
 import './PlayingCard.css';
 import { useDispatch, useSelector } from 'react-redux';
+import Suit from '../Suit/Suit';
 
 function playingCard({card, noSelect}){
     const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function playingCard({card, noSelect}){
                 }>
             <div>{card.name}</div>
             <div>{card.suit}</div>
+            <Suit/>
         </div>
     );
 }
