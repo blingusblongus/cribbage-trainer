@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Button } from '@mui/material';
 import { useHistory } from "react-router";
 import { useEffect } from "react";
+import './GolfResults.css';
 
 function GolfResults(props) {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function GolfResults(props) {
     },[])
 
     return (
-        <>
+        <div className="results-container">
             <div>Golf Results</div>
             <div>
                 <p>Total Score (lower is better): {golfScore.reduce((total, score) => total += score, 0)}</p>
@@ -31,7 +32,7 @@ function GolfResults(props) {
                 <Button variant="contained" onClick={()=>history.push('/golf')}>Play Again</Button>
             </div>
 
-        </>
+        </div>
     )
 }
 
