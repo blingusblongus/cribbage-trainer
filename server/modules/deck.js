@@ -2,6 +2,8 @@ function DeckConstructor() {
     const names = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven',
         'eight', 'nine', 'ten', 'jack', 'queen', 'king'];
 
+    const icons = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+
     const suits = ['clubs', 'hearts', 'spades', 'diamonds'];
 
     let cards = [];
@@ -10,9 +12,10 @@ function DeckConstructor() {
     for (let suit of suits) {
         let index = 0;
 
-        for (let name of names) {
+        for (let i = 0; i<names.length; i++) {
             cards.push({
-                name: name,
+                name: names[i],
+                icon: icons[i],
                 suit: suit,
                 value: index < 10 ? index + 1 : 10,
                 index: index,

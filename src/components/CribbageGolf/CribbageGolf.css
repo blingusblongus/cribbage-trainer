@@ -32,3 +32,21 @@
     margin: auto;
     bottom: 20px;
   }
+
+  .chart {
+    background-color: var(--primary);
+    width: 95%;
+    max-width: 500px;
+    bottom: 0%;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 15px black;
+    display: flex;
+    align-items: center;
+  }
+
+  .chart-btn {
+    position: absolute;
+    right: 0;
+    width: 40%;
+  }
