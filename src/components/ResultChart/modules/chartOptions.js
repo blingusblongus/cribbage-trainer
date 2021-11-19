@@ -28,7 +28,7 @@
             label: {
               content: 'average',
               enabled: false,
-              rotation: 'auto',
+              rotation: '90deg',
               font: { style: 'italic' }
             }
           },

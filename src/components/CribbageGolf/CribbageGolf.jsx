@@ -17,7 +17,7 @@ function CribbageGolf(props) {
     const results = useSelector(store => store.results);
     const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
-    const [showChart, setShowChart] = useState(true);
+    const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
 
     // Deal cards on page load
