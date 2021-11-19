@@ -36,6 +36,7 @@
   .chart {
     background-color: var(--primary);
     width: 95%;
+    max-width: 500px;
     bottom: 0%;
     padding: 10px;
     border-radius: 15px;

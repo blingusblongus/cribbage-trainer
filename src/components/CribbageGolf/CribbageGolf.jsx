@@ -10,7 +10,7 @@ import ResultChart from '../ResultChart/ResultChart';
 function CribbageGolf(props) {
     const history = useHistory();
     const dispatch = useDispatch();
-    const deal = useSelector(store => store.deal);
+    let deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
     // const round = useSelector(store => store.round);
@@ -60,6 +60,25 @@ function CribbageGolf(props) {
         DIFFERENCE: {(results[1].stats.avg - results[0].stats.avg).toFixed(2)}
     </>
     )
+
+    //sort hand
+    deal.sort((a,b) => {
+        return a.index - b.index;
+    })
+    deal.sort((a,b) => {
+        return a.value - b.value;
+    })
+
+    //sort results if they exist
+    if(results && results[1]){
+        let resultDraw = results[1].cards.draw;
+        resultDraw.sort((a,b) => {
+            return a.index - b.index;
+        })
+        resultDraw.sort((a,b) => {
+            return a.value - b.value;
+        })
+    }
 
     const toggleChart = () => {
         setShowChart(!showChart);
