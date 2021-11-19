@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './CribbageGolf.css';
 import Card from '../Card/PlayingCard.jsx';
 import Button from '@mui/material/Button';
+import ResultChart from '../ResultChart/ResultChart';
 
 
 function CribbageGolf(props) {
@@ -117,6 +118,7 @@ function CribbageGolf(props) {
                     />
                 })}
             </div>
+            <ResultChart/>
         </>
     )
 }
