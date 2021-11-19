@@ -25,3 +25,19 @@
 .card-container:first-child {
     margin-left: 0px;
 }
+
+.edge-suit {
+    height: 20px;
+    width: 20px;
+}
+
+.card-label {
+    display: flex;
+    font-weight: bold;
+    font-size: 130%;
+}
+
+.center-suit {
+    width: 50%;
+    margin: 30px auto;
+}
