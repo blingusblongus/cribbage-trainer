@@ -1,5 +1,20 @@
   // init options for the graph
   const options = {
+    scales: {
+        x: {
+            title: {
+                display: true,
+                text: 'Points',
+            },
+        },
+        y: {
+            ticks: {
+                callback: function(value, index, values){
+                    return Math.round((value / 46)*100) + '%';
+                }
+            },
+        },
+    },
     plugins: {
       autocolors: false,
       annotation: {
