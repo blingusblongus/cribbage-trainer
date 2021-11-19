@@ -17,6 +17,7 @@ function CribbageGolf(props) {
     const results = useSelector(store => store.results);
     const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
+    const [showChart, setShowChart] = useState(true);
     const [first, setFirst] = useState(true);
 
     // Deal cards on page load
@@ -47,6 +48,7 @@ function CribbageGolf(props) {
         }
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
+        setShowChart(false);
         dispatch({ type: 'DEAL_6' })
     }
 
@@ -59,8 +61,22 @@ function CribbageGolf(props) {
     </>
     )
 
+    const toggleChart = () => {
+        setShowChart(!showChart);
+    }
+
     return (
         <>
+
+            {displayResults &&
+                <div className="chart-btn">
+                    <Button
+                        onClick={toggleChart}
+                        variant="contained">
+                        {showChart ? 'Hide Chart': 'Show Chart'}
+                    </Button>
+                </div>
+            }
             <div className="div-center">
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
 
@@ -82,7 +98,7 @@ function CribbageGolf(props) {
                         {displayResults
                             && <Button variant="contained"
                                 onClick={newHand}>
-                                {golfScore.length === golfRounds ? 
+                                {golfScore.length === golfRounds ?
                                     'See results' : 'Next Hand'}
                             </Button>}
                     </div>
@@ -118,7 +134,18 @@ function CribbageGolf(props) {
                     />
                 })}
             </div>
-            <ResultChart/>
+
+            {showChart &&
+                <div
+                    className="chart abs-center-x"
+                    onClick={toggleChart}>
+                    <ResultChart />
+                </div>
+
+            }
+
+
+
         </>
     )
 }
