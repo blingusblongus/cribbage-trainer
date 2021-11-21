@@ -27,7 +27,7 @@ function CribbageGolf(props) {
             setFirst(false);
         }
         dispatch({ type: 'NEW_HAND' });
-        dispatch({ type: 'DEAL_6' });
+        dispatch({ type: 'DEAL', payload: 6 });
     }, []);
 
     // Send request for optimum hand checking
@@ -49,7 +49,7 @@ function CribbageGolf(props) {
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
         setShowChart(false);
-        dispatch({ type: 'DEAL_6' })
+        dispatch({ type: 'DEAL', payload: 6 });
     }
 
     const bestHand = results ? (results.length === 1) : false;

@@ -49,12 +49,6 @@ function* getAllScores(){
   }
 }
 
-// // Make sure that the hand is emptied before dealing again
-// function* newGolfHand () {
-//   yield put({type: 'NEW_HAND'});
-//   yield put({type: 'DEAL_6'});
-// }
-
 function* getUserScores(){
   try {
     const response = yield axios.get('/api/score/user');
