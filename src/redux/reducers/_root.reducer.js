@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
   results,
   global,
   userScores,
-  allScores
+  allScores,
    // will have an id and username if someone is logged in
 });
 
