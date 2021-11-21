@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import PlayingCard from '../PlayingCard/PlayingCard.jsx';
-import Button from '@mui/material/Button';
-import ResultChart from '../ResultChart/ResultChart';
 import sortValueSuit from '../../modules/sortValueSuit';
 
 function LearnMode(props) {
@@ -14,38 +12,51 @@ function LearnMode(props) {
     const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
     const flip = deal.filter(card => card.flip)[0] || null;
-    const singleHandCheck = useSelector(store => store.singleHandCheck);
+    const scores = useSelector(store => store.singleHandCheck);
     const hand = useSelector(store => store.hand);
     const [foundScores, setFoundScores] = useState([]);
-    console.log(singleHandCheck);
+    const [scoreList, setScoreList] = useState([]);
+
+    console.log('singleHandCheck', scores);
     console.log(hand);
     console.log('foundScores', foundScores);
 
     const checkSelected = () => {
-        if (hand.length === 0) return;
+        // if (hand.length === 0) return;
 
-        //check if score was already found
-        for (let score of foundScores) {
-            console.log('score.filter', score.filter(card => hand.includes(card.id)).length === hand.length);
-            if (hand.length === score.length
-                && score.filter(card => hand.includes(card.id)).length === hand.length) {
+        // //check if score was already found
+        // for (let score of foundScores) {
+        //     console.log('score.filter', score.filter(card => hand.includes(card.id)).length === hand.length);
+        //     if (hand.length === score.length
+        //         && score.filter(card => hand.includes(card.id)).length === hand.length) {
 
-                console.log('match already found');
-                return;
-            }
-        }
-
-        const scores = singleHandCheck.scores;
+        //         console.log('match already found');
+        //         return;
+        //     }
+        // }
 
         //iterate through all stored scoring hands
         for (let scoreType in scores) {
-            for (let combo of scores[scoreType]) {
+            for (let i=0; i<scores[scoreType].length; i++) {
+                if(scores[scoreType][i].found){
+                    break;
+                }
+
+                let combo = scores[scoreType][i].combo;
                 //check selection against scoring hand
                 if (hand.length === combo.length
                     && combo.filter(card => hand.includes(card.id)).length === hand.length) {
 
                     console.log('match', scores[scoreType]);
                     setFoundScores([...foundScores, combo]);
+                    //update the store to mark card as found
+                    dispatch({
+                        type: 'MARK_FOUND', 
+                        payload: {
+                            index: i,
+                            scoreType: scoreType
+                        }})
+                    // setScoreList([...scoreList, {scoreType, cards: combo}])
                 }
 
             }
@@ -94,6 +105,8 @@ function LearnMode(props) {
     //SORTING==========================
     //sort hand
     sortValueSuit(deal);
+
+    console.log('scoreList', scoreList);
 
     return (
         <>
