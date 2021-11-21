@@ -19,12 +19,15 @@
 
 .selected {
     margin-top: -20px;
+    margin-bottom: 50px;
     transition: margin .3s ease;
 }
 
 .card-container:first-child {
     margin-left: 0px;
 }
+
+
 
 .edge-suit {
     height: 20px;

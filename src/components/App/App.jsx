@@ -25,6 +25,7 @@ import CribbageGolf from '../CribbageGolf/CribbageGolf';
 import GolfResults from '../GolfResults/GolfResults.jsx';
 import Home from '../Home/Home';
 import Leaderboards from '../Leaderboards/Leaderboards';
+import LearnMode from '../LearnMode/LearnMode';
 
 function App() {
   const dispatch = useDispatch();
@@ -125,6 +126,10 @@ function App() {
 
           <ProtectedRoute path="/golf">
             <CribbageGolf/>
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/learn">
+            <LearnMode/>
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

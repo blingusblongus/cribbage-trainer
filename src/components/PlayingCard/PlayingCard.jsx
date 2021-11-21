@@ -2,14 +2,14 @@ import './PlayingCard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Suit from '../Suit/Suit';
 
-function playingCard({ card, noSelect }) {
+function playingCard({ card, noSelect, max4 }) {
     const dispatch = useDispatch();
     const hand = useSelector(store => store.hand);
     const selected = hand.filter(id => id === card.id).length > 0;
 
     const addToHand = () => {
         //max 4 cards selected
-        if (hand.length >= 4) return;
+        if (hand.length >= 4 && max4) return;
 
         dispatch({
             type: 'ADD_TO_HAND',
