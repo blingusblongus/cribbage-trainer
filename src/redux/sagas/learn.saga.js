@@ -10,7 +10,7 @@ function* fetchCombos() {
       hand: '[' + crib.join(', ') + ']'
     }
     const response = yield axios.post('/api/score/single', data);
-    yield console.log(response.data);
+    yield put({type: 'SET_COMBOS', payload: response.data});
   } catch (err) {
     console.log(err);
   }

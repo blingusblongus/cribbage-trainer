@@ -231,7 +231,7 @@ const scoreUtils = {
         const option = {
             handScore: 0,
             flipCard: flip,
-            scores: []
+            scores: {},
         }
     
         // create copy of complete hand for scoring
@@ -247,7 +247,7 @@ const scoreUtils = {
             if(points > 0){
                 //add points and push combo
                 option.handScore += points;
-                option[func] = hands;
+                option.scores[func] = hands;
             }
     
         } 
