@@ -287,6 +287,7 @@ router.post('/golf', (req, res) => {
         });
 })
 
+// Return User specific scores
 router.get('/user', (req, res)=>{
     const queryText = `
         SELECT * FROM golf_scores
@@ -307,6 +308,7 @@ router.get('/user', (req, res)=>{
         });
 })
 
+// Return all scores from all players
 router.get('/leaderboards', (req, res)=>{
     const queryText = `
         SELECT golf_scores.id, user_id, display_name, golf_score, timestamp 
