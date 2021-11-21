@@ -11,23 +11,33 @@ const singleHandCheck = (state = [], action) => {
                 result[scoreType] = typeOfScore.map(score => {
                     //calculate points
                     let points = 0;
+                    let name = '';
                     switch(scoreType){
                         case 'countFifteens':
+                            name = 'Fifteen';
+                            points = 2;
+                            break;
                         case 'countPairs':
+                            name = 'Pair'
                             points = 2;
                             break;
                         case 'countRuns':
+                            name = 'Run';
+                            points = score.length;
+                            break;
                         case 'countFlush':
+                            name = 'Flush';
                             points = score.length;
                             break;
                         case 'countNibsNobs':
                             console.log(score);
                             score.name === 'jack' ? points = 2 : points = 1;
+                            score.name === 'jack' ? name = 'Nibs' : name = 'Nobs';
                             break;
                     }
 
-
                     return {
+                        name: name,
                         combo: score,
                         found: false,
                         points: points

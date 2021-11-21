@@ -22,18 +22,6 @@ function LearnMode(props) {
     console.log('foundScores', foundScores);
 
     const checkSelected = () => {
-        // if (hand.length === 0) return;
-
-        // //check if score was already found
-        // for (let score of foundScores) {
-        //     console.log('score.filter', score.filter(card => hand.includes(card.id)).length === hand.length);
-        //     if (hand.length === score.length
-        //         && score.filter(card => hand.includes(card.id)).length === hand.length) {
-
-        //         console.log('match already found');
-        //         return;
-        //     }
-        // }
 
         //iterate through all stored scoring hands
         for (let scoreType in scores) {
@@ -100,6 +88,9 @@ function LearnMode(props) {
 
     // CONDITIONAL RENDERING ==========
 
+    const totalPoints = foundScores?.reduce((sum, score) => {
+        return sum += score.points
+    }, 0);
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -118,10 +109,11 @@ function LearnMode(props) {
             }
 
             <div className="found-scores">
+                <div>Total Points: {totalPoints}</div>
                 {foundScores?.map((score, i) => {
                     return (
                         <div key={i} className="found-score">
-                            Hello
+                            {score.name} for {score.points}
                         </div>
                     )
                 })}

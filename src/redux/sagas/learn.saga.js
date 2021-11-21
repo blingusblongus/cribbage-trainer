@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 import { put, takeLatest, select } from 'redux-saga/effects';
 
 function* fetchCombos() {
