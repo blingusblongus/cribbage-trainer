@@ -4,7 +4,7 @@ const scoreUtils = require('../modules/scoring.js');
 const probUtils = require('../modules/probability.js');
 const pool = require('../modules/pool.js');
 
-// return all possible hands from 4 given cards
+// return all possible hands from 4 given cards ************
 router.post('/', (req, res) => {
     let response = {
         cards: {
@@ -12,6 +12,8 @@ router.post('/', (req, res) => {
             crib: []
         }
     };
+
+    //rebuild cards from given ids =======================
     const deck = require('../modules/deck.js');
     let handIds = JSON.parse(req.body.hand);
     let cribIds = JSON.parse(req.body.crib);
@@ -53,9 +55,10 @@ router.post('/', (req, res) => {
                 removeFromDeck(id);
             }
         }
-    }
+    }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    /////// END 
+
+    // SCORE AND PACKAGE ============================
 
     // use the scoring utility!!!
     let possibleScores = scoreUtils.scoreAll(hand, deck);
@@ -69,9 +72,7 @@ router.post('/', (req, res) => {
 
     //analyze result and bundle
     response.stats = probUtils.analyzeProbs(response);
-
-    //possibility to tweak here by inserting the odds of a max or min hand
-    //however, maybe this would be better in a chart.js goal.
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     res.send(response);
 });
@@ -95,8 +96,8 @@ router.post('/optimal', (req, res) => {
         cribIds = [ids[set[0]], ids[set[1]]];
         handIds = ids.filter((id, i) => !(i === set[0] || i === set[1]));
 
-        console.log('==========crib', cribIds.sort());
-        console.log('==========hand', handIds.sort());
+        cribIds.sort();
+        handIds.sort();
 
         let response = {
             cards: {
@@ -104,9 +105,8 @@ router.post('/optimal', (req, res) => {
                 crib: []
             }
         };
+
         let deck = require('../modules/deck.js');
-
-
         deck.gather();
 
         let hand = [];
@@ -118,6 +118,7 @@ router.post('/optimal', (req, res) => {
             })
         }
 
+        // BUILD THE SINGLE HAND ==========================
         //sort the cards into hand, 
         for (let card of deck.cards) {
             let matched = false;
@@ -144,11 +145,10 @@ router.post('/optimal', (req, res) => {
                     removeFromDeck(id);
                 }
             }
-        }
+        }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^         
 
-        /////// END 
-
-        // use the scoring utility!!!
+        // SCORE AND PACKAGE ==============================
+        // use the scoring utility
         let possibleScores = scoreUtils.scoreAll(hand, deck);
 
         // insert the probability
@@ -159,8 +159,6 @@ router.post('/optimal', (req, res) => {
 
         //analyze result and bundle
         response.stats = probUtils.analyzeProbs(response);
-
-        // console.log(response);
 
         //Strip extra data from possibleScores
         let distribution = {};
@@ -197,9 +195,9 @@ router.post('/optimal', (req, res) => {
             results[0].bestHand = false;
         }
 
-    }
+    }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        /// SAVE TO HANDS TABLE FOR TESTING
+        /// SAVE TO HANDS TABLE FOR TESTING ==============
         const hand_score = results.length === 2 ? results[1].stats.avg - results[0].stats.avg : 0;
         const queryObj = {
             optimal: results.length === 1,
@@ -219,11 +217,12 @@ router.post('/optimal', (req, res) => {
             }).catch(err => {
                 console.log(err)
             });
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     res.send(results);
 })
 
-// Check a single hand
+// Check a single hand **********************************
 router.post('/single', (req, res) => {
     let response = {
         cards: {
