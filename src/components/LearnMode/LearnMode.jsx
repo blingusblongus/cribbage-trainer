@@ -19,14 +19,16 @@ function LearnMode(props) {
     const [foundScores, setFoundScores] = useState([]);
     console.log(singleHandCheck);
     console.log(hand);
+    console.log('foundScores', foundScores);
 
     const checkSelected = () => {
         if (hand.length === 0) return;
 
         //check if score was already found
         for (let score of foundScores) {
+            console.log('score.filter', score.filter(card => hand.includes(card.id)).length === hand.length);
             if (hand.length === score.length
-                && score.filter(card => hand.includes(card.id))) {
+                && score.filter(card => hand.includes(card.id)).length === hand.length) {
 
                 console.log('match already found');
                 return;
@@ -40,7 +42,7 @@ function LearnMode(props) {
             for (let combo of scores[scoreType]) {
                 //check selection against scoring hand
                 if (hand.length === combo.length
-                    && combo.filter(card => hand.includes(card.id))) {
+                    && combo.filter(card => hand.includes(card.id)).length === hand.length) {
 
                     console.log('match', scores[scoreType]);
                     setFoundScores([...foundScores, combo]);
@@ -74,6 +76,16 @@ function LearnMode(props) {
         dispatch({ type: 'DEAL', payload: 6 });
     }
 
+    // const parseScoreType = (scoreType) => {
+    //     switch(scoreType){
+    //         case 'countFifteens':
+    //             return 'Fifteen';
+    //         case 'countPairs':
+    //             return 'Pair';
+    //         case ''
+    //     }
+    // }
+
     // CONDITIONAL RENDERING ==========
 
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,6 +102,16 @@ function LearnMode(props) {
                     <PlayingCard key={flip.id} card={flip} />
                 </div>
             }
+
+            <div className="found-scores">
+                {foundScores?.map((score, i) => {
+                    return (
+                        <div key={i} className="found-score">
+                            Hello
+                        </div>
+                    )
+                })}
+            </div>
 
             <div className="hand-container abs-center-x">
                 {/* Render cards only if the hand has been dealt */}
