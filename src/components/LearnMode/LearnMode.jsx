@@ -17,6 +17,7 @@ function LearnMode(props) {
     const [displayResults, setDisplayResults] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
+    const flip = deal[4] || '';
 
     // Deal cards on page load
     useEffect(() => {
@@ -47,11 +48,16 @@ function LearnMode(props) {
     //sort hand
     sortValueSuit(deal);
 
+
     return (
         <>
+            <div className="flip-container">
+                <PlayingCard key={flip.id} card={flip}/>
+            </div>
             <div className="hand-container abs-center-x">
                 {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
+                    if(card.flip) return;
                     return <PlayingCard
                         key={card.id}
                         card={card}

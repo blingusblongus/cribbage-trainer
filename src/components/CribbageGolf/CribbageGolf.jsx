@@ -142,6 +142,7 @@ function CribbageGolf(props) {
                         key={card.id}
                         card={card}
                         noSelect={false}
+                        max4={true}
                     />
                 })}
             </div>
