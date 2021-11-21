@@ -220,8 +220,6 @@ router.post('/optimal', (req, res) => {
 
 // Check a single hand **********************************
 router.post('/single', (req, res) => {
-    console.log(req.body);
-    console.log('called');
     let response = {
         cards: {
             draw: [],

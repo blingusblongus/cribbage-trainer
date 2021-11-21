@@ -10,14 +10,10 @@ function LearnMode(props) {
     const history = useHistory();
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
-    const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
-    const results = useSelector(store => store.results);
     const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
-    const [showChart, setShowChart] = useState(false);
-    const [first, setFirst] = useState(true);
-    const flip = deal[4] || '';
+    const flip = deal.filter(card => card.flip)[0] || null;
 
     // Deal cards on page load
     useEffect(() => {
@@ -48,16 +44,18 @@ function LearnMode(props) {
     //sort hand
     sortValueSuit(deal);
 
-
     return (
         <>
-            <div className="flip-container">
-                <PlayingCard key={flip.id} card={flip}/>
-            </div>
+            {flip &&
+                <div className="flip-container">
+                    <PlayingCard key={flip.id} card={flip} />
+                </div>
+            }
+
             <div className="hand-container abs-center-x">
                 {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
-                    if(card.flip) return;
+                    if (card.flip) return;
                     return <PlayingCard
                         key={card.id}
                         card={card}
