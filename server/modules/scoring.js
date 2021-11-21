@@ -227,7 +227,7 @@ const scoreUtils = {
         countRuns: countRuns,
         countFlush: countFlush
     },
-    scoreHand: function(hand, flip) {
+    scoreHand: function(nonFlips, flip) {
         // init obj to be returned
         const option = {
             handScore: 0,
@@ -236,7 +236,7 @@ const scoreUtils = {
         }
     
         // create copy of complete hand for scoring
-        let fullHand = hand.concat(flip);
+        let fullHand = nonFlips.concat(flip);
     
         // loop through scoringMethods, collect 
         for (let func in this.scoringMethods) {

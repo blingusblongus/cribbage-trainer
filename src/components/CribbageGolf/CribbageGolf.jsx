@@ -2,18 +2,17 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import './CribbageGolf.css';
-import Card from '../Card/PlayingCard.jsx';
+import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import Button from '@mui/material/Button';
 import ResultChart from '../ResultChart/ResultChart';
-
+import sortValueSuit from '../../modules/sortValueSuit';
 
 function CribbageGolf(props) {
     const history = useHistory();
     const dispatch = useDispatch();
-    let deal = useSelector(store => store.deal);
+    const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
-    // const round = useSelector(store => store.round);
     const results = useSelector(store => store.results);
     const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
@@ -27,7 +26,7 @@ function CribbageGolf(props) {
             setFirst(false);
         }
         dispatch({ type: 'NEW_HAND' });
-        dispatch({ type: 'DEAL_6' });
+        dispatch({ type: 'DEAL', payload: 6 });
     }, []);
 
     // Send request for optimum hand checking
@@ -40,7 +39,6 @@ function CribbageGolf(props) {
 
     // Deal a new hand
     const newHand = () => {
-
         //push to score page if total rounds met
         if (golfScore.length >= golfRounds) {
             history.push('/golfResults');
@@ -49,9 +47,11 @@ function CribbageGolf(props) {
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
         setShowChart(false);
-        dispatch({ type: 'DEAL_6' })
+        dispatch({ type: 'DEAL', payload: 6 });
     }
 
+
+    // CONDITIONAL RENDERING ==========
     const bestHand = results ? (results.length === 1) : false;
 
     const avgMsg = (results && !bestHand) && (<>
@@ -59,26 +59,18 @@ function CribbageGolf(props) {
         BEST POSSIBLE AVG: {results[1].stats.avg.toFixed(2)} <br />
         DIFFERENCE: {(results[1].stats.avg - results[0].stats.avg).toFixed(2)}
     </>
-    )
+    )//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+
+    //SORTING==========================
     //sort hand
-    deal.sort((a,b) => {
-        return a.index - b.index;
-    })
-    deal.sort((a,b) => {
-        return a.value - b.value;
-    })
+    sortValueSuit(deal);
 
     //sort results if they exist
     if(results && results[1]){
         let resultDraw = results[1].cards.draw;
-        resultDraw.sort((a,b) => {
-            return a.index - b.index;
-        })
-        resultDraw.sort((a,b) => {
-            return a.value - b.value;
-        })
-    }
+        sortValueSuit(resultDraw);
+    }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     const toggleChart = () => {
         setShowChart(!showChart);
@@ -134,7 +126,7 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<Card key={card.id} card={card} noSelect={true} />)
+                            return (<PlayingCard key={card.id} card={card} noSelect={true} />)
                         })}
                     </div>
                 </>
@@ -146,7 +138,7 @@ function CribbageGolf(props) {
 
                 {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
-                    return <Card
+                    return <PlayingCard
                         key={card.id}
                         card={card}
                         noSelect={false}
