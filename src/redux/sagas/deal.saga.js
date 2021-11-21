@@ -2,9 +2,9 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // Deal 6 cards to the user (by default, into the crib)
-function* deal6() {
+function* deal(action) {
   try {
-    const response = yield axios.get('/api/deal');
+    const response = yield axios.get(`/api/deal/${action.payload}`);
     yield put({ type: 'SET_DEAL', payload: response.data });
     yield put({type: 'SET_CRIB', payload: response.data});
   } catch (error) {
@@ -13,7 +13,7 @@ function* deal6() {
 }
 
 function* dealSaga() {
-  yield takeLatest('DEAL_6', deal6);
+  yield takeLatest('DEAL', deal);
 }
 
 export default dealSaga;
