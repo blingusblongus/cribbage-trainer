@@ -11,6 +11,7 @@ import global from './global.reducer';
 import userScores from './userScores.reducer';
 import allScores from './allScores.reducer';
 import singleHandCheck from './singleHandCheck.reducer';
+import handObjs from './handObjs.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   userScores,
   allScores,
   singleHandCheck,
+  handObjs
    // will have an id and username if someone is logged in
 });
 

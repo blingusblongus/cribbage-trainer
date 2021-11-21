@@ -4,11 +4,9 @@ import { put, takeLatest, select } from 'redux-saga/effects';
 
 function* fetchCombos() {
   try {
-    const crib = yield select(store => store.crib);
-    console.log(crib);
-    const data = {
-      hand: '[' + crib.join(', ') + ']'
-    }
+    const deal = yield select(store => store.deal);
+    console.log(deal);
+    const data = deal;
     const response = yield axios.post('/api/score/single', data);
     yield put({type: 'SET_COMBOS', payload: response.data});
   } catch (err) {

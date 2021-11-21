@@ -39,16 +39,17 @@ function LearnMode(props) {
         for (let scoreType in scores) {
             for (let i=0; i<scores[scoreType].length; i++) {
                 if(scores[scoreType][i].found){
-                    break;
+                    continue;
                 }
 
-                let combo = scores[scoreType][i].combo;
+                let scoreItem = scores[scoreType][i];
+                let combo = scoreItem.combo;
                 //check selection against scoring hand
                 if (hand.length === combo.length
                     && combo.filter(card => hand.includes(card.id)).length === hand.length) {
 
                     console.log('match', scores[scoreType]);
-                    setFoundScores([...foundScores, combo]);
+                    setFoundScores([...foundScores, scoreItem]);
                     //update the store to mark card as found
                     dispatch({
                         type: 'MARK_FOUND', 

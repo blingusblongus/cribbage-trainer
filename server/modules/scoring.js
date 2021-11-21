@@ -155,7 +155,7 @@ function countNibsNobs(hand) {
             return {
                 points: 1,
                 name: 'nobs',
-                hands: [flip]
+                hands: [[flip]]
             }
         }
     }

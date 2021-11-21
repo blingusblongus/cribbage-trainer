@@ -15,12 +15,20 @@ function playingCard({ card, noSelect, max4 }) {
             type: 'ADD_TO_HAND',
             payload: card.id
         });
+        dispatch({
+            type: 'ADD_TO_HAND_OBJS',
+            payload: card
+        });
     }
 
     const removeFromHand = () => {
         dispatch({
             type: 'REMOVE_FROM_HAND',
             payload: card.id
+        })
+        dispatch({
+            type: 'REMOVE_FROM_HAND_OBJS',
+            payload: card
         })
 
         // setSelected(false);
