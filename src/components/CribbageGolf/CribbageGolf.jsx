@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import './CribbageGolf.css';
-import Card from '../Card/PlayingCard.jsx';
+import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import Button from '@mui/material/Button';
 import ResultChart from '../ResultChart/ResultChart';
 
@@ -134,7 +134,7 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<Card key={card.id} card={card} noSelect={true} />)
+                            return (<PlayingCard key={card.id} card={card} noSelect={true} />)
                         })}
                     </div>
                 </>
@@ -146,7 +146,7 @@ function CribbageGolf(props) {
 
                 {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
-                    return <Card
+                    return <PlayingCard
                         key={card.id}
                         card={card}
                         noSelect={false}
