@@ -5,7 +5,7 @@ import './CribbageGolf.css';
 import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import Button from '@mui/material/Button';
 import ResultChart from '../ResultChart/ResultChart';
-
+import sortValueSuit from '../../modules/sortValueSuit';
 
 function CribbageGolf(props) {
     const history = useHistory();
@@ -62,12 +62,7 @@ function CribbageGolf(props) {
     )
 
     //sort hand
-    deal.sort((a,b) => {
-        return a.index - b.index;
-    })
-    deal.sort((a,b) => {
-        return a.value - b.value;
-    })
+    sortValueSuit(deal);
 
     //sort results if they exist
     if(results && results[1]){
