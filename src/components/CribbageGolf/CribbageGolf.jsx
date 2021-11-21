@@ -2,20 +2,22 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import './CribbageGolf.css';
-import Card from '../Card/PlayingCard.jsx';
+import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import Button from '@mui/material/Button';
+import ResultChart from '../ResultChart/ResultChart';
 
 
 function CribbageGolf(props) {
     const history = useHistory();
     const dispatch = useDispatch();
-    const deal = useSelector(store => store.deal);
+    let deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
     // const round = useSelector(store => store.round);
     const results = useSelector(store => store.results);
     const golfRounds = useSelector(store => store.global.golfRounds);
     const [displayResults, setDisplayResults] = useState(false);
+    const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
 
     // Deal cards on page load
@@ -46,6 +48,7 @@ function CribbageGolf(props) {
         }
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
+        setShowChart(false);
         dispatch({ type: 'DEAL_6' })
     }
 
@@ -58,8 +61,41 @@ function CribbageGolf(props) {
     </>
     )
 
+    //sort hand
+    deal.sort((a,b) => {
+        return a.index - b.index;
+    })
+    deal.sort((a,b) => {
+        return a.value - b.value;
+    })
+
+    //sort results if they exist
+    if(results && results[1]){
+        let resultDraw = results[1].cards.draw;
+        resultDraw.sort((a,b) => {
+            return a.index - b.index;
+        })
+        resultDraw.sort((a,b) => {
+            return a.value - b.value;
+        })
+    }
+
+    const toggleChart = () => {
+        setShowChart(!showChart);
+    }
+
     return (
         <>
+
+            {displayResults &&
+                <div className="chart-btn">
+                    <Button
+                        onClick={toggleChart}
+                        variant="contained">
+                        {showChart ? 'Hide Chart': 'Show Chart'}
+                    </Button>
+                </div>
+            }
             <div className="div-center">
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
 
@@ -81,7 +117,7 @@ function CribbageGolf(props) {
                         {displayResults
                             && <Button variant="contained"
                                 onClick={newHand}>
-                                {golfScore.length === golfRounds ? 
+                                {golfScore.length === golfRounds ?
                                     'See results' : 'Next Hand'}
                             </Button>}
                     </div>
@@ -98,7 +134,7 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<Card key={card.id} card={card} noSelect={true} />)
+                            return (<PlayingCard key={card.id} card={card} noSelect={true} />)
                         })}
                     </div>
                 </>
@@ -110,13 +146,25 @@ function CribbageGolf(props) {
 
                 {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
-                    return <Card
+                    return <PlayingCard
                         key={card.id}
                         card={card}
                         noSelect={false}
                     />
                 })}
             </div>
+
+            {showChart &&
+                <div
+                    className="chart abs-center-x"
+                    onClick={toggleChart}>
+                    <ResultChart />
+                </div>
+
+            }
+
+
+
         </>
     )
 }
