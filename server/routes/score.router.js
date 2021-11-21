@@ -65,7 +65,6 @@ router.post('/', (req, res) => {
 
     // insert the probability
     probUtils.checkProb(possibleScores);
-    // console.log('possible scores w/ probability', possibleScores);
 
     //Begin bundling
     response.possibleScores = possibleScores;
@@ -80,7 +79,6 @@ router.post('/', (req, res) => {
 // check if 4 selected cards are best of 6
 // return hand selected and optimal hand, if applicable
 router.post('/optimal', (req, res) => {
-    console.log(req.body);
     let handIds = JSON.parse(req.body.hand);
     let cribIds = JSON.parse(req.body.crib);
     let sets = scoreUtils.setsOf2In6;
@@ -185,12 +183,10 @@ router.post('/optimal', (req, res) => {
         }
 
         if(originalHand){
-            console.log('first');
             results.push(pruned);
             originalHand = false;
             bestAvg = pruned.stats.avg;
         }else if(pruned.stats.avg > bestAvg){
-            console.log('better')
             results.splice(1, 1, pruned);
             results[0].bestHand = false;
         }
