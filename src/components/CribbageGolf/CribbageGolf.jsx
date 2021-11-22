@@ -126,7 +126,11 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<PlayingCard key={card.id} card={card} noSelect={true} />)
+                            return (<PlayingCard 
+                                key={card.id} 
+                                card={card} 
+                                noSelect={true} 
+                                addClass={"overlap"}/>)
                         })}
                     </div>
                 </>
@@ -142,6 +146,8 @@ function CribbageGolf(props) {
                         key={card.id}
                         card={card}
                         noSelect={false}
+                        maxHand={4}
+                        addClass={"overlap"}
                     />
                 })}
             </div>

@@ -220,44 +220,47 @@ router.post('/optimal', (req, res) => {
 
 // Check a single hand **********************************
 router.post('/single', (req, res) => {
-    let response = {
-        cards: {
-            draw: [],
-            crib: []
-        }
-    };
-    const deck = require('../modules/deck.js');
-    let handIds = JSON.parse(req.body.hand);
+    // let response = {
+    //     cards: {
+    //         draw: [],
+    //         crib: []
+    //     }
+    // };
+    // const deck = require('../modules/deck.js');
+    // let handIds = JSON.parse(req.body.hand);
 
-    let hand = [];
-    const removeFromDeck = (id) => {
-        deck.cards = deck.cards.filter(card => {
-            return card.id !== id;
-        })
-    }
+    // let hand = [];
+    // const removeFromDeck = (id) => {
+    //     deck.cards = deck.cards.filter(card => {
+    //         return card.id !== id;
+    //     })
+    // }
 
-    deck.gather();
-    for (let card of deck.cards) {
-        let matched = false;
-        for (let id of handIds) {
-            if (card.id === id) {
-                // push the card to the hand if matched
-                hand.push(card); // REMOVE THIS
-                response.cards.draw.push(card);
-                removeFromDeck(id);
-                matched = true;
-                break;
-            }
-        }
+    // deck.gather();
+    // for (let card of deck.cards) {
+    //     let matched = false;
+    //     for (let id of handIds) {
+    //         if (card.id === id) {
+    //             // push the card to the hand if matched
+    //             hand.push(card); // REMOVE THIS
+    //             response.cards.draw.push(card);
+    //             removeFromDeck(id);
+    //             matched = true;
+    //             break;
+    //         }
+    //     }
 
-        //skip to next card if already matched
-        if (matched) continue;
-    }
+    //     //skip to next card if already matched
+    //     if (matched) continue;
+    // }
 
-    hand[4].flip = true;
-    let flip = hand.splice(4,1);
+    let hand = req.body;
+
+    // hand[4].flip = true;
+    let flip = hand.filter(card => card.flip)[0];
 
     const result = scoreUtils.scoreHand(hand, flip)
+    console.log(result);
 
     res.send(result);
 })

@@ -140,12 +140,11 @@ function countFlush(hand) {
 
 function countNibsNobs(hand) {
     const [flip] = hand.filter(card => card.flip);
-
     if (flip.name === 'jack') {
         return {
             points: 2,
             name: 'nibs',
-            hands: [flip]
+            hands: [[flip]]
         }
     }
 
@@ -156,7 +155,7 @@ function countNibsNobs(hand) {
             return {
                 points: 1,
                 name: 'nobs',
-                hands: [flip]
+                hands: [[flip]]
             }
         }
     }
@@ -232,7 +231,7 @@ const scoreUtils = {
         const option = {
             handScore: 0,
             flipCard: flip,
-            scores: []
+            scores: {},
         }
     
         // create copy of complete hand for scoring
@@ -248,7 +247,7 @@ const scoreUtils = {
             if(points > 0){
                 //add points and push combo
                 option.handScore += points;
-                option.scores.push(hands);
+                option.scores[func] = hands;
             }
     
         } 
