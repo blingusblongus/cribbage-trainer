@@ -4,13 +4,14 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import './UserTable.css';
 
 function UserTable({rows}) {
     return (
-        <TableContainer>
-            <Table aria-label="simple table">
+        <TableContainer sx={{maxHeight: 200}}>
+            <Table stickyHeader aria-label="personal score table">
                 <TableHead>
-                    <TableRow>
+                    <TableRow className="header-row">
                         <TableCell>Rank</TableCell>
                         <TableCell align="center">Score</TableCell>
                         <TableCell align="right">Date</TableCell>
