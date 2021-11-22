@@ -30,14 +30,15 @@
     justify-content: center;
     width: 95%;
     margin: auto;
-    bottom: 20px;
+    bottom: calc(var(--nav-height) + 1vh);
   }
 
   .chart {
     background-color: var(--primary);
     width: 95%;
     max-width: 500px;
-    bottom: 0%;
+    height: 25vh;
+    bottom: var(--nav-height);
     padding: 10px;
     border-radius: 15px;
     box-shadow: 3px 3px 15px black;

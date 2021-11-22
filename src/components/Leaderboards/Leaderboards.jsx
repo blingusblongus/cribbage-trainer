@@ -52,7 +52,7 @@ function Leaderboards(props) {
                                 <TableCell align="right">{row.timestamp.split('T')[0]}</TableCell>
                             </TableRow>
                         )})}
-                    </TableBody>
+                     </TableBody>
                 </Table>
             </TableContainer>
         </div>
