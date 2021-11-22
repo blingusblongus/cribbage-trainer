@@ -4,6 +4,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -60,10 +62,10 @@ function Nav() {
             <HomeOutlinedIcon fontSize={'large'}/>
           </div>
           <div class="nav-icon flex-grow text-center">
-            <HomeOutlinedIcon fontSize={'large'}/>
+            <PersonOutlineOutlinedIcon fontSize={'large'}/>
           </div>
           <div class="nav-icon flex-grow text-center">
-            <HomeOutlinedIcon fontSize={'large'}/>
+            <LeaderboardOutlinedIcon fontSize={'large'}/>
           </div>
         </nav>
       </div>
