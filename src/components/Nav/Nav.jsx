@@ -17,6 +17,8 @@ function Nav() {
 }
 
   return (
+    <>
+    {user.id === null ?
     <div className="nav">
       <Link to="/home">
         <h2 className="nav-title">Cribbage Trainer</h2>
@@ -62,7 +64,13 @@ function Nav() {
         {/* <Link className="navLink" to="/about">
           About
         </Link> */}
-        <nav className="bottom-bar">
+
+      </div>
+    </div>
+
+    :
+
+    <nav className="bottom-bar">
           <div 
             className="nav-icon flex-grow text-center bar-item"
             onClick={() => redirect('/home')}>
@@ -84,8 +92,8 @@ function Nav() {
             <LeaderboardOutlinedIcon fontSize={'large'}/>
           </div>
         </nav>
-      </div>
-    </div>
+}
+    </>
   );
 }
 
