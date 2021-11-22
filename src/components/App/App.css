@@ -3,7 +3,9 @@ body,
 #react-root {
   height: 100%;
   background-color: var(--bg-color);
-  color: var(--dm-text)
+  color: var(--dm-text);
+  scroll-behavior: none;
+  overflow: hidden;
 }
 
 :root {
@@ -15,8 +17,12 @@ body,
   /*  */
   --bg-primary: rgb(29, 29, 29);
   --bg-secondary: #444;
+  --bg-ternary: rgb(58, 48, 57);
 
   --nav-height: 7vh;
+
+  --ui-border-primary: rgb(107, 107, 107);
+  --border: 1px solid var(--ui-border-primary);
 }
 
 body {
@@ -116,7 +122,7 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
+  background-color: var(--bg-ternary);
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }

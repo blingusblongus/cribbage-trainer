@@ -41,15 +41,24 @@
   background-color: #008183;
 }
 
-.bottom-bar {
+.nav-bar {
   width: 100vw;
   height: var(--nav-height);
+  background-color: var(--bg-primary);
+  z-index: 100;
+  border: var(--border);
+}
+
+.bottom-bar {
   position: fixed;
   bottom: 0;
-  background-color: var(--bg-primary);
-  left: 0;
-  z-index: 100;
+  left: -1px;
   display: flex;
+}
+
+#top-bar {
+  height: var(--nav-height) * 1.5;
+  margin-left: -1px;
 }
 
 .nav-icon {
@@ -58,6 +67,11 @@
 
 .bar-item {
   width: 25%
+}
+
+.page-title {
+  font-size: 2rem;
+  
 }
 
 #card-icon-container {

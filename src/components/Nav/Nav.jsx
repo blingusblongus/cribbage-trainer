@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
@@ -11,10 +11,28 @@ import CardIcon from './CardIcon.svg';
 function Nav() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
+  const location = useLocation();
+  console.log(location)
 
   const redirect = (path) => {
+    if(path === location.pathname) return;
     history.push(path);
 }
+
+  const parsePathname = (pathname) => {
+    if(!user.id && pathname !== '/leaderboards'){
+      return 'Log In';
+    } 
+    
+    switch(pathname){
+      case '/home': return 'Home';
+      case '/golf': return 'Cribbage Golf';
+      case '/leaderboards': return 'Leaderboards';
+      case '/user': return 'Profile';
+      case '/login': return 'Log In';
+      default: return 'Cribbage Trainer';
+    }
+  }
 
   return (
     <>
@@ -70,7 +88,12 @@ function Nav() {
 
     :
 
-    <nav className="bottom-bar">
+    <>
+    <nav id="top-bar" className="nav-bar">
+        <h1 className="page-title">{parsePathname(location.pathname)}</h1>
+    </nav>
+
+    <nav className="nav-bar bottom-bar">
           <div 
             className="nav-icon flex-grow text-center bar-item"
             onClick={() => redirect('/home')}>
@@ -92,6 +115,7 @@ function Nav() {
             <LeaderboardOutlinedIcon fontSize={'large'}/>
           </div>
         </nav>
+        </>
 }
     </>
   );
