@@ -40,3 +40,14 @@
 .navLink:hover {
   background-color: #008183;
 }
+
+.bottom-bar {
+  width: 100vw;
+  height: var(--nav-height);
+  position: fixed;
+  bottom: 0;
+  background-color: var(--bg-primary);
+  left: 0;
+  z-index: 100;
+  display: flex;
+}

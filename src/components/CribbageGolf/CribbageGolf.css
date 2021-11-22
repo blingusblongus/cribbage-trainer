@@ -30,7 +30,7 @@
     justify-content: center;
     width: 95%;
     margin: auto;
-    bottom: 20px;
+    bottom: calc(var(--nav-height) + 1vh);
   }
 
   .chart {

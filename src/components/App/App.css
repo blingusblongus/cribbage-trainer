@@ -11,6 +11,12 @@ body,
   --dm-text: white;
   --primary: thistle;
   --secondary: #50325d;
+
+  /*  */
+  --bg-primary: rgb(29, 29, 29);
+  --bg-secondary: #444;
+
+  --nav-height: 7vh;
 }
 
 body {
@@ -123,3 +129,15 @@ input {
 /* --------------------------------------------------------------------------------
 Other global classes
 -------------------------------------------------------------------------------- */
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}

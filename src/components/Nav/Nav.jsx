@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 function Nav() {
   const user = useSelector((store) => store.user);
+  const history = useHistory();
 
   return (
     <div className="nav">
@@ -17,13 +19,13 @@ function Nav() {
         {user.id === null &&
           // If there's no user, show login/registration links
           <>
-          <Link className="navLink" to="/login">
-            Login / Register
-          </Link>
+            <Link className="navLink" to="/login">
+              Login / Register
+            </Link>
 
-          <Link className="navLink" to="/leaderboards">
-            Leaderboards
-          </Link>
+            <Link className="navLink" to="/leaderboards">
+              Leaderboards
+            </Link>
           </>
         }
 
@@ -33,7 +35,7 @@ function Nav() {
             <Link className="navLink" to="/user">
               Profile
             </Link>
-{/* 
+            {/* 
             <Link className="navLink" to="/info">
               Info Page
             </Link> */}
@@ -43,8 +45,8 @@ function Nav() {
             </Link>
 
             <Link className="navLink" to="/leaderboards">
-            Leaderboards
-          </Link>
+              Leaderboards
+            </Link>
 
             <LogOutButton className="navLink" />
           </>
@@ -53,6 +55,17 @@ function Nav() {
         {/* <Link className="navLink" to="/about">
           About
         </Link> */}
+        <nav className="bottom-bar">
+          <div class="nav-icon flex-grow text-center">
+            <HomeOutlinedIcon fontSize={'large'}/>
+          </div>
+          <div class="nav-icon flex-grow text-center">
+            <HomeOutlinedIcon fontSize={'large'}/>
+          </div>
+          <div class="nav-icon flex-grow text-center">
+            <HomeOutlinedIcon fontSize={'large'}/>
+          </div>
+        </nav>
       </div>
     </div>
   );
