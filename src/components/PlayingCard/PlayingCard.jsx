@@ -2,7 +2,7 @@ import './PlayingCard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Suit from '../Suit/Suit';
 
-function playingCard({ card, noSelect, max4 }) {
+function playingCard({ card, noSelect, max4, addClass }) {
     const dispatch = useDispatch();
     const hand = useSelector(store => store.hand);
     const selected = hand.filter(id => id === card.id).length > 0;
@@ -37,7 +37,7 @@ function playingCard({ card, noSelect, max4 }) {
     return (
         //{/* // check both selected and hand.length to prevent sticky selection */}
         <div className={(!selected || hand.length === 0 || noSelect) ?
-            "card-container" : "card-container selected"}
+            `card-container ${addClass}` : `card-container ${addClass} selected`}
             onClick={
                 selected ? removeFromHand : addToHand
             }>

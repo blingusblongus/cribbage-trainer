@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import sortValueSuit from '../../modules/sortValueSuit';
+import './LearnMode.css';
 
 function LearnMode(props) {
     const history = useHistory();
@@ -25,8 +26,8 @@ function LearnMode(props) {
 
         //iterate through all stored scoring hands
         for (let scoreType in scores) {
-            for (let i=0; i<scores[scoreType].length; i++) {
-                if(scores[scoreType][i].found){
+            for (let i = 0; i < scores[scoreType].length; i++) {
+                if (scores[scoreType][i].found) {
                     continue;
                 }
 
@@ -40,11 +41,12 @@ function LearnMode(props) {
                     setFoundScores([...foundScores, scoreItem]);
                     //update the store to mark card as found
                     dispatch({
-                        type: 'MARK_FOUND', 
+                        type: 'MARK_FOUND',
                         payload: {
                             index: i,
                             scoreType: scoreType
-                        }})
+                        }
+                    })
                     // setScoreList([...scoreList, {scoreType, cards: combo}])
                 }
 
@@ -88,9 +90,21 @@ function LearnMode(props) {
 
     // CONDITIONAL RENDERING ==========
 
-    const totalPoints = foundScores?.reduce((sum, score) => {
-        return sum += score.points
-    }, 0);
+    // const totalPoints = foundScores?.reduce((sum, score) => {
+    //     return sum += score.points
+    // }, 0);
+
+    const totals = {
+        foundPoints: foundScores?.reduce((sum, score) => {
+            return sum += score.points
+        }, 0),
+        //iterate through scores object and sum object[key].points
+        possiblePoints: Object.keys(scores)?.reduce((sum, scoreType) => {
+            return sum += scores[scoreType].reduce((points, type) => {
+                return points += type.points;
+            }, 0);
+        }, 0)
+    }
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -99,25 +113,41 @@ function LearnMode(props) {
     sortValueSuit(deal);
 
     console.log('scoreList', scoreList);
+    console.log('totals', totals);
 
     return (
         <>
+            <div className="grid-mid">
+
             {flip &&
-                <div className="flip-container">
-                    <PlayingCard key={flip.id} card={flip} />
-                </div>
-            }
+                    <div className="flip-container">
+                        <h2 className="flip-title">Flip Card</h2>
+                        <PlayingCard key={flip.id} card={flip} />
+                    </div>
+                }
+
+
 
             <div className="found-scores">
-                <div>Total Points: {totalPoints}</div>
-                {foundScores?.map((score, i) => {
-                    return (
-                        <div key={i} className="found-score">
-                            {score.name} for {score.points}
-                        </div>
-                    )
-                })}
+                    <div>
+                        Total Points: {totals.foundPoints} of {totals.possiblePoints}
+                    </div>
+
+                    {foundScores?.map((score, i) => {
+                        return (
+                            <div key={i} className="found-score">
+                                {score.name} for {score.points}
+                            </div>
+                        )
+                    })}
+                </div>
+
+
+
+
             </div>
+
+
 
             <div className="hand-container abs-center-x">
                 {/* Render cards only if the hand has been dealt */}
@@ -128,6 +158,7 @@ function LearnMode(props) {
                         card={card}
                         noSelect={false}
                         max4={false}
+                        addClass={"overlap"}
                     />
                 })}
             </div>
