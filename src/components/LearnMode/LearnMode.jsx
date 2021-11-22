@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import sortValueSuit from '../../modules/sortValueSuit';
 import './LearnMode.css';
+import tutorialDetails from './tutorialDetails.js';
 
 function LearnMode(props) {
+    const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
@@ -17,13 +19,11 @@ function LearnMode(props) {
     const hand = useSelector(store => store.hand);
     const [foundScores, setFoundScores] = useState([]);
     const [scoreList, setScoreList] = useState([]);
+    const [details, setDetails] = useState(tutorialDetails(params.page))
+    
 
-    console.log('singleHandCheck', scores);
-    console.log(hand);
-    console.log('foundScores', foundScores);
-
+    console.log('details', details);
     const checkSelected = () => {
-
         //iterate through all stored scoring hands
         for (let scoreType in scores) {
             for (let i = 0; i < scores[scoreType].length; i++) {
@@ -46,10 +46,8 @@ function LearnMode(props) {
                             index: i,
                             scoreType: scoreType
                         }
-                    })
-                    // setScoreList([...scoreList, {scoreType, cards: combo}])
+                    });
                 }
-
             }
         }
     }
@@ -78,16 +76,6 @@ function LearnMode(props) {
         dispatch({ type: 'DEAL', payload: 6 });
     }
 
-    // const parseScoreType = (scoreType) => {
-    //     switch(scoreType){
-    //         case 'countFifteens':
-    //             return 'Fifteen';
-    //         case 'countPairs':
-    //             return 'Pair';
-    //         case ''
-    //     }
-    // }
-
     // CONDITIONAL RENDERING ==========
 
     // const totalPoints = foundScores?.reduce((sum, score) => {
@@ -112,23 +100,17 @@ function LearnMode(props) {
     //sort hand
     sortValueSuit(deal);
 
-    console.log('scoreList', scoreList);
-    console.log('totals', totals);
-
     return (
         <>
             <div className="grid-mid">
-
-            {flip &&
+                {flip &&
                     <div className="flip-container">
                         <h2 className="flip-title">Flip Card</h2>
                         <PlayingCard key={flip.id} card={flip} />
                     </div>
                 }
 
-
-
-            <div className="found-scores">
+                <div className="found-scores">
                     <div>
                         Total Points: {totals.foundPoints} of {totals.possiblePoints}
                     </div>
@@ -141,13 +123,7 @@ function LearnMode(props) {
                         )
                     })}
                 </div>
-
-
-
-
             </div>
-
-
 
             <div className="hand-container abs-center-x">
                 {/* Render cards only if the hand has been dealt */}
@@ -162,6 +138,12 @@ function LearnMode(props) {
                     />
                 })}
             </div>
+
+            <div 
+                className={details.overlay ? "overlay" : "overlay fade"}
+                onClick={()=>setDetails({...details, overlay: false})}>
+            </div>
+   
         </>
     )
 }

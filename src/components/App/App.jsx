@@ -128,7 +128,7 @@ function App() {
             <CribbageGolf/>
           </ProtectedRoute>
 
-          <ProtectedRoute path="/learn">
+          <ProtectedRoute path="/learn/:page?">
             <LearnMode/>
           </ProtectedRoute>
 
