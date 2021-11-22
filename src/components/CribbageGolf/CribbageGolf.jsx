@@ -130,7 +130,6 @@ function CribbageGolf(props) {
                                 key={card.id} 
                                 card={card} 
                                 noSelect={true} 
-                                max4={true}
                                 addClass={"overlap"}/>)
                         })}
                     </div>
@@ -147,7 +146,7 @@ function CribbageGolf(props) {
                         key={card.id}
                         card={card}
                         noSelect={false}
-                        max4={true}
+                        maxHand={4}
                         addClass={"overlap"}
                     />
                 })}

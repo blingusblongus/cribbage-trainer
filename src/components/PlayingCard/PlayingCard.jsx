@@ -2,22 +2,18 @@ import './PlayingCard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Suit from '../Suit/Suit';
 
-function playingCard({ card, noSelect, max4, addClass }) {
+function playingCard({ card, noSelect, maxHand = Infinity, addClass }) {
     const dispatch = useDispatch();
     const hand = useSelector(store => store.hand);
     const selected = hand.filter(id => id === card.id).length > 0;
 
     const addToHand = () => {
-        //max 4 cards selected
-        if (hand.length >= 4 && max4) return;
+        //check max cards
+        if (hand.length >= maxHand) return;
 
         dispatch({
             type: 'ADD_TO_HAND',
             payload: card.id
-        });
-        dispatch({
-            type: 'ADD_TO_HAND_OBJS',
-            payload: card
         });
     }
 
@@ -26,12 +22,6 @@ function playingCard({ card, noSelect, max4, addClass }) {
             type: 'REMOVE_FROM_HAND',
             payload: card.id
         })
-        dispatch({
-            type: 'REMOVE_FROM_HAND_OBJS',
-            payload: card
-        })
-
-        // setSelected(false);
     }
 
     return (
