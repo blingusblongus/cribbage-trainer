@@ -51,3 +51,8 @@
   z-index: 100;
   display: flex;
 }
+
+#card-icon-container {
+  transform: scale(.45);
+  margin-top: -10px;
+}

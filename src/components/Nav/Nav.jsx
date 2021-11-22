@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
+import CardIcon from './CardIcon.svg';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -58,13 +59,16 @@ function Nav() {
           About
         </Link> */}
         <nav className="bottom-bar">
-          <div class="nav-icon flex-grow text-center">
+          <div className="nav-icon flex-grow text-center">
             <HomeOutlinedIcon fontSize={'large'}/>
           </div>
-          <div class="nav-icon flex-grow text-center">
+          <div id="card-icon-container" className="nav-icon flex-grow text-center">
+            <img src={CardIcon}/>
+          </div>
+          <div className="nav-icon flex-grow text-center">
             <PersonOutlineOutlinedIcon fontSize={'large'}/>
           </div>
-          <div class="nav-icon flex-grow text-center">
+          <div className="nav-icon flex-grow text-center">
             <LeaderboardOutlinedIcon fontSize={'large'}/>
           </div>
         </nav>
