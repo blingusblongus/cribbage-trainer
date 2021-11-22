@@ -12,6 +12,10 @@ function Nav() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
 
+  const redirect = (path) => {
+    history.push(path);
+}
+
   return (
     <div className="nav">
       <Link to="/home">
@@ -59,16 +63,24 @@ function Nav() {
           About
         </Link> */}
         <nav className="bottom-bar">
-          <div className="nav-icon flex-grow text-center">
+          <div 
+            className="nav-icon flex-grow text-center bar-item"
+            onClick={() => redirect('/home')}>
             <HomeOutlinedIcon fontSize={'large'}/>
           </div>
-          <div id="card-icon-container" className="nav-icon flex-grow text-center">
+          <div id="card-icon-container" 
+            className="nav-icon flex-grow text-center bar-item"
+            onClick={() => redirect('/golf')}>
             <img src={CardIcon}/>
           </div>
-          <div className="nav-icon flex-grow text-center">
+          <div 
+            className="nav-icon flex-grow text-center bar-item"
+            onClick={() => redirect('/user')}>
             <PersonOutlineOutlinedIcon fontSize={'large'}/>
           </div>
-          <div className="nav-icon flex-grow text-center">
+          <div 
+            className="nav-icon flex-grow text-center bar-item"
+            onClick={() => redirect('/leaderboards')}>
             <LeaderboardOutlinedIcon fontSize={'large'}/>
           </div>
         </nav>

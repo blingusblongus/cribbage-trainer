@@ -52,7 +52,15 @@
   display: flex;
 }
 
+.nav-icon {
+  padding-top: 6px;
+}
+
+.bar-item {
+  width: 25%
+}
+
 #card-icon-container {
-  transform: scale(.45);
-  margin-top: -10px;
+  transform: scale(.35);
+  margin-top: -13px;
 }
