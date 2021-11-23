@@ -139,9 +139,12 @@ function LearnMode(props) {
                 })}
             </div>
 
+            <div className={details.overlay ? 
+                "overlay-container" : "overlay-container fade"}
+                onClick={() => setDetails({ ...details, overlay: false })}>
             <div
                 className={details.overlay ? "overlay" : "overlay fade"}
-                onClick={() => setDetails({ ...details, overlay: false })}>
+                >
             </div>
             <h3 className={details.overlay ?
                 "flashing dismiss-message" : "dismiss-message overlay fade"}>
@@ -152,6 +155,7 @@ function LearnMode(props) {
                 {details.overlayMessage.map(message => {
                     return <p>{message}</p>;
                 })}
+            </div>
             </div>
 
         </>
