@@ -37,6 +37,21 @@ function tutorialDetails(page){
                 {"name":"six","icon":"6","suit":"spades","value":6,"index":5,"flip":false,"id":31},
                 {"name":"queen","icon":"Q","suit":"spades","value":10,"index":11,"flip":true,"id":37},   
             ]
+        },
+        fifteens: {
+            messages: [
+                'In addition to scoring pairs, any combination of cards that adds up to 15 is worth 2 points.',
+                'Find both sets of fifteen in this hand.',
+                'Remember that you can re-use cards when counting different scoring combinations!',
+                'Important: In cribbage, all face cards are counted as ten, and aces are counted as one!'
+            ],
+            hand: [
+                {"name":"ace","icon":"A","suit":"clubs","value":1,"index":0,"flip":false,"id":0},
+                {"name":"five","icon":"5","suit":"spades","value":5,"index":4,"flip":false,"id":30},
+                {"name":"nine","icon":"9","suit":"spades","value":9,"index":8,"flip":false,"id":34},
+                {"name":"king","icon":"K","suit":"clubs","value":10,"index":12,"flip":false,"id":12},
+                {"name":"two","icon":"2","suit":"diamonds","value":2,"index":1,"flip":true,"id":40},
+            ]
         }
     }
 
@@ -49,6 +64,10 @@ function tutorialDetails(page){
         case 2:
             details.overlayMessage = scenarios.multiplePairs.messages;
             details.hand = scenarios.multiplePairs.hand;
+            break;
+        case 3:
+            details.overlayMessage = scenarios.fifteens.messages;
+            details.hand = scenarios.fifteens.hand;
             break;
         default:
             details.overlay = false;
