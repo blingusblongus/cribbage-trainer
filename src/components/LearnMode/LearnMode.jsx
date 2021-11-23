@@ -12,16 +12,11 @@ function LearnMode(props) {
     const history = useHistory();
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
-    const golfScore = useSelector(store => store.golfScore);
-    const golfRounds = useSelector(store => store.global.golfRounds);
-    const [displayResults, setDisplayResults] = useState(false);
     const flip = deal.filter(card => card.flip)[0] || null;
     const scores = useSelector(store => store.singleHandCheck);
     const hand = useSelector(store => store.hand);
     const [foundScores, setFoundScores] = useState([]);
-    const [scoreList, setScoreList] = useState([]);
     const [details, setDetails] = useState(tutorialDetails(params.page))
-
 
     console.log('details', details);
     const checkSelected = () => {
@@ -69,6 +64,11 @@ function LearnMode(props) {
         dispatch({ type: 'NEW_HAND' });
         dispatch({ type: 'DEAL', payload: 5 });
         setFoundScores([]);
+        if(params.page){
+            let nextPage = parseInt(params.page) + 1
+            history.push(`/learn/${nextPage}`);
+            setDetails(tutorialDetails(nextPage));
+        }
     }
 
     // CONDITIONAL RENDERING ==========
@@ -89,11 +89,16 @@ function LearnMode(props) {
         }, 0)
     }
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+    
+    //set Custom Hand if training mode
+    if(details.hand){
+        dispatch({type: 'SET_DEAL', payload: details.hand});
+    }
 
     //SORTING==========================
     //sort hand
     sortValueSuit(deal);
+
 
     return (
         <>
@@ -152,8 +157,8 @@ function LearnMode(props) {
             </h3>
             <div className={details.overlay ?
                 "overlay-body" : "overlay-body fade"}>
-                {details.overlayMessage?.map(message => {
-                    return <p>{message}</p>;
+                {details.overlayMessage?.map((message, i) => {
+                    return <p key={i}>{message}</p>;
                 })}
             </div>
             </div>
