@@ -14,6 +14,10 @@ function UserPage() {
   const userScores = useSelector(store => store.userScores);
   const [displayName, setDisplayName] = useState(user.display_name);
 
+  // After fetch user is called, these reinit. How to get around it?
+  // const [nameIsUpdated, setNameIsUpdated] = useState(false);
+  // const [oldName, setOldName] = useState(user.display_name);
+
   const updateDisplay = () => {
     //should add error message for this
     if(!displayName) return;
@@ -21,7 +25,23 @@ function UserPage() {
     dispatch({
       type: 'SET_DISPLAY_NAME',
       payload: displayName
-    })
+    });
+
+    alert('Display Name Updated')
+
+    // Not working - WHY?
+    // setNameIsUpdated(true);
+  }
+
+  const promptMsg = `Are you sure?
+  Type 'delete ${user.username}' to remove your account and all associated data`;
+
+  const deleteAccount = () => {
+    if(prompt(promptMsg) === `delete ${user.username}`){
+      dispatch({type: 'DELETE_USER'});
+    }else{
+      return;
+    }
   }
 
   useEffect(()=>{
@@ -38,14 +58,21 @@ function UserPage() {
         value={displayName}
         onChange={(e) => setDisplayName(e.target.value)}></TextField>
       <Button variant="contained"
+        disabled={displayName === user.display_name}
         onClick={updateDisplay}>Update Display Name</Button>
+        {/* Broken below */}
+        {/* {nameIsUpdated && <p>Display Name Updated to '{displayName}'</p>} */}
       <Button variant="contained"
         onClick={() => history.push('/golf')}>PLAY GOLF</Button>
       <br />
       <br />
       {/* Commented out until rows is resolved */}
-      {userScores.length > 1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>};
+      <h2>Personal High Scores</h2>
+      {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>}
       <LogOutButton className="btn" />
+      <Button variant="contained" 
+        color="warning"
+        onClick={deleteAccount}>Delete Account</Button>
     </div>
   );
 }

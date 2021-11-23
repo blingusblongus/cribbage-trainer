@@ -1,0 +1,31 @@
+.grid-mid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5%;
+    margin: 20px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.flip-title {
+    padding-bottom: 20px;
+}
+
+.overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    opacity: .65;
+    background-color: rgb(1,1,1);
+    transition: opacity 2s;
+    visibility: visible;
+}
+
+.overlay.fade {
+    opacity: 0;
+    transition: opacity .3s ease, visibility .5s 0s;
+    visibility: hidden;
+}

@@ -1,6 +1,6 @@
 const global = (state =
     {
-        golfRounds: 5,
+        golfRounds: 10,
     },
 
     action) => {

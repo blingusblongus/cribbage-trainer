@@ -5,7 +5,7 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: #00acb0;
+  background-color: var(--secondary);
   overflow: hidden;
 }
 
@@ -24,7 +24,7 @@
 .navLink {
   display: inline-block;
   color: #f2f2f2;
-  background-color: #00acb0;
+  background-color: var(--secondary);
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -39,4 +39,42 @@
 
 .navLink:hover {
   background-color: #008183;
+}
+
+.nav-bar {
+  width: 100vw;
+  height: var(--nav-height);
+  background-color: var(--bg-primary);
+  z-index: 100;
+  border: var(--border);
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: -1px;
+  display: flex;
+}
+
+#top-bar {
+  height: var(--nav-height) * 1.5;
+  margin-left: -1px;
+}
+
+.nav-icon {
+  padding-top: 6px;
+}
+
+.bar-item {
+  width: 25%
+}
+
+.page-title {
+  font-size: 2rem;
+  
+}
+
+#card-icon-container {
+  transform: scale(.35);
+  margin-top: -13px;
 }
