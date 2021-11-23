@@ -68,6 +68,7 @@ function LearnMode(props) {
     const newHand = () => {
         dispatch({ type: 'NEW_HAND' });
         dispatch({ type: 'DEAL', payload: 5 });
+        setFoundScores([]);
     }
 
     // CONDITIONAL RENDERING ==========
