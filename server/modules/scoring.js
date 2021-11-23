@@ -179,6 +179,7 @@ function countRuns(hand) {
         for (let combo of set) {
             //map the card permutation (in order)
             let cards = combo.map(i => hand[i]);
+            console.log('hand to check', cards);
 
             let result = true;
             // check for run
@@ -190,7 +191,7 @@ function countRuns(hand) {
             }
 
             if (result) {
-
+                console.log('SCORE FOUND', cards);
                 //check if you might be checking a larger scored set
                 let dupe = false;
                 for (let score of successes) {
@@ -245,6 +246,7 @@ const scoreUtils = {
     
         // create copy of complete hand for scoring
         let fullHand = nonFlips.concat(flip);
+        console.log('fullhand = ', fullHand);
     
         // loop through scoringMethods, collect 
         for (let func in this.scoringMethods) {

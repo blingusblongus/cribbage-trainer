@@ -72,6 +72,20 @@ const scenarios = [
             {"name":"two","icon":"2","suit":"hearts","value":2,"index":1,"flip":false,"id":14},
             {"name":"two","icon":"2","suit":"clubs","value":2,"index":1,"flip":false,"id":1},
         ]
+    },
+    {
+        messages: [
+            'OK, challenge time',
+            'Here\'s a hand with runs, fifteens, and pairs!',
+            'Remember, runs can be longer than three cards ;)'
+        ],
+        hand: [
+            {"name":"six","icon":"6","suit":"clubs","value":6,"index":5,"flip":false,"id":5},
+            {"name":"seven","icon":"7","suit":"hearts","value":7,"index":6,"flip":false,"id":19},
+            {"name":"eight","icon":"8","suit":"hearts","value":8,"index":7,"flip":true,"id":20},
+            {"name":"eight","icon":"8","suit":"diamonds","value":8,"index":7,"flip":false,"id":46},
+            {"name":"nine","icon":"9","suit":"diamonds","value":9,"index":8,"flip":false,"id":47},
+        ]
     }
 ]
 
