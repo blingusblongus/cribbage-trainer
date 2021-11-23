@@ -207,6 +207,7 @@ function countRuns(hand) {
                 if (dupe) break;
 
                 successes.push(cards);
+                console.log('successes', successes);
             }
         }
     }

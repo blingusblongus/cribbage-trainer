@@ -55,7 +55,22 @@ const scenarios = [
             {"name":"king","icon":"K","suit":"spades","value":10,"index":12,"flip":false,"id":38},
             {"name":"four","icon":"4","suit":"spades","value":4,"index":3,"flip":false,"id":29},
             {"name":"king","icon":"K","suit":"clubs","value":10,"index":12,"flip":false,"id":12},
-            {"name":"two","icon":"2","suit":"diamonds","value":2,"index":1,"flip":true,"id":40},
+            {"name":"two","icon":"2","suit":"diamonds","value":2,"index":1,"flip":true,"id":40}
+        ]
+    },
+    {
+        messages: [
+            'A common scoring combination in cribbage is to have a pair (or more) cards that can be counted in a run.',
+            'This is called a double run!',
+            'Since there are now two ways to make that run, we score 3 + 3 = 6 from runs...and 2 more from the pair!',
+            'Experienced players will skip the math and just call it "a double run for 8", but for now, let\'s practice scoring each part of this double run.'
+        ],
+        hand: [
+            {"name":"three","icon":"3","suit":"hearts","value":3,"index":2,"flip":false,"id":15},
+            {"name":"ace","icon":"A","suit":"diamonds","value":1,"index":0,"flip":true,"id":39},
+            {"name":"six","icon":"6","suit":"hearts","value":6,"index":5,"flip":false,"id":18},
+            {"name":"two","icon":"2","suit":"hearts","value":2,"index":1,"flip":false,"id":14},
+            {"name":"two","icon":"2","suit":"clubs","value":2,"index":1,"flip":false,"id":1},
         ]
     }
 ]
