@@ -158,7 +158,7 @@ function LearnMode(props) {
                 </h3>
                 <div className={details.overlay ?
                     "overlay-body" : "overlay-body fade"}>
-                    {details.overlayMessage?.map((message, i) => {
+                    {details.messages?.map((message, i) => {
                         return <p key={i}>{message}</p>;
                     })}
                 </div>
