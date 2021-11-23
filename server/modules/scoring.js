@@ -194,20 +194,28 @@ function countRuns(hand) {
                 //check if you might be checking a larger scored set
                 let dupe = false;
                 for (let score of successes) {
-                    for (let i = 0; i < cards.length; i++) {
-                        if (cards[i].index === score[i].index &&
-                            cards[i].suit !== score[i].suit) {
-                            dupe = false;
-                            break;
-                        }
+                    const scoreIds = score.map(card => card.id);
+                    const cardIds = cards.map(card => card.id);
+
+                    if(cardIds.every((id, i) => id === scoreIds[i])){
                         dupe = true;
                     }
+
+                    // for (let i = 0; i < cards.length; i++) {
+                        
+
+                    //     if (cards[i].index === score[i].index &&
+                    //         cards[i].suit !== score[i].suit) {
+                    //         dupe = false;
+                    //         break;
+                    //     }
+                    //     dupe = true;
+                    // }
                 }
                 //exit early if already scored as a larger run
                 if (dupe) break;
 
                 successes.push(cards);
-                console.log('successes', successes);
             }
         }
     }
