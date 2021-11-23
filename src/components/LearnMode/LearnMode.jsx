@@ -5,6 +5,7 @@ import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import sortValueSuit from '../../modules/sortValueSuit';
 import './LearnMode.css';
 import tutorialDetails from './tutorialDetails.js';
+import { Button } from '@mui/material';
 
 function LearnMode(props) {
     const params = useParams();
@@ -65,15 +66,8 @@ function LearnMode(props) {
 
     // Deal a new hand
     const newHand = () => {
-        //push to score page if total rounds met
-        if (golfScore.length >= golfRounds) {
-            history.push('/golfResults');
-            return;
-        }
         dispatch({ type: 'NEW_HAND' });
-        setDisplayResults(false);
-        setShowChart(false);
-        dispatch({ type: 'DEAL', payload: 6 });
+        dispatch({ type: 'DEAL', payload: 5 });
     }
 
     // CONDITIONAL RENDERING ==========
@@ -109,7 +103,7 @@ function LearnMode(props) {
                         <PlayingCard key={flip.id} card={flip} />
                     </div>
                 }
-
+            
                 <div className="found-scores">
                     <div>
                         Total Points: {totals.foundPoints} of {totals.possiblePoints}
@@ -123,6 +117,11 @@ function LearnMode(props) {
                         )
                     })}
                 </div>
+                <div></div>
+                <Button 
+                    onClick={newHand}
+                    variant="contained"
+                    >New Hand</Button>
             </div>
 
             <div className="hand-container abs-center-x">
@@ -152,7 +151,7 @@ function LearnMode(props) {
             </h3>
             <div className={details.overlay ?
                 "overlay-body" : "overlay-body fade"}>
-                {details.overlayMessage.map(message => {
+                {details.overlayMessage?.map(message => {
                     return <p>{message}</p>;
                 })}
             </div>
