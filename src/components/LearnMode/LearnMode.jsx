@@ -147,6 +147,12 @@ function LearnMode(props) {
                 "flashing dismiss-message" : "dismiss-message overlay fade"}>
                 Tap Anywhere to Dismiss
             </h3>
+            <div className={details.overlay ?
+                "overlay-body" : "overlay-body fade"}>
+                {details.overlayMessage.map(message => {
+                    return <p>{message}</p>;
+                })}
+            </div>
 
         </>
     )

@@ -8,22 +8,32 @@ function tutorialDetails(page){
     };
 
     const messages = {
-        welcome: 
-            `Welcome to score training!
-            `
+        pairs: [
+            'Welcome to score training!',
+            'There are many ways to score a hand in cribbage.',
+            'Matching pairs are the first way.',
+            'Every pair is worth 2 points.',
+            'Select the pairs to continue!'
+        ],
+        multiplePairs: [
+
+        ]
     }
 
     const hands = {
 
     }
 
+    details.overlay = true;
     switch(parseInt(page)){
         case 1:
-            details.overlay = true;
-            details.overlayMessage = messages.welcome;
+            details.overlayMessage = messages.pairs;
+            break;
+        case 2:
+            details.overlayMessage = messages.multiplePairs;
             break;
         default:
-            return details;
+            details.overlay = false;
     }
 
     return details;
