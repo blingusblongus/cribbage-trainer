@@ -43,8 +43,21 @@ const scenarios = [
             {"name":"king","icon":"K","suit":"clubs","value":10,"index":12,"flip":false,"id":12},
             {"name":"two","icon":"2","suit":"diamonds","value":2,"index":1,"flip":true,"id":40},
         ]
+    },
+    {
+        messages: [
+            'Three or more sequential cards are a run.',
+            'Runs are worth 1 point for each card they contain.',
+            'This hand contains a run, a pair, and two fifteens!'
+        ],
+        hand: [
+            {"name":"three","icon":"3","suit":"hearts","value":3,"index":2,"flip":false,"id":15},
+            {"name":"king","icon":"K","suit":"spades","value":10,"index":12,"flip":false,"id":38},
+            {"name":"four","icon":"4","suit":"spades","value":4,"index":3,"flip":false,"id":29},
+            {"name":"king","icon":"K","suit":"clubs","value":10,"index":12,"flip":false,"id":12},
+            {"name":"two","icon":"2","suit":"diamonds","value":2,"index":1,"flip":true,"id":40},
+        ]
     }
-
 ]
 
 export default scenarios;
