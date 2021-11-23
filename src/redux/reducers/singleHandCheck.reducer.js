@@ -30,9 +30,8 @@ const singleHandCheck = (state = [], action) => {
                             points = score.length;
                             break;
                         case 'countNibsNobs':
-                            console.log(score);
-                            score.name === 'jack' ? points = 2 : points = 1;
-                            score.name === 'jack' ? name = 'Nibs' : name = 'Nobs';
+                            score[0].name === 'jack' ? points = 2 : points = 1;
+                            score[0].name === 'jack' ? name = 'Nibs' : name = 'Nobs';
                             break;
                     }
 
