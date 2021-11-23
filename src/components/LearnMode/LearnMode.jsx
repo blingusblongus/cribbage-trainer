@@ -140,10 +140,10 @@ function LearnMode(props) {
             </div>
 
             <div className={details.overlay ? 
-                "overlay-container" : "overlay-container fade"}
+                "overlay-container" : "fade"}
                 onClick={() => setDetails({ ...details, overlay: false })}>
             <div
-                className={details.overlay ? "overlay" : "overlay fade"}
+                className="overlay"
                 >
             </div>
             <h3 className={details.overlay ?
