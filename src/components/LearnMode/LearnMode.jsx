@@ -20,7 +20,7 @@ function LearnMode(props) {
     const [foundScores, setFoundScores] = useState([]);
     const [scoreList, setScoreList] = useState([]);
     const [details, setDetails] = useState(tutorialDetails(params.page))
-    
+
 
     console.log('details', details);
     const checkSelected = () => {
@@ -139,11 +139,15 @@ function LearnMode(props) {
                 })}
             </div>
 
-            <div 
+            <div
                 className={details.overlay ? "overlay" : "overlay fade"}
-                onClick={()=>setDetails({...details, overlay: false})}>
+                onClick={() => setDetails({ ...details, overlay: false })}>
             </div>
-   
+            <h3 className={details.overlay ?
+                "flashing dismiss-message" : "dismiss-message overlay fade"}>
+                Tap Anywhere to Dismiss
+            </h3>
+
         </>
     )
 }
