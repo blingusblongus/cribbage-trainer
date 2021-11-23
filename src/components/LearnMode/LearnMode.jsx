@@ -5,22 +5,18 @@ import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import sortValueSuit from '../../modules/sortValueSuit';
 import './LearnMode.css';
 import tutorialDetails from './tutorialDetails.js';
+import { Button } from '@mui/material';
 
 function LearnMode(props) {
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
     const deal = useSelector(store => store.deal);
-    const golfScore = useSelector(store => store.golfScore);
-    const golfRounds = useSelector(store => store.global.golfRounds);
-    const [displayResults, setDisplayResults] = useState(false);
     const flip = deal.filter(card => card.flip)[0] || null;
     const scores = useSelector(store => store.singleHandCheck);
     const hand = useSelector(store => store.hand);
     const [foundScores, setFoundScores] = useState([]);
-    const [scoreList, setScoreList] = useState([]);
     const [details, setDetails] = useState(tutorialDetails(params.page))
-    
 
     console.log('details', details);
     const checkSelected = () => {
@@ -65,15 +61,14 @@ function LearnMode(props) {
 
     // Deal a new hand
     const newHand = () => {
-        //push to score page if total rounds met
-        if (golfScore.length >= golfRounds) {
-            history.push('/golfResults');
-            return;
-        }
         dispatch({ type: 'NEW_HAND' });
-        setDisplayResults(false);
-        setShowChart(false);
-        dispatch({ type: 'DEAL', payload: 6 });
+        dispatch({ type: 'DEAL', payload: 5 });
+        setFoundScores([]);
+        if(params.page){
+            let nextPage = parseInt(params.page) + 1
+            history.push(`/learn/${nextPage}`);
+            setDetails(tutorialDetails(nextPage));
+        }
     }
 
     // CONDITIONAL RENDERING ==========
@@ -94,11 +89,16 @@ function LearnMode(props) {
         }, 0)
     }
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+    
+    //set Custom Hand if training mode
+    if(details.hand){
+        dispatch({type: 'SET_DEAL', payload: details.hand});
+    }
 
     //SORTING==========================
     //sort hand
     sortValueSuit(deal);
+
 
     return (
         <>
@@ -109,7 +109,7 @@ function LearnMode(props) {
                         <PlayingCard key={flip.id} card={flip} />
                     </div>
                 }
-
+            
                 <div className="found-scores">
                     <div>
                         Total Points: {totals.foundPoints} of {totals.possiblePoints}
@@ -123,6 +123,11 @@ function LearnMode(props) {
                         )
                     })}
                 </div>
+                <div></div>
+                <Button 
+                    onClick={newHand}
+                    variant="contained"
+                    >New Hand</Button>
             </div>
 
             <div className="hand-container abs-center-x">
@@ -139,11 +144,25 @@ function LearnMode(props) {
                 })}
             </div>
 
-            <div 
-                className={details.overlay ? "overlay" : "overlay fade"}
-                onClick={()=>setDetails({...details, overlay: false})}>
+            <div className={details.overlay ? 
+                "overlay-container" : "fade"}
+                onClick={() => setDetails({ ...details, overlay: false })}>
+            <div
+                className="overlay"
+                >
             </div>
-   
+            <h3 className={details.overlay ?
+                "flashing dismiss-message" : "dismiss-message overlay fade"}>
+                Tap Anywhere to Dismiss
+            </h3>
+            <div className={details.overlay ?
+                "overlay-body" : "overlay-body fade"}>
+                {details.overlayMessage?.map((message, i) => {
+                    return <p key={i}>{message}</p>;
+                })}
+            </div>
+            </div>
+
         </>
     )
 }
