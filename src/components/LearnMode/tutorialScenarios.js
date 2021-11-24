@@ -86,6 +86,20 @@ const scenarios = [
             {"name":"eight","icon":"8","suit":"diamonds","value":8,"index":7,"flip":false,"id":46},
             {"name":"nine","icon":"9","suit":"diamonds","value":9,"index":8,"flip":false,"id":47},
         ]
+    },
+    {
+        message: [
+            'Just a couple more ways to score!',
+            'If all four cards in your hand are the same suit, you score 4 points for the flush',
+            'If the flip card AND all the cards in your hand share a suit, you score 5 points',
+        ],
+        hand: [
+            {"name":"two","icon":"2","suit":"spades","value":2,"index":1,"flip":false,"id":27},
+            {"name":"four","icon":"4","suit":"spades","value":4,"index":3,"flip":false,"id":29},
+            {"name":"six","icon":"6","suit":"spades","value":6,"index":5,"flip":true,"id":31},
+            {"name":"eight","icon":"8","suit":"spades","value":8,"index":7,"flip":false,"id":33},
+            {"name":"queen","icon":"Q","suit":"spades","value":10,"index":11,"flip":false,"id":37},
+        ]
     }
 ]
 

@@ -53,7 +53,10 @@ const setsOf2In6 = [
 ]
 
 function countFifteens(hand) {
+    //init array for storing scoring combinations
     let successes = [];
+
+    //Loop through all permutations of card combinations
     for (let set of allSets) {
         for (let combo of set) {
             //check combo to see if it === 15
@@ -119,14 +122,16 @@ function countFlush(hand) {
     //check for 4-card flush
     if(draw.every((card, i, arr) => card.suit === arr[0].suit)){
         points = 4;
-        successes.push(draw);
         let suit = draw[0].suit;
 
         //check for 5-card flush
-        if(flip.suit === suit){
+        if(flip[0].suit === suit){
             points = 5;
-            successes = [hand];
+            successes.push(hand);
+        }else{
+            successes.push(draw);  
         }
+
     }
 
     const result = {
@@ -179,7 +184,6 @@ function countRuns(hand) {
         for (let combo of set) {
             //map the card permutation (in order)
             let cards = combo.map(i => hand[i]);
-            console.log('hand to check', cards);
 
             let result = true;
             // check for run
