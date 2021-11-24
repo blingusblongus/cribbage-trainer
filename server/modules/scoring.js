@@ -53,7 +53,10 @@ const setsOf2In6 = [
 ]
 
 function countFifteens(hand) {
+    //init array for storing scoring combinations
     let successes = [];
+
+    //Loop through all permutations of card combinations
     for (let set of allSets) {
         for (let combo of set) {
             //check combo to see if it === 15
@@ -119,14 +122,16 @@ function countFlush(hand) {
     //check for 4-card flush
     if(draw.every((card, i, arr) => card.suit === arr[0].suit)){
         points = 4;
-        successes.push(draw);
         let suit = draw[0].suit;
 
         //check for 5-card flush
-        if(flip.suit === suit){
+        if(flip[0].suit === suit){
             points = 5;
-            successes = [hand];
+            successes.push(hand);
+        }else{
+            successes.push(draw);  
         }
+
     }
 
     const result = {
@@ -190,18 +195,27 @@ function countRuns(hand) {
             }
 
             if (result) {
-
+                console.log('SCORE FOUND', cards);
                 //check if you might be checking a larger scored set
                 let dupe = false;
                 for (let score of successes) {
-                    for (let i = 0; i < cards.length; i++) {
-                        if (cards[i].index === score[i].index &&
-                            cards[i].suit !== score[i].suit) {
-                            dupe = false;
-                            break;
-                        }
+                    const scoreIds = score.map(card => card.id);
+                    const cardIds = cards.map(card => card.id);
+
+                    if(cardIds.every((id, i) => id === scoreIds[i])){
                         dupe = true;
                     }
+
+                    // for (let i = 0; i < cards.length; i++) {
+                        
+
+                    //     if (cards[i].index === score[i].index &&
+                    //         cards[i].suit !== score[i].suit) {
+                    //         dupe = false;
+                    //         break;
+                    //     }
+                    //     dupe = true;
+                    // }
                 }
                 //exit early if already scored as a larger run
                 if (dupe) break;
@@ -236,6 +250,7 @@ const scoreUtils = {
     
         // create copy of complete hand for scoring
         let fullHand = nonFlips.concat(flip);
+        console.log('fullhand = ', fullHand);
     
         // loop through scoringMethods, collect 
         for (let func in this.scoringMethods) {

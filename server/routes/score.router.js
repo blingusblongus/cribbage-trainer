@@ -255,12 +255,13 @@ router.post('/single', (req, res) => {
     // }
 
     let hand = req.body;
+    console.log(hand);
 
     // hand[4].flip = true;
     let flip = hand.filter(card => card.flip)[0];
+    hand = hand.filter(card => !card.flip);
 
-    const result = scoreUtils.scoreHand(hand, flip)
-    console.log(result);
+    const result = scoreUtils.scoreHand(hand, flip);
 
     res.send(result);
 })
