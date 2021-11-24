@@ -54,6 +54,7 @@
   bottom: 0;
   left: -1px;
   display: flex;
+  align-items: center;
 }
 
 #top-bar {
@@ -62,7 +63,7 @@
 }
 
 .nav-icon {
-  padding-top: 6px;
+  /* padding-top: 6px; */
 }
 
 .bar-item {
@@ -75,6 +76,12 @@
 }
 
 #card-icon-container {
-  transform: scale(.35);
-  margin-top: -13px;
+  /* margin-top: -13px; */
+  display: flex;
+  justify-content: center;
+
+}
+
+#custom-card-icon {
+  max-height: 25px;
 }
