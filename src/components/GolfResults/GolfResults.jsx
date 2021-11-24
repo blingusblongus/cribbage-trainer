@@ -10,6 +10,7 @@ function GolfResults(props) {
     const history = useHistory();
     const golfScore = useSelector(store => store.golfScore);
 
+    // on new hand, assuming all rounds completed, submit score
     useEffect(() => {
         if(golfScore.length > 0){
             dispatch({

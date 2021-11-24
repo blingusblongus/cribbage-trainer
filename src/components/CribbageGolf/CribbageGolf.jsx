@@ -21,6 +21,7 @@ function CribbageGolf(props) {
 
     // Deal cards on page load
     useEffect(() => {
+        // if starting a game, clear the reducer
         if (first) {
             dispatch({ type: 'CLEAR_GOLF_SCORE' });
             setFirst(false);
@@ -37,7 +38,7 @@ function CribbageGolf(props) {
         setDisplayResults(true);
     }
 
-    // Deal a new hand
+    // Deal a new hand, reset display
     const newHand = () => {
         //push to score page if total rounds met
         if (golfScore.length >= golfRounds) {
@@ -67,35 +68,37 @@ function CribbageGolf(props) {
     sortValueSuit(deal);
 
     //sort results if they exist
-    if(results && results[1]){
+    if (results && results[1]) {
         let resultDraw = results[1].cards.draw;
         sortValueSuit(resultDraw);
     }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    //BUTTONS===========================
     const toggleChart = () => {
         setShowChart(!showChart);
-    }
+    }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     return (
         <>
-
+            {/* Results Display (conditional) */}
             {displayResults &&
                 <div className="chart-btn">
                     <Button
                         onClick={toggleChart}
                         variant="contained">
-                        {showChart ? 'Hide Chart': 'Show Chart'}
+                        {showChart ? 'Hide Chart' : 'Show Chart'}
                     </Button>
                 </div>
             }
             <div className="div-center">
-                <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
 
-                {/* Currently on load, it runs double, so round is off by one */}
+                {/* MAIN TEXT CONTENT */}
+                <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
                 <p>Round #: {golfScore.length + 1} of {golfRounds}</p>
                 <p>Total Points Over Par: {golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</p>
                 <p>Last Hand: {golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</p>
 
+                {/* RESULTS AND NEXT HAND BUTTON */}
                 <div className="test-container abs-center-x">
                     {/* Render submit button only if hand chosen 
                     and results not displayed  */}
@@ -116,6 +119,7 @@ function CribbageGolf(props) {
                     {/* <Scatter data={data} options={options} /> */}
                 </div>
 
+                {/* DISPLAY OPTIMAL HAND AFTER SCORING */}
                 <div className="optimal-container">
                     {(displayResults && results) && (
                         !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
@@ -126,11 +130,11 @@ function CribbageGolf(props) {
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
-                            return (<PlayingCard 
-                                key={card.id} 
-                                card={card} 
-                                noSelect={true} 
-                                addClass={"overlap"}/>)
+                            return (<PlayingCard
+                                key={card.id}
+                                card={card}
+                                noSelect={true}
+                                addClass={"overlap"} />)
                         })}
                     </div>
                 </>
@@ -138,6 +142,7 @@ function CribbageGolf(props) {
             </div>
 
 
+            {/* DISPLAY DEALT HAND */}
             <div className="hand-container abs-center-x">
 
                 {/* Render cards only if the hand has been dealt */}
@@ -152,6 +157,7 @@ function CribbageGolf(props) {
                 })}
             </div>
 
+            {/* CHART (CONDITIONAL) */}
             {showChart &&
                 <div
                     className="chart abs-center-x"
