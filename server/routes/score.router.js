@@ -220,44 +220,9 @@ router.post('/optimal', (req, res) => {
 
 // Check a single hand **********************************
 router.post('/single', (req, res) => {
-    // let response = {
-    //     cards: {
-    //         draw: [],
-    //         crib: []
-    //     }
-    // };
-    // const deck = require('../modules/deck.js');
-    // let handIds = JSON.parse(req.body.hand);
 
-    // let hand = [];
-    // const removeFromDeck = (id) => {
-    //     deck.cards = deck.cards.filter(card => {
-    //         return card.id !== id;
-    //     })
-    // }
-
-    // deck.gather();
-    // for (let card of deck.cards) {
-    //     let matched = false;
-    //     for (let id of handIds) {
-    //         if (card.id === id) {
-    //             // push the card to the hand if matched
-    //             hand.push(card); // REMOVE THIS
-    //             response.cards.draw.push(card);
-    //             removeFromDeck(id);
-    //             matched = true;
-    //             break;
-    //         }
-    //     }
-
-    //     //skip to next card if already matched
-    //     if (matched) continue;
-    // }
-
+    //prep req data to fit scoreHand utility
     let hand = req.body;
-    console.log(hand);
-
-    // hand[4].flip = true;
     let flip = hand.filter(card => card.flip)[0];
     hand = hand.filter(card => !card.flip);
 

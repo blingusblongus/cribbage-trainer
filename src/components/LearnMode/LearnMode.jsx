@@ -43,6 +43,13 @@ function LearnMode(props) {
                             scoreType: scoreType
                         }
                     });
+
+                    setTimeout(() => {
+                        // DESELECT ALL CARDS
+                        dispatch({
+                            type: 'NEW_HAND'
+                        })
+                    }, 500);
                 }
             }
         }

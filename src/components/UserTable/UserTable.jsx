@@ -7,6 +7,23 @@ import TableRow from '@mui/material/TableRow';
 import './UserTable.css';
 
 function UserTable({rows}) {
+
+    // placement suffix utility
+    const placement = (index) => {
+        let j = index % 10,
+            k = index % 100;
+        if (j == 1 && k != 11) {
+            return index + "st";
+        }
+        if (j == 2 && k != 12) {
+            return index + "nd";
+        }
+        if (j == 3 && k != 13) {
+            return index + "rd";
+        }
+        return index + "th";
+    }
+
     return (
         <TableContainer sx={{maxHeight: 200}}>
             <Table stickyHeader aria-label="personal score table">
@@ -28,7 +45,7 @@ function UserTable({rows}) {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {i+1}
+                                {placement(i+1)}
                             </TableCell>
                             <TableCell align="right">{abbrScore}</TableCell>
                             <TableCell align="right">{row.timestamp.split('T')[0]}</TableCell>

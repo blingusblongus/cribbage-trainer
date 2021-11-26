@@ -1,3 +1,5 @@
+// DECLARE ALL PERMUTATIONS OF CARDS
+
 const setsOf2 = [
     [0, 1],
     [0, 2],
@@ -81,6 +83,8 @@ function countFifteens(hand) {
     let result = {
         name: 'fifteens',
         points: successes.length * 2,
+        
+        // rewrite nested arrays to be IDs instead of card objects
         hands: successes.map(success => {
             return success.map(cardIndex => {
                 return hand[cardIndex];
@@ -102,6 +106,8 @@ function countPairs(hand) {
     const result = {
         name: 'pairs',
         points: 2 * successes.length,
+
+        // rewrite nested arrays to be IDs instead of card objects
         hands: successes.map(success => {
             return success.map(cardIndex => {
                 return hand[cardIndex];
@@ -145,6 +151,8 @@ function countFlush(hand) {
 
 function countNibsNobs(hand) {
     const [flip] = hand.filter(card => card.flip);
+
+    // Check if the flip card was a jack
     if (flip.name === 'jack') {
         return {
             points: 2,
@@ -153,8 +161,8 @@ function countNibsNobs(hand) {
         }
     }
 
+    // Check if non-flip cards are jack, then compare to flip suit
     const notFlip = hand.filter(card => !card.flip);
-
     for (let card of notFlip) {
         if (card.name === 'jack' && flip.suit === card.suit) {
             return {
@@ -202,24 +210,15 @@ function countRuns(hand) {
                     const scoreIds = score.map(card => card.id);
                     const cardIds = cards.map(card => card.id);
 
+                    //Check if the entire run already exists in a larger run
                     if(cardIds.every((id, i) => id === scoreIds[i])){
                         dupe = true;
                     }
-
-                    // for (let i = 0; i < cards.length; i++) {
-                        
-
-                    //     if (cards[i].index === score[i].index &&
-                    //         cards[i].suit !== score[i].suit) {
-                    //         dupe = false;
-                    //         break;
-                    //     }
-                    //     dupe = true;
-                    // }
                 }
                 //exit early if already scored as a larger run
                 if (dupe) break;
 
+                //else push result to success array
                 successes.push(cards);
             }
         }
@@ -232,6 +231,7 @@ function countRuns(hand) {
     }
 }
 
+// COLLECT SCORING UTILITIES FOR EXPORT
 const scoreUtils = {
     scoringMethods: {
         countFifteens: countFifteens,
