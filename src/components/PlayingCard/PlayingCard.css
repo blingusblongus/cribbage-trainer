@@ -49,10 +49,10 @@
 
 .selected.outlined {
     border: 3px solid var(--border-selected);
-    transition: margin .3s ease, border .5s ease;
+    transition: margin .5s ease, border .5s ease;
 }
 
 .selected.outlined.matched {
     border: 3px solid var(--border-success);
-    transition: margin .3s ease, border .5s ease;
+    transition: margin .5s ease, border .5s ease;
 }

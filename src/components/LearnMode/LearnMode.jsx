@@ -19,7 +19,6 @@ function LearnMode(props) {
     const [details, setDetails] = useState(tutorialDetails(params.page));
     const [matched, setMatched] = useState('');
 
-    console.log('details', details);
     const checkSelected = () => {
         //iterate through all stored scoring hands
         for (let scoreType in scores) {
@@ -34,7 +33,6 @@ function LearnMode(props) {
                 if (hand.length === combo.length
                     && combo.filter(card => hand.includes(card.id)).length === hand.length) {
 
-                    console.log('match', scores[scoreType]);
                     setFoundScores([...foundScores, scoreItem]);
                     //update the store to mark card as found
                     dispatch({
@@ -52,7 +50,7 @@ function LearnMode(props) {
                             type: 'NEW_HAND'
                         });
                         setMatched('');
-                    }, 500);
+                    }, 700);
                 }
             }
         }
