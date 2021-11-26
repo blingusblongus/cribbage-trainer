@@ -7,7 +7,7 @@ import './LearnMode.css';
 import tutorialDetails from './tutorialDetails.js';
 import { Button } from '@mui/material';
 
-function LearnMode(props) {
+function LearnMode(props) { 
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -169,6 +169,7 @@ function LearnMode(props) {
                 </h3>
                 <div className={details.overlay ?
                     "overlay-body" : "overlay-body fade"}>
+                        {console.log('details before map', details)}
                     {details.messages?.map((message, i) => {
                         return <p key={i}>{message}</p>;
                     })}

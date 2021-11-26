@@ -88,14 +88,28 @@ const scenarios = [
         ]
     },
     {
-        message: [
+        messages: [
             'Just a couple more ways to score!',
-            'If all four cards in your hand are the same suit, you score 4 points for the flush',
-            'If the flip card AND all the cards in your hand share a suit, you score 5 points',
+            'If all four cards in your hand are the same suit, you score 4 points for the flush.',
+            'If the flip card AND all the cards in your hand share a suit, you score 5 points.',
         ],
         hand: [
             {"name":"two","icon":"2","suit":"spades","value":2,"index":1,"flip":false,"id":27},
             {"name":"four","icon":"4","suit":"spades","value":4,"index":3,"flip":false,"id":29},
+            {"name":"six","icon":"6","suit":"spades","value":6,"index":5,"flip":true,"id":31},
+            {"name":"eight","icon":"8","suit":"spades","value":8,"index":7,"flip":false,"id":33},
+            {"name":"queen","icon":"Q","suit":"spades","value":10,"index":11,"flip":false,"id":37},
+        ]
+    },
+    {
+        messages: [
+            'However, if even one of the cards in your hand is not the same suit as the others, it doesn\'t count as a flush, regardless of the flip card',
+            'Bummer.',
+            '(When scoring the crib, it\'s also slightly different - the crib HAS to be a five-card flush.)',
+        ],
+        hand: [
+            {"name":"two","icon":"2","suit":"spades","value":2,"index":1,"flip":false,"id":27},
+            {"name":"eight","icon":"8","suit":"hearts","value":8,"index":7,"flip":false,"id":20},
             {"name":"six","icon":"6","suit":"spades","value":6,"index":5,"flip":true,"id":31},
             {"name":"eight","icon":"8","suit":"spades","value":8,"index":7,"flip":false,"id":33},
             {"name":"queen","icon":"Q","suit":"spades","value":10,"index":11,"flip":false,"id":37},
