@@ -7,7 +7,7 @@ function tutorialDetails(page){
 
     if(page){
         let index = page - 1;
-        console.log(details);
+        console.log('details in scenarios', details);
         return {overlay:true, ...scenarios[index]}
     }
 
