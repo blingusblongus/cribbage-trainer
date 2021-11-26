@@ -10,7 +10,7 @@
     border-radius: 10px;
     text-align: left;
     border: 3px solid black;
-    transition: margin .3s ease;
+    transition: margin .3s ease, border .5s ease;;
     color: black;
     margin-top: 30px;
     box-shadow: 3px 3px 8px black;
@@ -48,10 +48,11 @@
 }
 
 .selected.outlined {
-    border: 3px solid yellow;
+    border: 3px solid var(--border-selected);
+    transition: margin .3s ease, border .5s ease;
 }
 
 .selected.outlined.matched {
-    border: 3px solid green;
-    transition: border .5s ease;
+    border: 3px solid var(--border-success);
+    transition: margin .3s ease, border .5s ease;
 }
