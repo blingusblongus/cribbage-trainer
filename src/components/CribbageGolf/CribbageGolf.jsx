@@ -166,9 +166,6 @@ function CribbageGolf(props) {
                 </div>
 
             }
-
-
-
         </>
     )
 }
