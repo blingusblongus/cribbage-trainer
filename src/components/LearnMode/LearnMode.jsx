@@ -16,9 +16,9 @@ function LearnMode(props) {
     const scores = useSelector(store => store.singleHandCheck);
     const hand = useSelector(store => store.hand);
     const [foundScores, setFoundScores] = useState([]);
-    const [details, setDetails] = useState(tutorialDetails(params.page))
+    const [details, setDetails] = useState(tutorialDetails(params.page));
+    const [matched, setMatched] = useState('');
 
-    console.log('details', details);
     const checkSelected = () => {
         //iterate through all stored scoring hands
         for (let scoreType in scores) {
@@ -33,7 +33,6 @@ function LearnMode(props) {
                 if (hand.length === combo.length
                     && combo.filter(card => hand.includes(card.id)).length === hand.length) {
 
-                    console.log('match', scores[scoreType]);
                     setFoundScores([...foundScores, scoreItem]);
                     //update the store to mark card as found
                     dispatch({
@@ -43,6 +42,15 @@ function LearnMode(props) {
                             scoreType: scoreType
                         }
                     });
+
+                    setMatched(' matched');
+                    setTimeout(() => {
+                        // DESELECT ALL CARDS
+                        dispatch({
+                            type: 'NEW_HAND'
+                        });
+                        setMatched('');
+                    }, 700);
                 }
             }
         }
@@ -106,7 +114,10 @@ function LearnMode(props) {
                 {flip &&
                     <div className="flip-container">
                         <h2 className="flip-title">Flip Card</h2>
-                        <PlayingCard key={flip.id} card={flip} />
+                        <PlayingCard 
+                            key={flip.id} 
+                            card={flip}
+                            addClass={'outlined' + matched} />
                     </div>
                 }
 
@@ -140,7 +151,7 @@ function LearnMode(props) {
                         card={card}
                         noSelect={false}
                         max4={false}
-                        addClass={"overlap"}
+                        addClass={'overlap outlined' + matched}
                     />
                 })}
             </div>

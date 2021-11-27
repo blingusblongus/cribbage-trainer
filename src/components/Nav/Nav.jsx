@@ -102,7 +102,7 @@ function Nav() {
           <div id="card-icon-container" 
             className="nav-icon flex-grow text-center bar-item"
             onClick={() => redirect('/golf')}>
-            <img src={CardIcon}/>
+            <img id="custom-card-icon" src={CardIcon}/>
           </div>
           <div 
             className="nav-icon flex-grow text-center bar-item"

@@ -10,7 +10,7 @@
     border-radius: 10px;
     text-align: left;
     border: 3px solid black;
-    transition: margin .3s ease;
+    transition: margin .3s ease, border .5s ease;;
     color: black;
     margin-top: 30px;
     box-shadow: 3px 3px 8px black;
@@ -31,8 +31,6 @@
     margin-left: 0px;
 }
 
-
-
 .edge-suit {
     height: 20px;
     width: 20px;
@@ -47,4 +45,14 @@
 .center-suit {
     width: 50%;
     margin: 30px auto;
+}
+
+.selected.outlined {
+    border: 3px solid var(--border-selected);
+    transition: margin .5s ease, border .5s ease;
+}
+
+.selected.outlined.matched {
+    border: 3px solid var(--border-success);
+    transition: margin .5s ease, border .5s ease;
 }

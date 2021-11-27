@@ -14,10 +14,6 @@ function UserPage() {
   const userScores = useSelector(store => store.userScores);
   const [displayName, setDisplayName] = useState(user.display_name);
 
-  // After fetch user is called, these reinit. How to get around it?
-  // const [nameIsUpdated, setNameIsUpdated] = useState(false);
-  // const [oldName, setOldName] = useState(user.display_name);
-
   const updateDisplay = () => {
     //should add error message for this
     if(!displayName) return;
