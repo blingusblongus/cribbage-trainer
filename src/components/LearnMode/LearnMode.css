@@ -66,6 +66,10 @@
     visibility: hidden;
 }
 
+.found-score {
+    user-select: none;
+}
+
 @keyframes flashing {
     from {
         opacity: 1;
