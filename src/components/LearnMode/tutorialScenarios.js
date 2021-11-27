@@ -127,8 +127,21 @@ const scenarios = [
             {"name":"eight","icon":"8","suit":"hearts","value":8,"index":7,"flip":false,"id":20},
             {"name":"six","icon":"6","suit":"spades","value":6,"index":5,"flip":true,"id":31},
             {"name":"eight","icon":"8","suit":"spades","value":8,"index":7,"flip":false,"id":33},
-            {"name":"queen","icon":"Q","suit":"spades","value":10,"index":11,"flip":false,"id":37},
+            {"name":"jack","icon":"J","suit":"spades","value":10,"index":10,"flip":false,"id":36},
         ]
+    },
+    {
+        messages: [
+            'Congratulations! Those are all the hand scoring methods of cribbage.',
+            'Feel free to continue practicing counting points with random hands, or return to the main menu to try your hand at Cribbage Golf!',
+        ],
+        // hand: [
+        //     {"name":"two","icon":"2","suit":"spades","value":2,"index":1,"flip":false,"id":27},
+        //     {"name":"eight","icon":"8","suit":"hearts","value":8,"index":7,"flip":false,"id":20},
+        //     {"name":"six","icon":"6","suit":"spades","value":6,"index":5,"flip":true,"id":31},
+        //     {"name":"eight","icon":"8","suit":"spades","value":8,"index":7,"flip":false,"id":33},
+        //     {"name":"jack","icon":"J","suit":"spades","value":10,"index":10,"flip":false,"id":36},
+        // ]
     }
 ]
 
