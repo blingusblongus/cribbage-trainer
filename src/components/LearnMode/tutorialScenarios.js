@@ -5,7 +5,7 @@ const scenarios = [
             'There are many ways to score a hand in cribbage.',
             'Matching pairs are the first way.',
             'Every pair is worth 2 points.',
-            'Select the pairs to continue!'
+            'Tap the pairs to continue!'
         ],
         hand: [
             {"name":"eight","icon":"8","suit":"clubs","value":8,"index":7,"flip":false,"id":7},
@@ -106,6 +106,21 @@ const scenarios = [
             'However, if even one of the cards in your hand is not the same suit as the others, it doesn\'t count as a flush, regardless of the flip card',
             'Bummer.',
             '(When scoring the crib, it\'s also slightly different - the crib HAS to be a five-card flush.)',
+        ],
+        hand: [
+            {"name":"two","icon":"2","suit":"spades","value":2,"index":1,"flip":false,"id":27},
+            {"name":"eight","icon":"8","suit":"hearts","value":8,"index":7,"flip":false,"id":20},
+            {"name":"six","icon":"6","suit":"spades","value":6,"index":5,"flip":true,"id":31},
+            {"name":"eight","icon":"8","suit":"spades","value":8,"index":7,"flip":false,"id":33},
+            {"name":"queen","icon":"Q","suit":"spades","value":10,"index":11,"flip":false,"id":37},
+        ]
+    },
+    {
+        messages: [
+            'Almost there! Two more bonus ways to score: Nibs and Nobs',
+            'When the flip card is a jack, the dealer automatically scores \'Nibs\', worth 2 points.',
+            'However, ANYONE can score Nobs, if they hold the jack of the same suit as the flip card. Nobs is worth 1 point.',
+            'For our purposes, we can count both Nibs and Nobs simply by tapping the flip card.'
         ],
         hand: [
             {"name":"two","icon":"2","suit":"spades","value":2,"index":1,"flip":false,"id":27},
