@@ -14,7 +14,7 @@ function Home(props) {
         <>
             <div className="menu-container">
                 <div className="primary-btn"
-                    onClick={() => redirect('/learn')}>Learn</div>
+                    onClick={() => redirect('/learn/1')}>Learn</div>
                 <div className="primary-btn"
                     onClick={() => redirect('/golf')}>Cribbage Golf</div>
                 <div className="primary-btn"
