@@ -18,6 +18,7 @@ function LearnMode(props) {
     const [foundScores, setFoundScores] = useState([]);
     const [details, setDetails] = useState(tutorialDetails(params.page));
     const [matched, setMatched] = useState('');
+    const [revealed, setRevealed] = useState([]);
 
     const checkSelected = () => {
         //iterate through all stored scoring hands
@@ -107,6 +108,33 @@ function LearnMode(props) {
     //sort hand
     sortValueSuit(deal);
 
+    const showFound = (show, i) => {
+        if(show){
+            console.log('setRevealed)');
+            console.log(foundScores);
+            console.log(i);
+            console.log(foundScores[i]);
+            setRevealed(foundScores[i] || []);
+        }else{
+            setRevealed([]);
+        }
+    }
+
+    const isRevealed = (card) => {
+        console.log('revealed in isRevealed', revealed);
+        if(revealed && revealed.combo){
+            for(let comboCard of revealed.combo){
+                console.log('comboCard id = ', comboCard.id);
+                console.log('card.id = ', card.id);
+                if(comboCard.id === card.id){
+                    return ' revealed';
+                }
+            }
+        }
+        return '';
+    }
+
+    console.log('revealed', revealed);
 
     return (
         <>
@@ -117,29 +145,37 @@ function LearnMode(props) {
                         <PlayingCard 
                             key={flip.id} 
                             card={flip}
-                            addClass={'outlined' + matched} />
+                            addClass={'outlined' + matched + isRevealed(flip)} />
                     </div>
                 }
 
                 <div className="found-scores">
-                    <div>
+                    <h4>
                         Total Points: {totals.foundPoints} of {totals.possiblePoints}
-                    </div>
+                    </h4>
 
                     {foundScores?.map((score, i) => {
                         return (
-                            <div key={i} className="found-score">
+                            <div key={i} 
+                                className="found-score" 
+                                onMouseDown={()=> showFound(true, i)}
+                                onMouseUp={()=> showFound(false, i)}
+                                onTouchStart={()=> showFound(true, i)}
+                                onTouchEnd={()=> showFound(false, i)}
+                                >
                                 {score.name} for {score.points}
                             </div>
                         )
                     })}
-                </div>
-                <div></div>
-                <Button
+                       <Button
                     onClick={newHand}
                     variant="contained"
                     disabled={totals.foundPoints !== totals.possiblePoints}
                 >New Hand</Button>
+                </div>
+             
+                <div></div>
+
             </div>
 
             <div className="hand-container abs-center-x">
@@ -151,7 +187,7 @@ function LearnMode(props) {
                         card={card}
                         noSelect={false}
                         max4={false}
-                        addClass={'overlap outlined' + matched}
+                        addClass={'overlap outlined' + matched + isRevealed(card)}
                     />
                 })}
             </div>

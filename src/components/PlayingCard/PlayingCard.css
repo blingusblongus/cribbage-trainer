@@ -56,3 +56,13 @@
     border: 3px solid var(--border-success);
     transition: margin .5s ease, border .5s ease;
 }
+
+.revealed {
+    border: 3px solid red;
+    transition: margin .5s ease, border .5s ease;
+}
+
+.selected.outlined.revealed {
+    border: 3px solid red;
+    transition: margin .5s ease, border .5s ease;
+}
