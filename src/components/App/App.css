@@ -151,6 +151,12 @@ Other global classes
   text-align: center;
 }
 
+.fade {
+  opacity: 0;
+  transition: opacity .5s ease, visibility .5s 0s;
+  visibility: hidden;
+}
+
 #help-btn-container {
   width: 30px;
   position: absolute;

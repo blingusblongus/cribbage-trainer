@@ -6,8 +6,8 @@ import sortValueSuit from '../../modules/sortValueSuit';
 import './LearnMode.css';
 import tutorialDetails from './tutorialDetails.js';
 import { Button } from '@mui/material';
-import HelpButton from '../HelpButton/HelpButton.jsx';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import HelpOverlay from '../HelpOverlay/HelpOverlay.jsx';
 
 function LearnMode(props) {
     // Hooks
@@ -189,8 +189,6 @@ function LearnMode(props) {
 
                 <div></div>
 
-
-
             </div>
 
             {/* SHOW CARDS IN HAND */}
@@ -208,27 +206,8 @@ function LearnMode(props) {
                 })}
             </div>
 
-            {/* CONDITIONAL HELP OVERLAY */}
-            <div className={details.overlay ?
-                "overlay-container" : "fade"}
-                onClick={() => setDetails({ ...details, overlay: false })}>
-                <div
-                    className="overlay"
-                >
-                </div>
-                <h3 className={details.overlay ?
-                    "flashing dismiss-message" : "dismiss-message overlay fade"}>
-                    Tap Anywhere to Dismiss
-                </h3>
-                <div className={details.overlay ?
-                    "overlay-body" : "overlay-body fade"}>
-                    {console.log('details before map', details)}
-                    {details.messages?.map((message, i) => {
-                        return <p key={i}>{message}</p>;
-                    })}
-                </div>
-            </div>
-
+            {/* HELP OVERLAY COMPONENT */}
+            <HelpOverlay details={details} setDetails={setDetails}/>
         </>
     )
 }
