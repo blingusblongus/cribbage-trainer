@@ -6,15 +6,21 @@ import sortValueSuit from '../../modules/sortValueSuit';
 import './LearnMode.css';
 import tutorialDetails from './tutorialDetails.js';
 import { Button } from '@mui/material';
+import HelpButton from '../HelpButton/HelpButton.jsx';
 
-function LearnMode(props) { 
+function LearnMode(props) {
+    // Hooks
     const params = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // REDUX
     const deal = useSelector(store => store.deal);
     const flip = deal.filter(card => card.flip)[0] || null;
     const scores = useSelector(store => store.singleHandCheck);
     const hand = useSelector(store => store.hand);
+
+    // LOCAL STATE
     const [foundScores, setFoundScores] = useState([]);
     const [details, setDetails] = useState(tutorialDetails(params.page));
     const [matched, setMatched] = useState('');
@@ -82,10 +88,6 @@ function LearnMode(props) {
 
     // CONDITIONAL RENDERING ==========
 
-    // const totalPoints = foundScores?.reduce((sum, score) => {
-    //     return sum += score.points
-    // }, 0);
-
     const totals = {
         foundPoints: foundScores?.reduce((sum, score) => {
             return sum += score.points
@@ -108,25 +110,21 @@ function LearnMode(props) {
     //sort hand
     sortValueSuit(deal);
 
+    // Track a specific scoring combo for highlighting
     const showFound = (show, i) => {
-        if(show){
-            console.log('setRevealed)');
-            console.log(foundScores);
-            console.log(i);
-            console.log(foundScores[i]);
+        if (show) {
             setRevealed(foundScores[i] || []);
-        }else{
+        } else {
             setRevealed([]);
         }
     }
 
+    // assign each card the revealed class if the card belongs to the
+    // selected scoring combo
     const isRevealed = (card) => {
-        console.log('revealed in isRevealed', revealed);
-        if(revealed && revealed.combo){
-            for(let comboCard of revealed.combo){
-                console.log('comboCard id = ', comboCard.id);
-                console.log('card.id = ', card.id);
-                if(comboCard.id === card.id){
+        if (revealed && revealed.combo) {
+            for (let comboCard of revealed.combo) {
+                if (comboCard.id === card.id) {
                     return ' revealed';
                 }
             }
@@ -134,21 +132,21 @@ function LearnMode(props) {
         return '';
     }
 
-    console.log('revealed', revealed);
-
     return (
         <>
             <div className="grid-mid">
+                {/* FLIP CARD */}
                 {flip &&
                     <div className="flip-container">
-                        <h2 className="flip-title">Flip Card</h2>
-                        <PlayingCard 
-                            key={flip.id} 
+                        <h4 className="flip-title">Flip Card</h4>
+                        <PlayingCard
+                            key={flip.id}
                             card={flip}
                             addClass={'outlined' + matched + isRevealed(flip)} />
                     </div>
                 }
 
+                {/* DISPLAY LIST OF FOUND SCORES */}
                 <div className="found-scores">
                     <h4>
                         Total Points: {totals.foundPoints} of {totals.possiblePoints}
@@ -156,28 +154,30 @@ function LearnMode(props) {
 
                     {foundScores?.map((score, i) => {
                         return (
-                            <div key={i} 
-                                className="found-score" 
-                                onMouseDown={()=> showFound(true, i)}
-                                onMouseUp={()=> showFound(false, i)}
-                                onTouchStart={()=> showFound(true, i)}
-                                onTouchEnd={()=> showFound(false, i)}
-                                >
+                            <div key={i}
+                                className="found-score"
+                                // attempting to handle touch and mobile screen
+                                onMouseDown={() => showFound(true, i)}
+                                onMouseUp={() => showFound(false, i)}
+                                onTouchStart={() => showFound(true, i)}
+                                onTouchEnd={() => showFound(false, i)}
+                            >
                                 {score.name} for {score.points}
                             </div>
                         )
                     })}
-                       <Button
-                    onClick={newHand}
-                    variant="contained"
-                    disabled={totals.foundPoints !== totals.possiblePoints}
-                >New Hand</Button>
+                    <Button
+                        onClick={newHand}
+                        variant="contained"
+                        disabled={totals.foundPoints !== totals.possiblePoints}
+                    >New Hand</Button>
                 </div>
-             
+
                 <div></div>
 
             </div>
 
+            {/* SHOW CARDS IN HAND */}
             <div className="hand-container abs-center-x">
                 {/* Render cards only if the hand has been dealt */}
                 {deal.length > 1 && deal?.map(card => {
@@ -205,7 +205,7 @@ function LearnMode(props) {
                 </h3>
                 <div className={details.overlay ?
                     "overlay-body" : "overlay-body fade"}>
-                        {console.log('details before map', details)}
+                    {console.log('details before map', details)}
                     {details.messages?.map((message, i) => {
                         return <p key={i}>{message}</p>;
                     })}
