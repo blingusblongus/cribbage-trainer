@@ -150,9 +150,9 @@ function LearnMode(props) {
                 }
 
                 <div className="found-scores">
-                    <div>
+                    <h4>
                         Total Points: {totals.foundPoints} of {totals.possiblePoints}
-                    </div>
+                    </h4>
 
                     {foundScores?.map((score, i) => {
                         return (
@@ -167,13 +167,15 @@ function LearnMode(props) {
                             </div>
                         )
                     })}
-                </div>
-                <div></div>
-                <Button
+                       <Button
                     onClick={newHand}
                     variant="contained"
                     disabled={totals.foundPoints !== totals.possiblePoints}
                 >New Hand</Button>
+                </div>
+             
+                <div></div>
+
             </div>
 
             <div className="hand-container abs-center-x">
