@@ -150,3 +150,11 @@ Other global classes
 .text-center {
   text-align: center;
 }
+
+#help-btn-container {
+  width: 30px;
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  transform: translate(-50%, -50%)
+}

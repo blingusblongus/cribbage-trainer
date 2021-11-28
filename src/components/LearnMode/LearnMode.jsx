@@ -7,6 +7,7 @@ import './LearnMode.css';
 import tutorialDetails from './tutorialDetails.js';
 import { Button } from '@mui/material';
 import HelpButton from '../HelpButton/HelpButton.jsx';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 function LearnMode(props) {
     // Hooks
@@ -119,6 +120,11 @@ function LearnMode(props) {
         }
     }
 
+    // Show help text
+    const showOverlay = () => {
+        setDetails({...details, overlay: true})
+    }
+
     // assign each card the revealed class if the card belongs to the
     // selected scoring combo
     const isRevealed = (card) => {
@@ -134,6 +140,14 @@ function LearnMode(props) {
 
     return (
         <>
+
+            {/* HELP BUTTON */}
+            <div 
+                id="help-btn-container"
+                onClick={showOverlay}>
+                <HelpOutlineOutlinedIcon fontSize="large" />
+            </div>
+
             <div className="grid-mid">
                 {/* FLIP CARD */}
                 {flip &&
@@ -175,6 +189,8 @@ function LearnMode(props) {
 
                 <div></div>
 
+
+
             </div>
 
             {/* SHOW CARDS IN HAND */}
@@ -192,6 +208,7 @@ function LearnMode(props) {
                 })}
             </div>
 
+            {/* CONDITIONAL HELP OVERLAY */}
             <div className={details.overlay ?
                 "overlay-container" : "fade"}
                 onClick={() => setDetails({ ...details, overlay: false })}>

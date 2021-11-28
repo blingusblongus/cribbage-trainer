@@ -18,6 +18,7 @@ function CribbageGolf(props) {
     const [displayResults, setDisplayResults] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
+    const [details, setDetails] = useState({overlay: false})
 
     // Deal cards on page load
     useEffect(() => {
@@ -76,10 +77,23 @@ function CribbageGolf(props) {
     //BUTTONS===========================
     const toggleChart = () => {
         setShowChart(!showChart);
-    }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    }
+
+    // Show help text
+    const showOverlay = () => {
+        setDetails({ ...details, overlay: true })
+    }
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     return (
         <>
+            {/* HELP BUTTON */}
+            <div
+                id="help-btn-container"
+                onClick={showOverlay}>
+                <HelpOutlineOutlinedIcon fontSize="large" />
+            </div>
+
             {/* Results Display (conditional) */}
             {displayResults &&
                 <div className="chart-btn">
