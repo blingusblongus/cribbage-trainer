@@ -150,3 +150,17 @@ Other global classes
 .text-center {
   text-align: center;
 }
+
+.fade {
+  opacity: 0;
+  transition: opacity .5s ease, visibility .5s 0s;
+  visibility: hidden;
+}
+
+#help-btn-container {
+  width: 30px;
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  transform: translate(-50%, -50%)
+}

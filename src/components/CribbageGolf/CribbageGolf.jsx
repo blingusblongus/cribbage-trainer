@@ -6,18 +6,35 @@ import PlayingCard from '../PlayingCard/PlayingCard.jsx';
 import Button from '@mui/material/Button';
 import ResultChart from '../ResultChart/ResultChart';
 import sortValueSuit from '../../modules/sortValueSuit';
+import HelpOverlay from '../HelpOverlay/HelpOverlay';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 function CribbageGolf(props) {
+    //Hooks
     const history = useHistory();
     const dispatch = useDispatch();
+
+    //REDUX
     const deal = useSelector(store => store.deal);
     const hand = useSelector(store => store.hand);
     const golfScore = useSelector(store => store.golfScore);
     const results = useSelector(store => store.results);
     const golfRounds = useSelector(store => store.global.golfRounds);
+
+    //Local State
     const [displayResults, setDisplayResults] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
+    const [details, setDetails] = useState({
+        overlay: true,
+        messages: [
+            'Welcome to Cribbage Golf!',
+            'The goal in this mode is to select, by tapping, the four cards that will yield the highest average points, when compared to every possible flip card.',
+            'The hand you choose is checked against the remaining 46 possible flip cards in the deck, and is given an average score.',
+            'Your golf score is the difference between the average score of your hand, and the average score of the best possible hand that can be made from the 6 dealt cards.',
+            `Lower score is better, and the game lasts for ${golfRounds} rounds!`
+        ]
+    })
 
     // Deal cards on page load
     useEffect(() => {
@@ -51,7 +68,6 @@ function CribbageGolf(props) {
         dispatch({ type: 'DEAL', payload: 6 });
     }
 
-
     // CONDITIONAL RENDERING ==========
     const bestHand = results ? (results.length === 1) : false;
 
@@ -61,7 +77,6 @@ function CribbageGolf(props) {
         DIFFERENCE: {(results[1].stats.avg - results[0].stats.avg).toFixed(2)}
     </>
     )//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 
     //SORTING==========================
     //sort hand
@@ -76,10 +91,26 @@ function CribbageGolf(props) {
     //BUTTONS===========================
     const toggleChart = () => {
         setShowChart(!showChart);
-    }//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    }
+
+    // Show help text
+    const showOverlay = () => {
+        setDetails({ ...details, overlay: true })
+    }
+    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     return (
         <>
+            {/* HELP BUTTON */}
+            <div
+                id="help-btn-container"
+                onClick={showOverlay}>
+                <HelpOutlineOutlinedIcon fontSize="large" />
+            </div>
+
+            {/* HELP OVERLAY */}
+                
+            <HelpOverlay details={details} setDetails={setDetails}/>
             {/* Results Display (conditional) */}
             {displayResults &&
                 <div className="chart-btn">
