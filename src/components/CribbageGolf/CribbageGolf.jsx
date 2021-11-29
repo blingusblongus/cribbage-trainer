@@ -8,6 +8,7 @@ import ResultChart from '../ResultChart/ResultChart';
 import sortValueSuit from '../../modules/sortValueSuit';
 import HelpOverlay from '../HelpOverlay/HelpOverlay';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import GolfStats from '../GolfStats/GolfStats';
 
 function CribbageGolf(props) {
     //Hooks
@@ -71,16 +72,6 @@ function CribbageGolf(props) {
         dispatch({ type: 'DEAL', payload: 6 });
     }
 
-    // CONDITIONAL RENDERING ==========
-    const bestHand = results ? (results.length === 1) : false;
-
-    const avgMsg = (results && !bestHand) && (<>
-        YOUR HAND AVG: {results[0].stats.avg.toFixed(2)} <br />
-        BEST POSSIBLE AVG: {results[1].stats.avg.toFixed(2)} <br />
-        DIFFERENCE: {(results[1].stats.avg - results[0].stats.avg).toFixed(2)}
-    </>
-    )//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
     //SORTING==========================
     //sort hand
     sortValueSuit(deal);
@@ -136,12 +127,13 @@ function CribbageGolf(props) {
 
                 {/* DISPLAY OPTIMAL HAND AFTER SCORING */}
                 <div className="optimal-container">
-                    {(displayResults && results) && (
+                    <GolfStats results={results}/>
+                    {/* {(displayResults && results) && (
                         !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
-                    )}
+                    )} */}
                 </div>
 
-                {(displayResults && !bestHand) && (<>
+                {(displayResults) && (<>
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
