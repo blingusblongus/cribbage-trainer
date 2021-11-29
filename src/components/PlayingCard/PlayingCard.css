@@ -5,7 +5,9 @@
 
 .card-container {
     width: 125px;
+    /* max-width: 40vw; */
     height: 175px;
+    max-height: 25vh;
     background-color: white;
     border-radius: 10px;
     text-align: left;

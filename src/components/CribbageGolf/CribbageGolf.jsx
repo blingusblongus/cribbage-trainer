@@ -9,6 +9,7 @@ import sortValueSuit from '../../modules/sortValueSuit';
 import HelpOverlay from '../HelpOverlay/HelpOverlay';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import GolfStats from '../GolfStats/GolfStats';
+import { display } from '@mui/system';
 
 function CribbageGolf(props) {
     //Hooks
@@ -103,18 +104,10 @@ function CribbageGolf(props) {
             </div>
 
             {/* HELP OVERLAY */}
-
             <HelpOverlay details={details} setDetails={setDetails} />
+
             {/* Results Display (conditional) */}
-            {displayResults &&
-                <div className="chart-btn">
-                    <Button
-                        onClick={toggleChart}
-                        variant="contained">
-                        {showChart ? 'Hide Chart' : 'Show Chart'}
-                    </Button>
-                </div>
-            }
+
             <div className="div-center">
 
                 {/* MAIN TEXT CONTENT */}
@@ -173,23 +166,29 @@ function CribbageGolf(props) {
             </div>
 
             {/* CHART (CONDITIONAL) */}
-            {showChart &&
                 <div
-                    className="chart abs-center-x"
+                    className={"chart abs-center-x" + (showChart ? "" : " off-right")}
                     onClick={toggleChart}>
                     <ResultChart />
                 </div>
 
-            }
-
             <div class="bottom-btns">
                 {/* Render Next Hand button if results are being displayed */}
+                <div
+                    id="chart-btn"
+                    className={"custom-btn bottom-btns" + (displayResults && ' both')}
+                    onClick={toggleChart}>
+                    {showChart ? 'Hide Chart' : 'Show Chart'}
+                </div>
                 <div id="score-hand"
-                    className={"custom-btn" + (hand.length === 4 ? '' : ' scared')}
+                    className={"custom-btn bottom-btns" + 
+                        (hand.length === 4 ? '' : ' scared')
+                        + (displayResults ? ' both' : '')}
                     onClick={firstClick ? scoreOptimal : newHand}>
                     {firstClick ?
                         'Score Hand' : 'Continue'}
                 </div>
+
             </div>
         </>
     )
