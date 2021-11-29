@@ -28,6 +28,7 @@ function CribbageGolf(props) {
     const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
     const [firstClick, setFirstClick] = useState(true);
+    const [round, setRound] = useState(1);
     const [details, setDetails] = useState({
         overlay: true,
         messages: [
@@ -62,7 +63,7 @@ function CribbageGolf(props) {
     // Deal a new hand, reset display
     const newHand = () => {
         //push to score page if total rounds met
-        if (golfScore.length >= golfRounds) {
+        if (round > golfRounds) {
             history.push('/golfResults');
             return;
         }
@@ -70,6 +71,7 @@ function CribbageGolf(props) {
         setDisplayResults(false);
         setShowChart(false);
         setFirstClick(true);
+        setRound(round + 1);
         dispatch({ type: 'DEAL', payload: 6 });
     }
 
@@ -114,7 +116,7 @@ function CribbageGolf(props) {
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
                 <div className="results-table">
                     <div className="bold">Round #:</div>
-                    <div>{golfScore.length + 1} of {golfRounds}</div>
+                    <div>{round} of {golfRounds}</div>
                     <div className="bold">Total Points Over Par:</div>
                     <div>{golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</div>
                     <div className="bold">Last Hand:</div>
