@@ -2,6 +2,7 @@ html,
 body,
 #react-root {
   height: 100%;
+  width: 100vw;
   background-color: var(--bg-color);
   color: var(--dm-text);
   scroll-behavior: none;
@@ -31,6 +32,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  width: 100vw;
 }
 
 img {
@@ -191,4 +193,12 @@ Other global classes
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  text-align: center;
 }
