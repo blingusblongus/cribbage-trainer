@@ -2,8 +2,11 @@ html,
 body,
 #react-root {
   height: 100%;
+  width: 100vw;
   background-color: var(--bg-color);
-  color: var(--dm-text)
+  color: var(--dm-text);
+  scroll-behavior: none;
+  overflow: hidden;
 }
 
 :root {
@@ -11,11 +14,25 @@ body,
   --dm-text: white;
   --primary: thistle;
   --secondary: #50325d;
+
+  /*  */
+  --bg-primary: rgb(29, 29, 29);
+  --bg-secondary: #444;
+  --bg-ternary: rgb(58, 48, 57);
+  --bg-light: rgb(168, 148, 167);
+
+  --nav-height: 7vh;
+
+  --ui-border-primary: rgb(107, 107, 107);
+  --border: 1px solid var(--ui-border-primary);
+  --border-selected: rgb(218, 218, 218);
+  --border-success: rgb(101, 214, 101);
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  width: 100vw;
 }
 
 img {
@@ -110,7 +127,7 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
+  background-color: var(--bg-ternary);
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
@@ -123,3 +140,65 @@ input {
 /* --------------------------------------------------------------------------------
 Other global classes
 -------------------------------------------------------------------------------- */
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity .5s ease, visibility .5s 0s;
+  visibility: hidden;
+}
+
+#help-btn-container {
+  width: 30px;
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  transform: translate(-50%, -50%)
+}
+
+.custom-btn {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 1rem;
+  border: 3px solid var(--border-selected);
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.custom-btn:active {
+  background-color: var(--border-selected);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  text-align: center;
+}

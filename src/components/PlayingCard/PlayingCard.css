@@ -5,21 +5,28 @@
 
 .card-container {
     width: 125px;
+    /* max-width: 40vw; */
     height: 175px;
+    max-height: 25vh;
     background-color: white;
     border-radius: 10px;
     text-align: left;
     border: 3px solid black;
-    margin-left: -50px;
-    margin-top: 30px;
-    transition: margin .3s ease;
+    transition: margin .3s ease, border .5s ease;;
     color: black;
+    margin-top: 30px;
     box-shadow: 3px 3px 8px black;
 }
 
 .selected {
     margin-top: -20px;
+    margin-bottom: 50px;
     transition: margin .3s ease;
+}
+
+.overlap {
+    margin-left: -50px;
+    
 }
 
 .card-container:first-child {
@@ -40,4 +47,28 @@
 .center-suit {
     width: 50%;
     margin: 30px auto;
+}
+
+.selected.outlined {
+    border: 3px solid var(--border-selected);
+    transition: margin .5s ease, border .5s ease;
+}
+
+.selected.outlined.matched {
+    border: 3px solid var(--border-success);
+    transition: margin .5s ease, border .5s ease;
+}
+
+.revealed {
+    border: 3px solid red;
+    transition: margin .5s ease, border .5s ease;
+}
+
+.selected.outlined.revealed {
+    border: 3px solid red;
+    transition: margin .5s ease, border .5s ease;
+}
+
+.frozen {
+    user-select: none;
 }

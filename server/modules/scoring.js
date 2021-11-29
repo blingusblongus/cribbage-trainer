@@ -1,3 +1,5 @@
+// DECLARE ALL PERMUTATIONS OF CARDS
+
 const setsOf2 = [
     [0, 1],
     [0, 2],
@@ -53,7 +55,10 @@ const setsOf2In6 = [
 ]
 
 function countFifteens(hand) {
+    //init array for storing scoring combinations
     let successes = [];
+
+    //Loop through all permutations of card combinations
     for (let set of allSets) {
         for (let combo of set) {
             //check combo to see if it === 15
@@ -78,6 +83,8 @@ function countFifteens(hand) {
     let result = {
         name: 'fifteens',
         points: successes.length * 2,
+        
+        // rewrite nested arrays to be IDs instead of card objects
         hands: successes.map(success => {
             return success.map(cardIndex => {
                 return hand[cardIndex];
@@ -99,6 +106,8 @@ function countPairs(hand) {
     const result = {
         name: 'pairs',
         points: 2 * successes.length,
+
+        // rewrite nested arrays to be IDs instead of card objects
         hands: successes.map(success => {
             return success.map(cardIndex => {
                 return hand[cardIndex];
@@ -119,14 +128,16 @@ function countFlush(hand) {
     //check for 4-card flush
     if(draw.every((card, i, arr) => card.suit === arr[0].suit)){
         points = 4;
-        successes.push(draw);
         let suit = draw[0].suit;
 
         //check for 5-card flush
-        if(flip.suit === suit){
+        if(flip[0].suit === suit){
             points = 5;
-            successes = [hand];
+            successes.push(hand);
+        }else{
+            successes.push(draw);  
         }
+
     }
 
     const result = {
@@ -141,22 +152,23 @@ function countFlush(hand) {
 function countNibsNobs(hand) {
     const [flip] = hand.filter(card => card.flip);
 
+    // Check if the flip card was a jack
     if (flip.name === 'jack') {
         return {
             points: 2,
             name: 'nibs',
-            hands: [flip]
+            hands: [[flip]]
         }
     }
 
+    // Check if non-flip cards are jack, then compare to flip suit
     const notFlip = hand.filter(card => !card.flip);
-
     for (let card of notFlip) {
         if (card.name === 'jack' && flip.suit === card.suit) {
             return {
                 points: 1,
                 name: 'nobs',
-                hands: [flip]
+                hands: [[flip]]
             }
         }
     }
@@ -191,22 +203,21 @@ function countRuns(hand) {
             }
 
             if (result) {
-
                 //check if you might be checking a larger scored set
                 let dupe = false;
                 for (let score of successes) {
-                    for (let i = 0; i < cards.length; i++) {
-                        if (cards[i].index === score[i].index &&
-                            cards[i].suit !== score[i].suit) {
-                            dupe = false;
-                            break;
-                        }
+                    const scoreIds = score.map(card => card.id);
+                    const cardIds = cards.map(card => card.id);
+
+                    //Check if the entire run already exists in a larger run
+                    if(cardIds.every((id, i) => id === scoreIds[i])){
                         dupe = true;
                     }
                 }
                 //exit early if already scored as a larger run
                 if (dupe) break;
 
+                //else push result to success array
                 successes.push(cards);
             }
         }
@@ -219,6 +230,7 @@ function countRuns(hand) {
     }
 }
 
+// COLLECT SCORING UTILITIES FOR EXPORT
 const scoreUtils = {
     scoringMethods: {
         countFifteens: countFifteens,
@@ -227,16 +239,16 @@ const scoreUtils = {
         countRuns: countRuns,
         countFlush: countFlush
     },
-    scoreHand: function(hand, flip) {
+    scoreHand: function(nonFlips, flip) {
         // init obj to be returned
         const option = {
             handScore: 0,
             flipCard: flip,
-            scores: []
+            scores: {},
         }
     
         // create copy of complete hand for scoring
-        let fullHand = hand.concat(flip);
+        let fullHand = nonFlips.concat(flip);
     
         // loop through scoringMethods, collect 
         for (let func in this.scoringMethods) {
@@ -248,7 +260,7 @@ const scoreUtils = {
             if(points > 0){
                 //add points and push combo
                 option.handScore += points;
-                option.scores.push(hands);
+                option.scores[func] = hands;
             }
     
         } 

@@ -12,15 +12,18 @@ function Home(props) {
 
     return (
         <>
-            <div>Home Page</div>
-            <div className="primary-btn"
-                onClick={()=>redirect('/golf')}>Cribbage Golf</div>
-            <div className="primary-btn"
-                onClick={()=>redirect('/user')}>Profile</div>
-            <div className="primary-btn"
-                onClick={()=>redirect('/leaderboards')}>Leaderboards</div>
-            <div className="primary-btn"
-                onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</div>
+            <div className="menu-container">
+                <div className="primary-btn"
+                    onClick={() => redirect('/learn/1')}>Learn</div>
+                <div className="primary-btn"
+                    onClick={() => redirect('/golf')}>Cribbage Golf</div>
+                <div className="primary-btn"
+                    onClick={() => redirect('/user')}>Profile</div>
+                <div className="primary-btn"
+                    onClick={() => redirect('/leaderboards')}>Leaderboards</div>
+                <div className="primary-btn"
+                    onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</div>
+            </div>
         </>
     )
 }

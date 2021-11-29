@@ -13,6 +13,7 @@ const deck = require('./modules/deck.js');
 // Route includes
 const userRouter = require('./routes/user.router');
 const scoreRouter = require('./routes/score.router.js');
+const dealRouter = require('./routes/deal.router.js')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/deal', dealRouter);
 app.use('/api/score', scoreRouter);
 
 // Serve static files
@@ -41,10 +43,3 @@ app.listen(PORT, () => {
 });
 
 
-// Uncategorized routes
-app.get('/api/deal', (req, res) => {
-  deck.gather();
-  deck.shuffle();
-  res.send(deck.deal(6));
-  console.log(deck.cards.length);
-})

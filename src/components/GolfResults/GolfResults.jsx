@@ -10,8 +10,9 @@ function GolfResults(props) {
     const history = useHistory();
     const golfScore = useSelector(store => store.golfScore);
 
+    // on new hand, assuming all rounds completed, submit score
     useEffect(() => {
-        if(golfScore.length > 0){
+        if (golfScore.length > 0) {
             dispatch({
                 type: 'SUBMIT_GOLF_SCORE',
                 payload: {
@@ -19,19 +20,24 @@ function GolfResults(props) {
                 }
             });
         }
-    },[])
+    }, [])
 
     return (
         <div className="results-container">
-            <div>Golf Results</div>
-            <div>
-                <p>Total Score (lower is better): {golfScore.reduce((total, score) => total += score, 0)}</p>
-                <p>Optimal Hands: {golfScore.filter(score => score === 0).length}</p>
-                <p>Results Recorded</p>
-                <br/>
-                <Button variant="contained" onClick={()=>history.push('/golf')}>Play Again</Button>
+            <h2>Golf Results</h2>
+            <div className="results-grid">
+                <div>Total Score (lower is better):</div>
+                <div>{golfScore.reduce((total, score) => total += score, 0).toFixed(3)}</div>
+                <div>Optimal Hands:</div> 
+                <div>{golfScore.filter(score => score === 0).length}</div>
+                
             </div>
-
+            <br/>
+            <div className="align-center">Results Recorded</div>
+            <br/>
+            <div className="flex justify-center">
+                <Button variant="contained" onClick={() => history.push('/golf')}>Play Again</Button>
+            </div>
         </div>
     )
 }

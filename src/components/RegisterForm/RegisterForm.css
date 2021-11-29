@@ -1,0 +1,18 @@
+.formItem {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+label {
+    text-align: center;
+    padding-top: .2rem;
+}
+
+.btn-center {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+}

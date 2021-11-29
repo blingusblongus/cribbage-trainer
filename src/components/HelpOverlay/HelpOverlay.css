@@ -1,0 +1,71 @@
+.overlay {
+    position: absolute;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    opacity: .8;
+    background-color: rgb(1,1,1);
+    transition: opacity 2s;
+    visibility: inherit;
+}
+
+.flashing {
+    animation-name: flashing;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+}
+
+.dismiss-message {
+    z-index: 200;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(var(--nav-height) * 1.5);
+    visibility: inherit;
+}
+
+.overlay-body {
+    z-index: 200;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    position: absolute;
+    left: 50%;
+    top: 15%;
+    width: 85vw;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 120%;
+    opacity: 1;
+    visibility: inherit;
+    transition: opacity 2s;
+}
+
+.overlay-container {
+    visibility: visible;
+    /* display: flex;
+    align-items: center; */
+}
+
+p {
+    margin: 4px;
+}
+
+@keyframes flashing {
+    from {
+        opacity: 1;
+    }
+    20% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

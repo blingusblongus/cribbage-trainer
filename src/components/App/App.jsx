@@ -25,6 +25,7 @@ import CribbageGolf from '../CribbageGolf/CribbageGolf';
 import GolfResults from '../GolfResults/GolfResults.jsx';
 import Home from '../Home/Home';
 import Leaderboards from '../Leaderboards/Leaderboards';
+import LearnMode from '../LearnMode/LearnMode';
 
 function App() {
   const dispatch = useDispatch();
@@ -79,7 +80,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -93,7 +94,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/home" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -125,6 +126,10 @@ function App() {
 
           <ProtectedRoute path="/golf">
             <CribbageGolf/>
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/learn/:page?">
+            <LearnMode/>
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
