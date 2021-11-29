@@ -46,12 +46,6 @@
     align-items: center;
   }
 
-  .chart-btn {
-    position: absolute;
-    right: 0;
-    width: 40%;
-  }
-
   .results-table {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -59,13 +53,15 @@
     margin-bottom: .8rem;
 }
 
+
+
 #score-hand {
-  width: 40%;
-  height: 3rem;
+  transition: bottom .3s ease;
   max-width: 300px;
   left: 50%;
   bottom: 5rem;
-  transition: bottom .3s ease;
+  width: 35%;
+  height: 3rem;
   /* transform: translateY(0%); */
 }
 
@@ -73,4 +69,23 @@
   bottom: -3rem;
   user-select: none;
   /* transition: bottom .5s ease; */
+}
+
+#score-hand.both {
+  left: 30%;
+  transition: left .3s ease;
+}
+
+#chart-btn {
+  max-width: 300px;
+  left: 30%;
+  bottom: -3rem;
+  width: 35%;
+  height: 3rem;
+}
+
+#chart-btn.both {
+  left: 70%;
+  bottom: 5rem;
+  transition: bottom .3s ease;
 }
