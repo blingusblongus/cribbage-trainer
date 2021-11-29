@@ -182,7 +182,7 @@ function CribbageGolf(props) {
 
             }
 
-            <div>
+            <div class="bottom-btns">
                 {/* Render Next Hand button if results are being displayed */}
                 <div id="score-hand"
                     className={"custom-btn" + (hand.length === 4 ? '' : ' scared')}

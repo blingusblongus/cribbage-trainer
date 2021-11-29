@@ -58,3 +58,19 @@
     row-gap:.2rem;
     margin-bottom: .8rem;
 }
+
+#score-hand {
+  width: 40%;
+  height: 3rem;
+  max-width: 300px;
+  left: 50%;
+  bottom: 5rem;
+  transition: bottom .3s ease;
+  /* transform: translateY(0%); */
+}
+
+#score-hand.scared {
+  bottom: -3rem;
+  user-select: none;
+  /* transition: bottom .5s ease; */
+}
