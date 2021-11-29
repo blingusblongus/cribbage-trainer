@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import {Button} from '@mui/material';
 import { useHistory } from 'react-router';
+import './LoginForm.css';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -59,17 +60,15 @@ function LoginForm() {
           />
         </label>
       </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-        <span>or</span>
-        <Button
+      <div className="flex justify-between">
+        <input className="btn login-btn" type="submit" name="submit" value="Log In" />
+        <input
+          className="btn login-btn"
+          value="Register"
           onClick={() => {
-            console.log('clicked');
             history.push('/registration');
           }}
-        >
-          Register
-        </Button>
+        />
       </div>
     </form>
   );

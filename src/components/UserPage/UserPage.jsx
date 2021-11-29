@@ -16,7 +16,7 @@ function UserPage() {
 
   const updateDisplay = () => {
     //should add error message for this
-    if(!displayName) return;
+    if (!displayName) return;
 
     dispatch({
       type: 'SET_DISPLAY_NAME',
@@ -33,42 +33,46 @@ function UserPage() {
   Type 'delete ${user.username}' to remove your account and all associated data`;
 
   const deleteAccount = () => {
-    if(prompt(promptMsg) === `delete ${user.username}`){
-      dispatch({type: 'DELETE_USER'});
-    }else{
+    if (prompt(promptMsg) === `delete ${user.username}`) {
+      dispatch({ type: 'DELETE_USER' });
+    } else {
       return;
     }
   }
 
-  useEffect(()=>{
-    dispatch({type: 'FETCH_USER_SCORES'});
-  },[]);
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER_SCORES' });
+  }, []);
 
   return (
     <div className="container">
+      <div className="flex justify-between">
+        <LogOutButton className="btn" />
+        <Button variant="contained"
+          color="warning"
+          onClick={deleteAccount}>Delete Account</Button>
+      </div>
+      
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <p>Your displayName is: </p>
-      <TextField
-        size="small"
-        value={displayName}
-        onChange={(e) => setDisplayName(e.target.value)}></TextField>
-      <Button variant="contained"
-        disabled={displayName === user.display_name}
-        onClick={updateDisplay}>Update Display Name</Button>
-        {/* Broken below */}
-        {/* {nameIsUpdated && <p>Display Name Updated to '{displayName}'</p>} */}
-      <Button variant="contained"
-        onClick={() => history.push('/golf')}>PLAY GOLF</Button>
-      <br />
-      <br />
+
+      <div className="flex justify-between">
+        <input
+          type="text"
+          value={displayName}
+          onChange={(e) => setDisplayName(e.target.value)} />
+        <Button
+          variant="contained"
+          size="small"
+          disabled={displayName === user.display_name}
+          onClick={updateDisplay}>Update Display Name</Button>
+      </div>
+
+      {/* {nameIsUpdated && <p>Display Name Updated to '{displayName}'</p>} */}
       {/* Commented out until rows is resolved */}
       <h2>Personal High Scores</h2>
-      {userScores.length >  1 ? <UserTable rows={userScores}/> : <div>No Scores Yet</div>}
-      <LogOutButton className="btn" />
-      <Button variant="contained" 
-        color="warning"
-        onClick={deleteAccount}>Delete Account</Button>
+      {userScores.length > 1 ? <UserTable rows={userScores} /> : <div>No Scores Yet</div>}
     </div>
   );
 }

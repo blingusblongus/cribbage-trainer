@@ -184,3 +184,11 @@ Other global classes
 .bold {
   font-weight: bold;
 }
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
