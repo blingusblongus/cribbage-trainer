@@ -2,3 +2,8 @@
     width: 90%;
     margin: auto;
 }
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
