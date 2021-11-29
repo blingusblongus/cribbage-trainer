@@ -181,6 +181,10 @@ Other global classes
   background-color: var(--border-selected);
 }
 
+.bold {
+  font-weight: bold;
+}
+
 #score-hand {
   width: 40%;
   height: 3rem;

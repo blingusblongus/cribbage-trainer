@@ -119,15 +119,21 @@ function CribbageGolf(props) {
 
                 {/* MAIN TEXT CONTENT */}
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
-                <p>Round #: {golfScore.length + 1} of {golfRounds}</p>
-                <p>Total Points Over Par: {golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</p>
-                <p>Last Hand: {golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</p>
+                <div className="results-table">
+                    <div className="bold">Round #:</div>
+                    <div>{golfScore.length + 1} of {golfRounds}</div>
+                    <div className="bold">Total Points Over Par:</div>
+                    <div>{golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</div>
+                    <div className="bold">Last Hand:</div>
+                    <div>{golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</div>
+                </div>
+
 
                 {/* RESULTS AND NEXT HAND BUTTON */}
 
                 {/* DISPLAY OPTIMAL HAND AFTER SCORING */}
                 <div className="optimal-container">
-                    <GolfStats results={results}/>
+                    <GolfStats results={results} />
                     {/* {(displayResults && results) && (
                         !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
                     )} */}
@@ -141,6 +147,7 @@ function CribbageGolf(props) {
                                 key={card.id}
                                 card={card}
                                 noSelect={true}
+                                freeze={true}
                                 addClass={"overlap"} />)
                         })}
                     </div>
@@ -158,6 +165,7 @@ function CribbageGolf(props) {
                         key={card.id}
                         card={card}
                         noSelect={false}
+                        freeze={displayResults}
                         maxHand={4}
                         addClass={"overlap"}
                     />

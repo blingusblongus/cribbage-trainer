@@ -51,3 +51,10 @@
     right: 0;
     width: 40%;
   }
+
+  .results-table {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    row-gap:.2rem;
+    margin-bottom: .8rem;
+}
