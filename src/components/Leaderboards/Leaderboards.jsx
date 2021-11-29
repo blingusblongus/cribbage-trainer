@@ -38,10 +38,8 @@ function Leaderboards(props) {
             <h2 className="leaderboard-title">Leaderboards</h2>
 
             <TableContainer>
-                <Table aria-label="simple table"
-                    sx={{
-                        color: 'white',
-                      }}>
+                <Table aria-label="simple table mui-table"
+                    >
                     <TableHead>
                         <TableRow>
                             <TableCell>Rank</TableCell>
