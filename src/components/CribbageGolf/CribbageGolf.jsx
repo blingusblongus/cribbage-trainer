@@ -166,14 +166,11 @@ function CribbageGolf(props) {
             </div>
 
             {/* CHART (CONDITIONAL) */}
-            {showChart &&
                 <div
-                    className="chart abs-center-x"
+                    className={"chart abs-center-x" + (showChart ? "" : " off-right")}
                     onClick={toggleChart}>
                     <ResultChart />
                 </div>
-
-            }
 
             <div class="bottom-btns">
                 {/* Render Next Hand button if results are being displayed */}
