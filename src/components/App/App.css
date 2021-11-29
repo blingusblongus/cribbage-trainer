@@ -164,3 +164,35 @@ Other global classes
   right: 1rem;
   transform: translate(-50%, -50%)
 }
+
+.custom-btn {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 1rem;
+  border: 3px solid var(--border-selected);
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.custom-btn:active {
+  background-color: var(--border-selected);
+}
+
+#score-hand {
+  width: 40%;
+  height: 3rem;
+  max-width: 300px;
+  left: 50%;
+  bottom: 5rem;
+  transition: bottom .3s ease;
+  /* transform: translateY(0%); */
+}
+
+#score-hand.scared {
+  bottom: -3rem;
+  user-select: none;
+  /* transition: bottom .5s ease; */
+}

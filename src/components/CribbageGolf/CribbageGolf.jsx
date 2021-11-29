@@ -25,6 +25,7 @@ function CribbageGolf(props) {
     const [displayResults, setDisplayResults] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
+    const [firstClick, setFirstClick] = useState(true);
     const [details, setDetails] = useState({
         overlay: true,
         messages: [
@@ -53,6 +54,7 @@ function CribbageGolf(props) {
             type: "SCORE_OPTIMAL"
         });
         setDisplayResults(true);
+        setFirstClick(false);
     }
 
     // Deal a new hand, reset display
@@ -65,6 +67,7 @@ function CribbageGolf(props) {
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
         setShowChart(false);
+        setFirstClick(true);
         dispatch({ type: 'DEAL', payload: 6 });
     }
 
@@ -109,8 +112,8 @@ function CribbageGolf(props) {
             </div>
 
             {/* HELP OVERLAY */}
-                
-            <HelpOverlay details={details} setDetails={setDetails}/>
+
+            <HelpOverlay details={details} setDetails={setDetails} />
             {/* Results Display (conditional) */}
             {displayResults &&
                 <div className="chart-btn">
@@ -130,25 +133,6 @@ function CribbageGolf(props) {
                 <p>Last Hand: {golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</p>
 
                 {/* RESULTS AND NEXT HAND BUTTON */}
-                <div className="test-container abs-center-x">
-                    {/* Render submit button only if hand chosen 
-                    and results not displayed  */}
-                    <div>
-                        {(hand.length === 4 && !displayResults)
-                            && <Button variant="contained"
-                                onClick={scoreOptimal}>Get Hand Avg</Button>}
-                    </div>
-                    <div>
-                        {/* Render Next Hand button if results are being displayed */}
-                        {displayResults
-                            && <Button variant="contained"
-                                onClick={newHand}>
-                                {golfScore.length === golfRounds ?
-                                    'See results' : 'Next Hand'}
-                            </Button>}
-                    </div>
-                    {/* <Scatter data={data} options={options} /> */}
-                </div>
 
                 {/* DISPLAY OPTIMAL HAND AFTER SCORING */}
                 <div className="optimal-container">
@@ -197,6 +181,16 @@ function CribbageGolf(props) {
                 </div>
 
             }
+
+            <div>
+                {/* Render Next Hand button if results are being displayed */}
+                <div id="score-hand"
+                    className={"custom-btn" + (hand.length === 4 ? '' : ' scared')}
+                    onClick={firstClick ? scoreOptimal : newHand}>
+                    {firstClick ?
+                        'Score Hand' : 'Continue'}
+                </div>
+            </div>
         </>
     )
 }
