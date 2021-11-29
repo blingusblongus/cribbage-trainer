@@ -63,7 +63,7 @@ function CribbageGolf(props) {
     // Deal a new hand, reset display
     const newHand = () => {
         //push to score page if total rounds met
-        if (round > golfRounds) {
+        if (round >= golfRounds) {
             history.push('/golfResults');
             return;
         }
