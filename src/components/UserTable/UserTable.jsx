@@ -25,7 +25,7 @@ function UserTable({rows}) {
     }
 
     return (
-        <TableContainer sx={{maxHeight: 200}}>
+        <TableContainer>
             <Table stickyHeader aria-label="personal score table">
                 <TableHead>
                     <TableRow className="header-row">
