@@ -8,6 +8,7 @@ import ResultChart from '../ResultChart/ResultChart';
 import sortValueSuit from '../../modules/sortValueSuit';
 import HelpOverlay from '../HelpOverlay/HelpOverlay';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import GolfStats from '../GolfStats/GolfStats';
 
 function CribbageGolf(props) {
     //Hooks
@@ -25,6 +26,7 @@ function CribbageGolf(props) {
     const [displayResults, setDisplayResults] = useState(false);
     const [showChart, setShowChart] = useState(false);
     const [first, setFirst] = useState(true);
+    const [firstClick, setFirstClick] = useState(true);
     const [details, setDetails] = useState({
         overlay: true,
         messages: [
@@ -53,6 +55,7 @@ function CribbageGolf(props) {
             type: "SCORE_OPTIMAL"
         });
         setDisplayResults(true);
+        setFirstClick(false);
     }
 
     // Deal a new hand, reset display
@@ -65,18 +68,9 @@ function CribbageGolf(props) {
         dispatch({ type: 'NEW_HAND' });
         setDisplayResults(false);
         setShowChart(false);
+        setFirstClick(true);
         dispatch({ type: 'DEAL', payload: 6 });
     }
-
-    // CONDITIONAL RENDERING ==========
-    const bestHand = results ? (results.length === 1) : false;
-
-    const avgMsg = (results && !bestHand) && (<>
-        YOUR HAND AVG: {results[0].stats.avg.toFixed(2)} <br />
-        BEST POSSIBLE AVG: {results[1].stats.avg.toFixed(2)} <br />
-        DIFFERENCE: {(results[1].stats.avg - results[0].stats.avg).toFixed(2)}
-    </>
-    )//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     //SORTING==========================
     //sort hand
@@ -109,8 +103,8 @@ function CribbageGolf(props) {
             </div>
 
             {/* HELP OVERLAY */}
-                
-            <HelpOverlay details={details} setDetails={setDetails}/>
+
+            <HelpOverlay details={details} setDetails={setDetails} />
             {/* Results Display (conditional) */}
             {displayResults &&
                 <div className="chart-btn">
@@ -125,39 +119,27 @@ function CribbageGolf(props) {
 
                 {/* MAIN TEXT CONTENT */}
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
-                <p>Round #: {golfScore.length + 1} of {golfRounds}</p>
-                <p>Total Points Over Par: {golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</p>
-                <p>Last Hand: {golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</p>
+                <div className="results-table">
+                    <div className="bold">Round #:</div>
+                    <div>{golfScore.length + 1} of {golfRounds}</div>
+                    <div className="bold">Total Points Over Par:</div>
+                    <div>{golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</div>
+                    <div className="bold">Last Hand:</div>
+                    <div>{golfScore[golfScore.length - 1]?.toFixed(2) || 'NA'}</div>
+                </div>
+
 
                 {/* RESULTS AND NEXT HAND BUTTON */}
-                <div className="test-container abs-center-x">
-                    {/* Render submit button only if hand chosen 
-                    and results not displayed  */}
-                    <div>
-                        {(hand.length === 4 && !displayResults)
-                            && <Button variant="contained"
-                                onClick={scoreOptimal}>Get Hand Avg</Button>}
-                    </div>
-                    <div>
-                        {/* Render Next Hand button if results are being displayed */}
-                        {displayResults
-                            && <Button variant="contained"
-                                onClick={newHand}>
-                                {golfScore.length === golfRounds ?
-                                    'See results' : 'Next Hand'}
-                            </Button>}
-                    </div>
-                    {/* <Scatter data={data} options={options} /> */}
-                </div>
 
                 {/* DISPLAY OPTIMAL HAND AFTER SCORING */}
                 <div className="optimal-container">
-                    {(displayResults && results) && (
+                    <GolfStats results={results} />
+                    {/* {(displayResults && results) && (
                         !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
-                    )}
+                    )} */}
                 </div>
 
-                {(displayResults && !bestHand) && (<>
+                {(displayResults) && (<>
                     <h3>Best Possible Hand</h3>
                     <div className="best-container">
                         {results && results[1]?.cards.draw.map(card => {
@@ -165,6 +147,7 @@ function CribbageGolf(props) {
                                 key={card.id}
                                 card={card}
                                 noSelect={true}
+                                freeze={true}
                                 addClass={"overlap"} />)
                         })}
                     </div>
@@ -182,6 +165,7 @@ function CribbageGolf(props) {
                         key={card.id}
                         card={card}
                         noSelect={false}
+                        freeze={displayResults}
                         maxHand={4}
                         addClass={"overlap"}
                     />
@@ -197,6 +181,16 @@ function CribbageGolf(props) {
                 </div>
 
             }
+
+            <div class="bottom-btns">
+                {/* Render Next Hand button if results are being displayed */}
+                <div id="score-hand"
+                    className={"custom-btn" + (hand.length === 4 ? '' : ' scared')}
+                    onClick={firstClick ? scoreOptimal : newHand}>
+                    {firstClick ?
+                        'Score Hand' : 'Continue'}
+                </div>
+            </div>
         </>
     )
 }
