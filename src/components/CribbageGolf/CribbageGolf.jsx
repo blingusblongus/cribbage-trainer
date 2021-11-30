@@ -116,7 +116,8 @@ function CribbageGolf(props) {
                 {/* MAIN TEXT CONTENT */}
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
                 <div className="results-table">
-                    <div className="bold">Round #:</div>
+                    <div className="bold"
+                    onClick={()=>history.push('/golfResults')}>Round #:</div>
                     <div>{round} of {golfRounds}</div>
                     <div className="bold">Total Points Over Par:</div>
                     <div>{golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</div>
