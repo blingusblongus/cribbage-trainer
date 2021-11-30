@@ -96,6 +96,7 @@ function CribbageGolf(props) {
     }
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    console.log(results);
     return (
         <>
             {/* HELP BUTTON */}
@@ -129,25 +130,7 @@ function CribbageGolf(props) {
                 {/* DISPLAY OPTIMAL HAND AFTER SCORING */}
                 <div className="optimal-container">
                     <GolfStats results={results} />
-                    {/* {(displayResults && results) && (
-                        !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
-                    )} */}
                 </div>
-
-                {(displayResults) && (<>
-                    <h3>Best Possible Hand</h3>
-                    <div className="best-container">
-                        {results && results[1]?.cards.draw.map(card => {
-                            return (<PlayingCard
-                                key={card.id}
-                                card={card}
-                                noSelect={true}
-                                freeze={true}
-                                addClass={"overlap"} />)
-                        })}
-                    </div>
-                </>
-                )}
             </div>
 
 

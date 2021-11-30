@@ -180,11 +180,13 @@ function LearnMode(props) {
                             </div>
                         )
                     })}
+                    <div className="flex-align-bottom">
                     <Button
                         onClick={newHand}
                         variant="contained"
                         disabled={totals.foundPoints !== totals.possiblePoints}
-                    >New Hand</Button>
+                    >Next Hand</Button>
+                    </div>
                 </div>
 
                 <div></div>
