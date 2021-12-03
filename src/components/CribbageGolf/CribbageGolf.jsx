@@ -96,6 +96,7 @@ function CribbageGolf(props) {
     }
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    console.log(results);
     return (
         <>
             {/* HELP BUTTON */}
@@ -115,7 +116,8 @@ function CribbageGolf(props) {
                 {/* MAIN TEXT CONTENT */}
                 <h1>{!displayResults ? 'Choose Cards' : 'Results'}</h1>
                 <div className="results-table">
-                    <div className="bold">Round #:</div>
+                    <div className="bold"
+                    onClick={()=>history.push('/golfResults')}>Round #:</div>
                     <div>{round} of {golfRounds}</div>
                     <div className="bold">Total Points Over Par:</div>
                     <div>{golfScore.reduce((sum, el) => sum += el, 0)?.toFixed(2)}</div>
@@ -129,25 +131,7 @@ function CribbageGolf(props) {
                 {/* DISPLAY OPTIMAL HAND AFTER SCORING */}
                 <div className="optimal-container">
                     <GolfStats results={results} />
-                    {/* {(displayResults && results) && (
-                        !bestHand ? avgMsg : 'OPTIMAL HAND, NICE WORK FRIEND'
-                    )} */}
                 </div>
-
-                {(displayResults) && (<>
-                    <h3>Best Possible Hand</h3>
-                    <div className="best-container">
-                        {results && results[1]?.cards.draw.map(card => {
-                            return (<PlayingCard
-                                key={card.id}
-                                card={card}
-                                noSelect={true}
-                                freeze={true}
-                                addClass={"overlap"} />)
-                        })}
-                    </div>
-                </>
-                )}
             </div>
 
 

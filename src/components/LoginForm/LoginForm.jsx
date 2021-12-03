@@ -65,6 +65,7 @@ function LoginForm() {
         <input
           className="btn login-btn"
           value="Register"
+          readOnly
           onClick={() => {
             history.push('/registration');
           }}

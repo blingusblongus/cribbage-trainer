@@ -152,7 +152,8 @@ function LearnMode(props) {
                 {/* FLIP CARD */}
                 {flip &&
                     <div className="flip-container">
-                        <h4 className="flip-title">Flip Card</h4>
+                        <h4 className="flip-title"
+                        onClick={()=>history.push('/learn/20')}>Flip Card</h4>
                         <PlayingCard
                             key={flip.id}
                             card={flip}
@@ -180,11 +181,13 @@ function LearnMode(props) {
                             </div>
                         )
                     })}
+                    <div className="flex-align-bottom">
                     <Button
                         onClick={newHand}
                         variant="contained"
                         disabled={totals.foundPoints !== totals.possiblePoints}
-                    >New Hand</Button>
+                    >Next Hand</Button>
+                    </div>
                 </div>
 
                 <div></div>
