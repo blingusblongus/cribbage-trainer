@@ -152,7 +152,8 @@ function LearnMode(props) {
                 {/* FLIP CARD */}
                 {flip &&
                     <div className="flip-container">
-                        <h4 className="flip-title">Flip Card</h4>
+                        <h4 className="flip-title"
+                        onClick={()=>history.push('/learn/20')}>Flip Card</h4>
                         <PlayingCard
                             key={flip.id}
                             card={flip}

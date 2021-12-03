@@ -1,6 +1,6 @@
 .grid-mid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: .9fr 1.1fr;
     grid-gap: 5%;
     margin: 20px;
 }

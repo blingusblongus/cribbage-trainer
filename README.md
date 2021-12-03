@@ -1,121 +1,71 @@
+<style>
+  h1,h2,h3,h4 {
+    text-align: center;
+  }
+  img[alt=Home] {
+    width: 100px;
+  }
+  .flex{
+    display: flex;
+  }
+  .text-center{
+    text-align: center;
+  }
+</style>
+# Cribbage Trainer
 
-# EDA Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+<div class="text-center">
+♥️♠️ <a href="http://cribbagetrainer.herokuapp.com">Try the App</a> ♣️♦️
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+(optimized for mobile)
+</div>
 
-## Use the Template for This Repository (Don't Clone)
+## Description
+**Duration:** _2 week sprint_
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+An full-stack, full CRUD web application for Cribbage Players of all skill levels to learn cribbage hand scoring and practice making informed gameplay decisions through interactive tutorials, game modes, direct feedback, and statistics.
 
+Features include a main challenge mode, a tutorial in hand scoring for beginners, and personal and public high score tracking.
+
+<div>
+Upon logging in to the app, the user is presented with a home screen, from which they can navigate throughout the app.
+</div>
+
+<p align="center">
+  <img width="150" src="images/home_screen.png">
+</p>
+
+Tapping the **Learn** button takes the user to the tutorial, in which the user is presented with a series of screens explaining a single scoring technique or quirk of the game, and tasked with using that knowledge to find all the card combinations that can be scored in that hand. The tutorials walk through every method of scoring, as well as 
+
+The primary challenge mode, titled **Cribbage Golf**, is a game in which the user is presented six random playing cards, and asked to choose to keep the best hand of four cards, disregarding the crib. Every scoring possibility of those four cards and every possible random card chosen from the deck, and an average score is assigned. The app also calculates the average score of every other possible hand the user could have chosen, and evaluates the user based on how close to statistically optimal their choice was. If the user did not choose the best hand, both their chosen hand and the best hand are presented for comparison. Additional statistics including the minimum possible, maximum possible, and average points for both hands are available in a optionally-displayed histogram.
 
 ## Prerequisites
 
-Before you get started, make sure you have the following software installed on your computer:
+- Node.js
+- PostgreSQL
 
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+## Usage
 
-## Create database and table
+1. Navigate to [cribbagetrainer.herokuapp.com](http://cribbagetrainer.herokuapp.com) or follow the installation instructions below
+2. Log In to an existing account, or register a new one.
+3. Choose a mode - Learn (for beginners) or Cribbage Golf (challenge mode)
+4. Learn Mode: Follow the onscreen prompts to learn the rules of Cribbage scoring and progress. Tap cards to select scoring combinations, the question mark icon to review the scoring and current goals, and items on the list of already found scores to highlight the cards that comprise them.
+5. Cribbage Golf: Complete 10 rounds to record your personal score and post it to the leaderboards. Tap the question mark icon to review the rules, and the 'Show Chart' button (when prompted) to view a chart with more information. Lower score is better!
+6. From the home screen or bottom nav bar, visit the Leaderboards page to view the best global scores.
+7. From the home screen or bottom nav bar, visit the Profile page to view personal scores, update display name, log out, or delete account.
 
-Create a new database called `prime_app` and create a `user` table:
+## Installation
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+1. Fork and clone repo
+2. Initialize the database with the code from `database.sql`
+3. In the terminal: `npm install`
+4. `npm run server`
+5. `npm run client` to automatically launch the app in a browser
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+## Support
 
-## Development Setup Instructions
+Please feel free to email me at rutherford.t.b@gmail.com with any comments or suggestions! I'd love to hear your thoughts :)
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+## Acknowledgements
 
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+Thanks to my instructors and peers at Prime Digital Academy, who have supported me in my growth as a Software Developer!
