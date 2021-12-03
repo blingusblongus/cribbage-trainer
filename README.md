@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
   h1,h2,h3,h4 {
     text-align: center;
   }
@@ -11,7 +11,7 @@
   .text-center{
     text-align: center;
   }
-</style>
+</style> -->
 # Cribbage Trainer
 
 <div class="text-center">
