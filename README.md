@@ -1,6 +1,20 @@
-# Cribbage Trainer
+<!-- <style>
+  h1,h2,h3,h4 {
+    text-align: center;
+  }
+  img[alt=Home] {
+    width: 100px;
+  }
+  .flex{
+    display: flex;
+  }
+  .text-center{
+    text-align: center;
+  }
+</style> -->
 
-<div class="text-center">
+# Cribbage Trainer
+<div class="text-center" align="center">
 ♥️♠️ <a href="http://cribbagetrainer.herokuapp.com">Try the App</a> ♣️♦️
 
 (optimized for mobile)
@@ -22,12 +36,17 @@ Upon logging in to the app, the user is presented with a home screen, from which
   
 </p>
 
-
 <img src="images/learn_demo.gif" width="150" align="left" margin-right="10px">
+
 Tapping the **Learn** button takes the user to the tutorial, in which the user is presented with a series of screens explaining a single scoring technique or quirk of the game, and tasked with using that knowledge to find all the card combinations that can be scored in that hand. The tutorials walk through every method of scoring, as well as provide randomized hands for users to practice counting against.
 
+<div width="100%" height="10px"></div>
+<br/>
+
 <img src="images/golf_demo.gif" width="150" align="right" margin-left="10px">
+
 The primary challenge mode, titled **Cribbage Golf**, is a game in which the user is presented six random playing cards, and asked to choose to keep the best hand of four cards, disregarding the crib. Every scoring possibility of those four cards and every possible random card chosen from the deck, and an average score is assigned. The app also calculates the average score of every other possible hand the user could have chosen, and evaluates the user based on how close to statistically optimal their choice was. If the user did not choose the best hand, both their chosen hand and the best hand are presented for comparison. Additional statistics including the minimum possible, maximum possible, and average points for both hands are available in a optionally-displayed histogram.
+
 
 ## Prerequisites
 
